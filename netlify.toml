@@ -1,0 +1,22 @@
+[build]
+  publish = "."
+
+# Lempar semua akses dari subdomain admin langsung ke file admin.html
+[[redirects]]
+  from = "https://admin.hivespot.site/*"
+  to = "/admin.html"
+  status = 200
+  force = true
+
+# Lempar semua akses dari domain utama & www ke index.html
+[[redirects]]
+  from = "https://hivespot.site/*"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://www.hivespot.site/*"
+  to = "/index.html"
+  status = 200
+  force = true

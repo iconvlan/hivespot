@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - HiveSpot Semarang</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            charcoal: '#0c0d0f',
+            carddark: '#141519',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .honeycomb-pattern {
+      background-image: radial-gradient(rgba(245, 158, 11, 0.08) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    #ai-chat-history::-webkit-scrollbar {
+      width: 4px;
+    }
+    #ai-chat-history::-webkit-scrollbar-thumb {
+      background: #4b5563;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-[#0c0d0f] text-gray-100 font-sans antialiased selection:bg-amber-500 selection:text-black pb-24 min-h-screen honeycomb-pattern">
+
+  <!-- Modal Login Passcode -->
+  <div id="loginModal" class="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4">
+    <div class="bg-[#141519] border border-amber-500/30 p-6 rounded-2xl shadow-2xl w-full max-w-sm text-center space-y-4">
+      <div>
+        <div class="w-12 h-12 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">
+          🔑
+        </div>
+        <h2 class="text-xl font-black text-white">Admin Authentication</h2>
+        <p class="text-xs text-gray-400 mt-1">Masukkan PIN Passcode Petugas / Admin</p>
+      </div>
+      <form onsubmit="submitLogin(event)" class="space-y-3">
+        <input type="password" id="pinInput" required maxlength="6" placeholder="••••" class="w-full bg-[#0c0d0f] border border-white/10 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-amber-500 text-center text-lg tracking-widest text-white placeholder-gray-600 font-mono">
+        <button type="submit" id="btnLogin" class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-bold py-2.5 rounded-xl transition text-xs shadow-lg shadow-amber-500/20">
+          Masuk Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Header Panel -->
+  <header class="bg-[#0c0d0f]/90 backdrop-blur-md border-b border-amber-500/10 p-4 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-2.5">
+        <span class="text-lg font-black tracking-wide text-white">Hive<span class="text-amber-400">Spot</span> <span class="text-xs font-normal text-gray-400">Panel</span></span>
+        <span id="roleBadge" class="text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded font-mono uppercase">Role: -</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="index.html" class="text-xs bg-[#141519] hover:bg-white/10 text-gray-300 px-3 py-1.5 rounded-xl border border-white/10 transition">
+          Lihat Web Utama
+        </a>
+        <button onclick="logoutAdmin()" class="text-xs bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-3 py-1.5 rounded-xl transition">
+          Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-4 space-y-6 mt-4">
+
+    <!-- Toggle Status Operasional Toko (Sinkron Google Sheet) -->
+    <section class="bg-[#141519]/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/10 flex justify-between items-center">
+      <div>
+        <h2 class="text-xs font-bold text-amber-400 uppercase tracking-wider">Status Operasional Toko</h2>
+        <p class="text-[11px] text-gray-400">Sinkron otomatis dengan Google Sheet (Buka / Tutup)</p>
+      </div>
+      <label class="relative inline-flex items-center cursor-pointer">
+        <input type="checkbox" id="storeToggle" class="sr-only peer" onchange="toggleStoreStatus(this)">
+        <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-500"></div>
+        <span id="storeStatusLabel" class="ml-3 text-xs font-bold text-gray-300 font-mono">Memuat...</span>
+      </label>
+    </section>
+
+    <!-- Form Input Order Baru -->
+    <section class="bg-[#141519]/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/10">
+      <h2 class="text-sm font-bold mb-4 text-amber-400 uppercase tracking-wider flex items-center gap-2">
+        <span>📦 Input Order Baru</span>
+      </h2>
+      <form id="orderForm" onsubmit="simpanOrder(event)" class="space-y-4">
+        
+        <!-- Informasi Pelanggan -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1">Nama Pelanggan</label>
+            <input type="text" id="custName" required placeholder="Nama lengkap" class="w-full bg-[#0c0d0f] border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1">No WhatsApp</label>
+            <input type="text" id="custPhone" required placeholder="08123456789" class="w-full bg-[#0c0d0f] border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500 font-mono">
+          </div>
+        </div>
+
+        <!-- Section Daftar Sepatu (Multi Item) -->
+        <div class="border-t border-white/10 pt-4">
+          <div class="flex justify-between items-center mb-2">
+            <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider">Daftar Sepatu & Layanan</label>
+            <button type="button" onclick="tambahBarisSepatu()" class="text-xs bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 border border-amber-500/30 px-2.5 py-1 rounded-xl font-semibold transition">
+              + Tambah Sepatu
+            </button>
+          </div>
+
+          <!-- Container Dynamic Inputs -->
+          <div id="shoeItemsContainer" class="space-y-3">
+            <!-- Baris Pertama (Default) -->
+            <div class="shoe-item grid grid-cols-1 md:grid-cols-3 gap-2 p-3 bg-[#0c0d0f] rounded-xl border border-white/10 relative">
+              <div>
+                <label class="block text-[10px] text-gray-500 mb-1">Merk / Jenis Sepatu</label>
+                <input type="text" placeholder="misal: Nike Jordan 1" class="input-shoe w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500" required>
+              </div>
+              <div>
+                <label class="block text-[10px] text-gray-500 mb-1">Layanan</label>
+                <select class="select-service w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                  <option value="Fast Clean">Fast Clean</option>
+                  <option value="Deep Clean">Deep Clean</option>
+                  <option value="Unyellowing">Unyellowing</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] text-gray-500 mb-1">Biaya (Rp)</label>
+                <input type="number" placeholder="50000" class="input-cost w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500 font-mono" oninput="hitungTotalBiaya()" required>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Display Total Biaya -->
+        <div class="flex justify-between items-center bg-[#0c0d0f] p-3.5 rounded-xl border border-amber-500/20">
+          <span class="text-xs font-bold text-gray-300">TOTAL BIAYA KESELURUHAN:</span>
+          <span id="displayTotalBiaya" class="text-sm font-black text-amber-400">Rp 0</span>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" id="btnSubmit" class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-bold py-2.5 rounded-xl transition text-xs shadow-lg shadow-amber-500/20">
+            + Simpan & Buat Tiket Otomatis
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- Tabel Tiket Aktif -->
+    <section class="bg-[#141519]/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/10">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-sm font-bold text-white uppercase tracking-wider">Daftar Order Aktif</h2>
+        <button onclick="loadTickets()" class="text-xs bg-white/10 hover:bg-white/20 text-gray-300 px-3 py-1.5 rounded-xl transition flex items-center gap-1">
+          🔄 Refresh
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-[#0c0d0f] text-gray-400 uppercase tracking-wider border-b border-white/10">
+            <tr>
+              <th class="p-3 rounded-l-xl">No. Tiket</th>
+              <th class="p-3">Pelanggan</th>
+              <th class="p-3">Daftar Sepatu</th>
+              <th class="p-3">Total Biaya</th>
+              <th class="p-3">Status</th>
+              <th class="p-3 rounded-r-xl">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="ticketTableBody" class="divide-y divide-white/5">
+            <tr>
+              <td colspan="6" class="p-6 text-center text-gray-500">Silakan login untuk memuat data.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FLOATING AI LIVE CHAT WIDGET -->
+  <div id="ai-widget-container" class="hidden fixed bottom-5 right-5 z-50 font-sans">
+    <button id="ai-toggle-btn" onclick="toggleAiChat()" class="w-14 h-14 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-black border-none shadow-xl hover:from-amber-400 hover:to-amber-500 transition flex items-center justify-center text-2xl cursor-pointer font-bold">
+      🤖
+    </button>
+
+    <div id="ai-chat-box" class="hidden absolute bottom-16 right-0 w-80 md:w-96 h-[420px] bg-[#141519] border border-amber-500/30 rounded-2xl shadow-2xl flex-col overflow-hidden">
+      
+      <div class="bg-[#0c0d0f] border-b border-white/10 text-white px-4 py-3 flex justify-between items-center font-bold text-xs">
+        <div class="flex items-center gap-2">
+          <span>🤖</span>
+          <span class="text-amber-400">HiveSpot AI Assistant</span>
+        </div>
+        <button onclick="toggleAiChat()" class="text-gray-400 hover:text-white text-lg font-bold">&times;</button>
+      </div>
+
+      <div id="ai-chat-history" class="flex-1 p-3 overflow-y-auto bg-[#0c0d0f] space-y-2.5 text-xs leading-relaxed">
+        <div class="bg-[#141519] border border-white/10 text-gray-200 p-3 rounded-xl max-w-[85%] self-start shadow">
+          Halo Bos! Ada yang bisa dibantu mengenai rekap transaksi atau analisis usaha hari ini?
+        </div>
+      </div>
+
+      <div class="p-2.5 border-t border-white/10 bg-[#0c0d0f] flex gap-2">
+        <input type="text" id="ai-prompt-input" placeholder="Tanyakan rekap..." class="flex-1 bg-[#141519] border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500" onkeypress="if(event.key === 'Enter') sendAiPrompt()">
+        <button onclick="sendAiPrompt()" id="btn-send-ai" class="bg-amber-500 hover:bg-amber-400 text-black font-bold px-3 py-2 rounded-xl text-xs transition">
+          Kirim
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  const API_URL = "https://script.google.com/macros/s/AKfycby2omN0gDy2YyY9cIlLzWLeCIki0OmQpAaIZC6HyhJf8FGTCHL7Jh-BU4ST7ryXQ1N7/exec";
+
+  let activeTickets = [];
+
+  window.onload = function() {
+    checkAuth();
+  };
+
+  function checkAuth() {
+    const userPin = sessionStorage.getItem("USER_PIN");
+    const userRole = sessionStorage.getItem("USER_ROLE");
+    const modal = document.getElementById("loginModal");
+    const aiWidget = document.getElementById("ai-widget-container");
+    const roleBadge = document.getElementById("roleBadge");
+
+    if (userPin && userRole) {
+      modal.classList.add("hidden");
+      roleBadge.innerText = `Role: ${userRole.toUpperCase()}`;
+
+      if (userRole === "admin") {
+        aiWidget.classList.remove("hidden");
+      } else {
+        aiWidget.classList.add("hidden");
+      }
+
+      loadTickets();
+      loadStoreStatus();
+    } else {
+      modal.classList.remove("hidden");
+      aiWidget.classList.add("hidden");
+    }
+  }
+
+  async function submitLogin(e) {
+    e.preventDefault();
+    const pin = document.getElementById("pinInput").value.trim();
+    const btn = document.getElementById("btnLogin");
+
+    if (!pin) return;
+
+    btn.innerText = "Memverifikasi...";
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`${API_URL}?action=validatePin&pin=${encodeURIComponent(pin)}`);
+      const result = await res.json();
+
+      if (result.success) {
+        sessionStorage.setItem("USER_PIN", pin);
+        sessionStorage.setItem("USER_ROLE", result.role);
+        document.getElementById("pinInput").value = "";
+        checkAuth();
+      } else {
+        alert("PIN / Passcode Salah!");
+      }
+    } catch (err) {
+      alert("Gagal terhubung ke server untuk verifikasi PIN.");
+    } finally {
+      btn.innerText = "Masuk Dashboard";
+      btn.disabled = false;
+    }
+  }
+
+  function getUserPin() {
+    const pin = sessionStorage.getItem("USER_PIN");
+    if (!pin) {
+      checkAuth();
+      return null;
+    }
+    return pin;
+  }
+
+  function logoutAdmin() {
+    sessionStorage.removeItem("USER_PIN");
+    sessionStorage.removeItem("USER_ROLE");
+    alert("Berhasil logout.");
+    checkAuth();
+  }
+
+  // --- LOGIKA STORE STATUS (GOOGLE SHEETS) ---
+  async function loadStoreStatus() {
+    const label = document.getElementById("storeStatusLabel");
+    const toggle = document.getElementById("storeToggle");
+
+    try {
+      const res = await fetch(`${API_URL}?action=getStoreStatus`);
+      const result = await res.json();
+      
+      if (result.success) {
+        const isOpen = result.status === "BUKA";
+        toggle.checked = isOpen;
+        label.innerText = isOpen ? "BUKA" : "TUTUP";
+        label.className = `ml-3 text-xs font-bold font-mono ${isOpen ? 'text-emerald-400' : 'text-red-400'}`;
+      } else {
+        label.innerText = "BUKA (Default)";
+        toggle.checked = true;
+      }
+    } catch (err) {
+      label.innerText = "BUKA (Offline)";
+      toggle.checked = true;
+    }
+  }
+
+  async function toggleStoreStatus(checkbox) {
+    const userPin = getUserPin();
+    if (!userPin) return;
+
+    const newStatus = checkbox.checked ? "BUKA" : "TUTUP";
+    const label = document.getElementById("storeStatusLabel");
+    label.innerText = "Menyimpan...";
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "updateStoreStatus",
+          pin: userPin,
+          status: newStatus
+        })
+      });
+      const result = await res.json();
+
+      if (result.success) {
+        label.innerText = newStatus;
+        label.className = `ml-3 text-xs font-bold font-mono ${newStatus === 'BUKA' ? 'text-emerald-400' : 'text-red-400'}`;
+      } else {
+        alert("Gagal memperbarui status toko di server.");
+        loadStoreStatus();
+      }
+    } catch (err) {
+      alert("Gagal terhubung ke server Google Sheets.");
+      loadStoreStatus();
+    }
+  }
+
+  // --- LOGIKA MULTI SEPATU DINAMIS ---
+  function tambahBarisSepatu() {
+    const container = document.getElementById('shoeItemsContainer');
+    const div = document.createElement('div');
+    div.className = "shoe-item grid grid-cols-1 md:grid-cols-3 gap-2 p-3 bg-[#0c0d0f] rounded-xl border border-white/10 relative pr-10";
+    div.innerHTML = `
+      <div>
+        <label class="block text-[10px] text-gray-500 mb-1">Merk / Jenis Sepatu</label>
+        <input type="text" placeholder="misal: Adidas Ultraboost" class="input-shoe w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500" required>
+      </div>
+      <div>
+        <label class="block text-[10px] text-gray-500 mb-1">Layanan</label>
+        <select class="select-service w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-500">
+          <option value="Fast Clean">Fast Clean</option>
+          <option value="Deep Clean">Deep Clean</option>
+          <option value="Unyellowing">Unyellowing</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-[10px] text-gray-500 mb-1">Biaya (Rp)</label>
+        <input type="number" placeholder="50000" class="input-cost w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500 font-mono" oninput="hitungTotalBiaya()" required>
+      </div>
+      <button type="button" onclick="hapusBarisSepatu(this)" class="absolute top-2 right-2 text-red-400 hover:text-red-300 font-bold p-1 text-xs">
+        ✕
+      </button>
+    `;
+    container.appendChild(div);
+  }
+
+  function hapusBarisSepatu(btn) {
+    btn.parentElement.remove();
+    hitungTotalBiaya();
+  }
+
+  function hitungTotalBiaya() {
+    const costInputs = document.querySelectorAll('.input-cost');
+    let total = 0;
+    costInputs.forEach(input => {
+      total += Number(input.value) || 0;
+    });
+    document.getElementById('displayTotalBiaya').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+    return total;
+  }
+
+  // --- API OPERATIONS ---
+  async function loadTickets() {
+    const tbody = document.getElementById('ticketTableBody');
+    const userPin = getUserPin();
+    if (!userPin) return;
+
+    tbody.innerHTML = '<tr><td colspan="6" class="p-6 text-center text-gray-500">Memuat data tiket...</td></tr>';
+
+    try {
+      const res = await fetch(`${API_URL}?api_key=CleanShoesAdmin2026!Key`);
+      const result = await res.json();
+
+      if (result.success && result.data.length > 0) {
+        activeTickets = result.data;
+        renderTable(result.data);
+      } else {
+        tbody.innerHTML = '<tr><td colspan="6" class="p-6 text-center text-gray-500">Belum ada order aktif.</td></tr>';
+      }
+    } catch (err) {
+      tbody.innerHTML = '<tr><td colspan="6" class="p-6 text-center text-gray-500">Gagal memuat dari server.</td></tr>';
+    }
+  }
+
+  function renderTable(tickets) {
+    const tbody = document.getElementById('ticketTableBody');
+    tbody.innerHTML = '';
+
+    tickets.forEach(t => {
+      let shoesDetailHtml = '';
+      if (Array.isArray(t.items) && t.items.length > 0) {
+        shoesDetailHtml = t.items.map(i => `<div class="text-xs">▪ <b class="text-white">${i.shoe_model}</b> (${i.service_type})</div>`).join('');
+      } else {
+        shoesDetailHtml = `<div class="text-xs">▪ <b class="text-white">${t.shoe_model || '-'}</b> (${t.service_type || '-'})</div>`;
+      }
+
+      const tr = document.createElement('tr');
+      tr.className = "hover:bg-white/5 border-b border-white/5 transition";
+      tr.innerHTML = `
+        <td class="p-3 font-bold text-amber-400 font-mono">${t.ticket_id}</td>
+        <td class="p-3">
+          <span class="font-semibold text-white">${t.customer_name || t.name}</span><br>
+          <span class="text-[11px] text-gray-400 font-mono">${t.phone_number || t.phone || '-'}</span>
+        </td>
+        <td class="p-3">${shoesDetailHtml}</td>
+        <td class="p-3 font-semibold text-gray-200 font-mono">Rp ${Number(t.total_cost || t.total || 0).toLocaleString('id-ID')}</td>
+        <td class="p-3">
+          <select onchange="updateStatus('${t.ticket_id}', this.value)" class="bg-[#0c0d0f] border border-white/10 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-amber-500">
+            <option value="Diterima" ${t.status === 'Diterima' ? 'selected' : ''}>Diterima</option>
+            <option value="Proses Cuci" ${t.status === 'Proses Cuci' ? 'selected' : ''}>Proses Cuci</option>
+            <option value="Selesai Siap Ambil" ${t.status === 'Selesai Siap Ambil' ? 'selected' : ''}>Selesai Siap Ambil</option>
+          </select>
+        </td>
+        <td class="p-3">
+          <button onclick="closeTicket('${t.ticket_id}', this)" class="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs px-3 py-1.5 rounded-xl transition">
+            Selesai & Archive
+          </button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  async function simpanOrder(e) {
+    e.preventDefault();
+    const userPin = getUserPin();
+    if (!userPin) return;
+
+    const shoeElements = document.querySelectorAll('.shoe-item');
+    const items = [];
+
+    shoeElements.forEach(el => {
+      items.push({
+        shoe_model: el.querySelector('.input-shoe').value,
+        service_type: el.querySelector('.select-service').value,
+        cost: Number(el.querySelector('.input-cost').value) || 0
+      });
+    });
+
+    const totalCost = hitungTotalBiaya();
+    const btn = document.getElementById('btnSubmit');
+    btn.innerText = "Menyimpan...";
+    btn.disabled = true;
+
+    const payload = {
+      action: "createTicket",
+      pin: userPin,
+      customer_name: document.getElementById('custName').value,
+      phone_number: document.getElementById('custPhone').value,
+      items: items,
+      total_cost: totalCost
+    };
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+      const result = await res.json();
+
+      if (result.success) {
+        alert(`Order Berhasil Disimpan!\nNomor Tiket: ${result.ticket_id}`);
+        document.getElementById('orderForm').reset();
+        document.getElementById('shoeItemsContainer').innerHTML = `
+          <div class="shoe-item grid grid-cols-1 md:grid-cols-3 gap-2 p-3 bg-[#0c0d0f] rounded-xl border border-white/10 relative">
+            <div>
+              <label class="block text-[10px] text-gray-500 mb-1">Merk / Jenis Sepatu</label>
+              <input type="text" placeholder="misal: Nike Jordan 1" class="input-shoe w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500" required>
+            </div>
+            <div>
+              <label class="block text-[10px] text-gray-500 mb-1">Layanan</label>
+              <select class="select-service w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                <option value="Fast Clean">Fast Clean</option>
+                <option value="Deep Clean">Deep Clean</option>
+                <option value="Unyellowing">Unyellowing</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] text-gray-500 mb-1">Biaya (Rp)</label>
+              <input type="number" placeholder="50000" class="input-cost w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500 font-mono" oninput="hitungTotalBiaya()" required>
+            </div>
+          </div>
+        `;
+        hitungTotalBiaya();
+        loadTickets();
+      } else {
+        alert("Gagal menyimpan order: " + (result.error || "PIN tidak valid"));
+        if (result.error && result.error.includes("403")) logoutAdmin();
+      }
+    } catch (err) {
+      alert("Terjadi kesalahan koneksi.");
+    } finally {
+      btn.innerText = "+ Simpan & Buat Tiket Otomatis";
+      btn.disabled = false;
+    }
+  }
+
+  async function updateStatus(ticketId, newStatus) {
+    const userPin = getUserPin();
+    if (!userPin) return;
+
+    const item = activeTickets.find(t => t.ticket_id === ticketId);
+    if (!item) return;
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "updateStatus",
+          pin: userPin,
+          ticket_id: ticketId,
+          status: newStatus,
+          customer_name: item.customer_name || item.name || "Pelanggan",
+          phone_number: item.phone_number || item.phone || "-"
+        })
+      });
+      const result = await res.json();
+      if (!result.success) {
+        alert("Gagal update status: " + result.error);
+        if (result.error && result.error.includes("403")) logoutAdmin();
+      }
+    } catch (err) {
+      alert("Gagal memperbarui status.");
+    }
+  }
+
+async function closeTicket(ticketId, btnElement) { // 1. Tambah parameter btnElement
+    const userPin = getUserPin();
+    if (!userPin) return;
+
+    if (!confirm(`Tandai tiket ${ticketId} Selesai & Pindahkan ke Google Sheets?`)) return;
+
+    const item = activeTickets.find(t => t.ticket_id === ticketId);
+    if (!item) return;
+
+    // 2. Disable tombol & ubah teksnya biar gak bisa diklik double-click
+    if (btnElement) {
+      btnElement.disabled = true;
+      btnElement.innerText = "Proses...";
+      btnElement.style.opacity = "0.5";
+    }
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "closeTicket",
+          pin: userPin,
+          ...item
+        })
+      });
+      const result = await res.json();
+      if (result.success) {
+        alert("Order berhasil di-close dan dipindahkan ke Google Sheets!");
+        loadTickets();
+      } else {
+        alert("Gagal close ticket: " + result.error);
+        if (result.error && result.error.includes("403")) logoutAdmin();
+        // Kalau gagal, aktifin lagi tombolnya
+        if (btnElement) {
+          btnElement.disabled = false;
+          btnElement.innerText = "Selesai & Archive";
+          btnElement.style.opacity = "1";
+        }
+      }
+    } catch (err) {
+      alert("Gagal memindahkan order ke Google Sheets.");
+      if (btnElement) {
+        btnElement.disabled = false;
+        btnElement.innerText = "Selesai & Archive";
+        btnElement.style.opacity = "1";
+      }
+    }
+  }
+
+  function toggleAiChat() {
+    const box = document.getElementById("ai-chat-box");
+    box.classList.toggle("hidden");
+    box.classList.toggle("flex");
+  }
+
+  async function sendAiPrompt() {
+    const input = document.getElementById("ai-prompt-input");
+    const history = document.getElementById("ai-chat-history");
+    const btn = document.getElementById("btn-send-ai");
+    const prompt = input.value.trim();
+    const userPin = getUserPin();
+
+    if (!prompt || !userPin) return;
+
+    history.innerHTML += `
+      <div class="bg-amber-500 text-black font-medium p-2.5 rounded-xl max-w-[85%] ml-auto shadow">
+        ${prompt}
+      </div>
+    `;
+
+    input.value = "";
+    btn.disabled = true;
+    btn.innerText = "...";
+    history.scrollTop = history.scrollHeight;
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "askAI",
+          pin: userPin,
+          prompt: prompt
+        })
+      });
+
+      const resData = await response.json();
+      if (resData.success) {
+        history.innerHTML += `
+          <div class="bg-[#0c0d0f] border border-white/10 text-gray-200 p-3 rounded-xl max-w-[85%] mr-auto shadow leading-relaxed">
+            ${resData.reply.replace(/\n/g, '<br>')}
+          </div>
+        `;
+      } else {
+        history.innerHTML += `
+          <div class="bg-red-500/10 text-red-400 border border-red-500/20 p-2 rounded-lg max-w-[85%] text-[11px]">
+            Gagal: ${resData.error || "Terjadi kesalahan."}
+          </div>
+        `;
+      }
+    } catch (err) {
+      history.innerHTML += `
+        <div class="bg-red-500/10 text-red-400 border border-red-500/20 p-2 rounded-lg max-w-[85%] text-[11px]">
+          Gagal terhubung ke server Apps Script.
+        </div>
+      `;
+    } finally {
+      btn.disabled = false;
+      btn.innerText = "Kirim";
+      history.scrollTop = history.scrollHeight;
+    }
+  }
+</script>
+</body>
+</html>
