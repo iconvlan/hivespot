@@ -203,8 +203,6 @@
 
   </main>
 
-
-
   <!-- ==================== POPUP MODAL DETAIL LAYANAN ==================== -->
   <div id="serviceModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
     <div class="bg-[#141519] border border-amber-500/30 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 relative">
@@ -329,9 +327,22 @@
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycby2omN0gDy2YyY9cIlLzWLeCIki0OmQpAaIZC6HyhJf8FGTCHL7Jh-BU4ST7ryXQ1N7/exec";
 
-    // Load Status Toko otomatis saat halaman dibuka
+    // Load Status Toko & Auto-Check URL Parameter saat halaman dibuka
     document.addEventListener("DOMContentLoaded", function() {
       checkStoreStatus();
+
+      // Tangkap parameter 'ticket' dari URL secara otomatis
+      const urlParams = new URLSearchParams(window.location.search);
+      const ticketId = urlParams.get('ticket');
+
+      if (ticketId) {
+        const inputEl = document.getElementById('searchInput');
+        if (inputEl) {
+          inputEl.value = ticketId;
+          // Langsung jalankan fungsi pencarian otomatis
+          cariTiket();
+        }
+      }
     });
 
     async function checkStoreStatus() {
