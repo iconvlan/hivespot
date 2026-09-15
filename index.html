@@ -33,7 +33,7 @@
 
   <!-- Top Navigation -->
   <header class="sticky top-0 z-50 backdrop-blur-md bg-[#0c0d0f]/85 border-b border-amber-500/10 honeycomb-pattern">
-    <div class="max-w-[90rem] mx-auto px-8 h-20 flex items-center justify-between relative z-10">
+    <div class="max-w-[90rem] mx-auto px-4 md:px-8 h-20 flex items-center justify-between relative z-10">
       
       <!-- LOGO KIRI ATAS -->
       <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
@@ -41,24 +41,45 @@
         <span class="text-xl font-bold tracking-wide text-white">Hive<span class="text-amber-400">Spot</span></span>
       </div>
       
-      <!-- MENU TENGAH -->
+      <!-- MENU TENGAH (Desktop) -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300 absolute left-1/2 -translate-x-1/2">
         <button onclick="openAllServicesModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-medium text-gray-300 text-sm">Layanan</button>
         <button onclick="openShowcaseModal(0)" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-medium text-gray-300 text-sm">Portofolio</button>
         <button onclick="openLocationModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-medium text-gray-300 text-sm">Lokasi</button>
       </nav>
 
-      <!-- TOMBOL KANAN -->
-      <div>
-        <a href="https://wa.me/6287811299845" target="_blank" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-semibold text-xs hover:from-amber-400 hover:to-amber-500 transition shadow-md shadow-amber-500/20">
+      <!-- TOMBOL KANAN & HAMBURGER MOBILE -->
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/6287811299845" target="_blank" class="px-4 md:px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-semibold text-xs hover:from-amber-400 hover:to-amber-500 transition shadow-md shadow-amber-500/20">
           WhatsApp
         </a>
+
+        <!-- Tombol Hamburger Mobile -->
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl bg-[#141519] border border-white/10 text-gray-300 hover:text-amber-400 transition focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
       </div>
+
+    </div>
+
+    <!-- Dropdown Menu Mobile -->
+    <div id="mobileMenu" class="hidden md:hidden bg-[#141519]/95 border-b border-white/10 px-6 py-4 space-y-3 backdrop-blur-md">
+      <button onclick="toggleMobileMenu(); openAllServicesModal();" class="block w-full text-left py-2 text-sm font-medium text-gray-300 hover:text-amber-400 transition border-b border-white/5">
+        🛠️ Layanan
+      </button>
+      <button onclick="toggleMobileMenu(); openShowcaseModal(0);" class="block w-full text-left py-2 text-sm font-medium text-gray-300 hover:text-amber-400 transition border-b border-white/5">
+        📸 Portofolio
+      </button>
+      <button onclick="toggleMobileMenu(); openLocationModal();" class="block w-full text-left py-2 text-sm font-medium text-gray-300 hover:text-amber-400 transition">
+        📍 Lokasi Workshop
+      </button>
     </div>
   </header>
 
   <!-- Main Layout -->
-  <main class="max-w-[90rem] mx-auto px-8 py-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10 my-auto">
+  <main class="max-w-[90rem] mx-auto px-4 md:px-8 py-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10 my-auto">
     
     <!-- KOLOM KIRI: Project Showcase -->
     <div id="showcase" class="lg:col-span-3 space-y-3">
@@ -346,6 +367,12 @@
       }
     });
 
+    // Fungsi Toggle Menu Mobile
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
     async function checkStoreStatus() {
       try {
         const res = await fetch(`${API_URL}?action=getStoreStatus`);
@@ -367,7 +394,7 @@
           statusText.className = "text-emerald-400 font-semibold";
           statusDesc.innerText = "Siap menerima titipan & drop sepatu hari ini (09.00 - 20.00)";
           dot.className = "relative inline-flex rounded-full h-3 w-3 bg-emerald-500";
-          ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75";
+          ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75";
         }
       } catch (err) {
         console.error("Gagal memuat status toko:", err);

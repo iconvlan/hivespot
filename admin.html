@@ -73,7 +73,7 @@
 
   <main class="max-w-6xl mx-auto p-4 space-y-6 mt-4">
 
-    <!-- Toggle Status Operasional Toko (Sinkron Google Sheet) -->
+    <!-- Toggle Status Operasional Toko (Sinkron Google Sheet dengan Optimistic UI) -->
     <section class="bg-[#141519]/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/10 flex justify-between items-center">
       <div>
         <h2 class="text-xs font-bold text-amber-400 uppercase tracking-wider">Status Operasional Toko</h2>
@@ -263,7 +263,15 @@
     btn.disabled = true;
 
     try {
-      const res = await fetch(`${API_URL}?action=validatePin&pin=${encodeURIComponent(pin)}`);
+      // Timeout 20 detik untuk mengantisipasi Google Apps Script yang sedang busy / cold start
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 20000);
+
+      const res = await fetch(`${API_URL}?action=validatePin&pin=${encodeURIComponent(pin)}`, {
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+
       const result = await res.json();
 
       if (result.success) {
@@ -275,7 +283,8 @@
         alert("PIN / Passcode Salah!");
       }
     } catch (err) {
-      alert("Gagal terhubung ke server untuk verifikasi PIN.");
+      console.warn("Login error:", err);
+      alert("Server Google sedang sibuk atau mengalami Cold Start. Silakan coba klik Masuk sekali lagi.");
     } finally {
       btn.innerText = "Masuk Dashboard";
       btn.disabled = false;
@@ -298,7 +307,7 @@
     checkAuth();
   }
 
-  // --- LOGIKA STORE STATUS (GOOGLE SHEETS) ---
+  // --- LOGIKA STORE STATUS (GOOGLE SHEETS) DENGAN OPTIMISTIC UI ---
   async function loadStoreStatus() {
     const label = document.getElementById("storeStatusLabel");
     const toggle = document.getElementById("storeToggle");
@@ -328,29 +337,36 @@
 
     const newStatus = checkbox.checked ? "BUKA" : "TUTUP";
     const label = document.getElementById("storeStatusLabel");
-    label.innerText = "Menyimpan...";
+    
+    // UI langsung berubah instan (Optimistic UI)
+    label.innerText = newStatus;
+    label.className = `ml-3 text-xs font-bold font-mono ${newStatus === 'BUKA' ? 'text-emerald-400' : 'text-red-400'}`;
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
+
       const res = await fetch(API_URL, {
         method: "POST",
+        signal: controller.signal,
         body: JSON.stringify({
           action: "updateStoreStatus",
           pin: userPin,
           status: newStatus
         })
       });
+      clearTimeout(timeoutId);
+      
       const result = await res.json();
 
-      if (result.success) {
-        label.innerText = newStatus;
-        label.className = `ml-3 text-xs font-bold font-mono ${newStatus === 'BUKA' ? 'text-emerald-400' : 'text-red-400'}`;
-      } else {
+      if (!result.success) {
         alert("Gagal memperbarui status toko di server.");
-        loadStoreStatus();
+        loadStoreStatus(); // Revert ke kondisi asli jika gagal
       }
     } catch (err) {
-      alert("Gagal terhubung ke server Google Sheets.");
+      checkbox.checked = !checkbox.checked;
       loadStoreStatus();
+      console.warn("Gagal sinkron status toko:", err);
     }
   }
 
@@ -563,7 +579,7 @@
     }
   }
 
-async function closeTicket(ticketId, btnElement) { // 1. Tambah parameter btnElement
+  async function closeTicket(ticketId, btnElement) {
     const userPin = getUserPin();
     if (!userPin) return;
 
@@ -572,7 +588,6 @@ async function closeTicket(ticketId, btnElement) { // 1. Tambah parameter btnEle
     const item = activeTickets.find(t => t.ticket_id === ticketId);
     if (!item) return;
 
-    // 2. Disable tombol & ubah teksnya biar gak bisa diklik double-click
     if (btnElement) {
       btnElement.disabled = true;
       btnElement.innerText = "Proses...";
@@ -595,7 +610,6 @@ async function closeTicket(ticketId, btnElement) { // 1. Tambah parameter btnEle
       } else {
         alert("Gagal close ticket: " + result.error);
         if (result.error && result.error.includes("403")) logoutAdmin();
-        // Kalau gagal, aktifin lagi tombolnya
         if (btnElement) {
           btnElement.disabled = false;
           btnElement.innerText = "Selesai & Archive";
