@@ -114,27 +114,33 @@
           </div>
         </div>
 
-        <!-- Tombol Kustom Foto Kondisi Before (Multiple & Akumulasi Foto) -->
+        <!-- Tombol Kustom Foto Kondisi Before (2 Tombol Terpisah: Kamera & Galeri) -->
         <div class="bg-[#0c0d0f] p-3.5 rounded-xl border border-white/10 space-y-2">
           <label class="block text-xs font-bold text-amber-400">📸 Foto Kondisi Awal (Before) - Bukti Pelanggan</label>
-          <p class="text-[11px] text-gray-400">Klik tombol di bawah untuk memilih atau menjepret foto. Bisa ditambahkan berkali-kali tanpa menimpa foto sebelumnya.</p>
+          <p class="text-[11px] text-gray-400">Gunakan tombol kamera untuk jepret langsung atau galeri untuk memilih foto. Foto akan terakumulasi otomatis.</p>
           
-          <!-- Input File Asli (Tanpa capture agar bisa akumulasi multi foto) -->
-          <input type="file" id="inputPhotoBefore" accept="image/*" multiple class="hidden" onchange="handleFileSelect(this)">
+          <!-- Input File Tersembunyi (Kamera & Galeri) -->
+          <input type="file" id="inputCamera" accept="image/*" capture="environment" class="hidden" onchange="handleFileSelect(this)">
+          <input type="file" id="inputGallery" accept="image/*" multiple class="hidden" onchange="handleFileSelect(this)">
 
-          <!-- Tombol Kustom Interaktif -->
-          <div class="flex gap-2">
-            <button type="button" onclick="document.getElementById('inputPhotoBefore').click()" class="flex-1 bg-amber-500 hover:bg-amber-400 text-black font-bold py-2.5 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10 cursor-pointer">
-              <span>📷 Tambah / Pilih Foto</span>
+          <!-- Dua Tombol Kustom Interaktif -->
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" onclick="document.getElementById('inputCamera').click()" class="bg-amber-500 hover:bg-amber-400 text-black font-bold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/10 cursor-pointer">
+              <span>📷 Buka Kamera</span>
             </button>
-            <button type="button" onclick="resetSelectedPhotos()" id="btnResetPhotos" class="hidden bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-3 py-2.5 rounded-xl text-xs font-semibold transition">
-              Reset Foto
+            <button type="button" onclick="document.getElementById('inputGallery').click()" class="bg-white/10 hover:bg-white/20 text-gray-200 font-bold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 border border-white/10 cursor-pointer">
+              <span>🖼️ Pilih Galeri</span>
             </button>
           </div>
 
-          <!-- Indikator Jumlah Foto Terpilih -->
-          <div id="fileChosenIndicator" class="text-[11px] text-emerald-400 font-medium hidden pt-1">
-            ✅ <span id="fileCountText">0 foto dipilih & siap dikirim</span>
+          <!-- Indikator & Tombol Reset -->
+          <div class="flex items-center justify-between pt-1">
+            <div id="fileChosenIndicator" class="text-[11px] text-emerald-400 font-medium hidden">
+              ✅ <span id="fileCountText">0 foto dipilih & siap dikirim</span>
+            </div>
+            <button type="button" onclick="resetSelectedPhotos()" id="btnResetPhotos" class="hidden text-[10px] bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-2.5 py-1 rounded-lg font-semibold transition ml-auto">
+              Reset Semua Foto
+            </button>
           </div>
         </div>
 
@@ -254,7 +260,7 @@
   const API_URL = "https://script.google.com/macros/s/AKfycby2omN0gDy2YyY9cIlLzWLeCIki0OmQpAaIZC6HyhJf8FGTCHL7Jh-BU4ST7ryXQ1N7/exec";
 
   let activeTickets = [];
-  let selectedFilesArray = []; // Array global penampung multi foto agar tidak saling menimpa
+  let selectedFilesArray = []; // Array global penampung multi foto
 
   window.onload = function() {
     checkAuth();
@@ -339,7 +345,7 @@
     checkAuth();
   }
 
-  // --- LOGIKA AKUMULASI MULTI FOTO (TIDAK MENIMPA) ---
+  // --- LOGIKA AKUMULASI MULTI FOTO (KAMERA & GALERI) ---
   function handleFileSelect(input) {
     const indicator = document.getElementById('fileChosenIndicator');
     const countText = document.getElementById('fileCountText');
@@ -368,7 +374,8 @@
     selectedFilesArray = [];
     document.getElementById('fileChosenIndicator').classList.add('hidden');
     document.getElementById('btnResetPhotos').classList.add('hidden');
-    document.getElementById('inputPhotoBefore').value = '';
+    document.getElementById('inputCamera').value = '';
+    document.getElementById('inputGallery').value = '';
   }
 
   // --- LOGIKA STORE STATUS (GOOGLE SHEETS) DENGAN OPTIMISTIC UI ---
