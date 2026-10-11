@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id" class="light">
 <head>
   <link rel="icon" href="images/logo.png" type="image/png">
   <meta charset="UTF-8">
@@ -12,50 +12,65 @@
       theme: {
         extend: {
           colors: {
-            charcoal: '#0c0d0f',
-            carddark: '#141519',
+            luxuryGold: '#c5a875',
+            softGoldBg: '#d8c29a',
+            espressoCard: '#241f1c', // Cokelat espresso gelap elegan untuk kontras
+            creamCard: '#e6d7bc',
           }
         }
       }
     }
   </script>
   <style>
-    .honeycomb-pattern {
-      background-image: radial-gradient(rgba(245, 158, 11, 0.08) 1px, transparent 1px);
-      background-size: 20px 20px;
+    .brushed-metal {
+      background-color: #d8c29a;
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 18px 18px, 4px 100%;
+    }
+    .luxury-glow {
+      box-shadow: 0 15px 40px -10px rgba(60, 45, 20, 0.4);
+    }
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 30px -10px rgba(40, 30, 15, 0.35);
     }
   </style>
 </head>
-<body class="bg-[#0c0d0f] text-gray-100 font-sans antialiased selection:bg-amber-500 selection:text-black min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+<body class="brushed-metal text-gray-900 font-sans antialiased selection:bg-amber-800 selection:text-white min-h-screen flex flex-col justify-between relative overflow-x-hidden">
 
-  <!-- Subtle Golden Smoke Glow di Tengah -->
-  <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[250px] bg-gradient-to-tr from-amber-600/10 via-amber-500/5 to-transparent blur-[150px] rounded-full pointer-events-none z-0"></div>
+  <!-- Ambient Light Glow -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-to-tr from-white/40 via-amber-200/20 to-transparent blur-[190px] rounded-full pointer-events-none z-0"></div>
 
-  <!-- Top Navigation -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-[#0c0d0f]/85 border-b border-amber-500/10 honeycomb-pattern">
+  <!-- Top Navigation (Luxury Header) -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-[#241f1c]/95 border-b border-amber-500/30 shadow-2xl">
     <div class="max-w-[90rem] mx-auto px-4 md:px-8 h-20 flex items-center justify-between relative z-10">
       
       <!-- LOGO KIRI ATAS -->
-      <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-        <img src="images/logo.png" alt="HiveSpot Logo" class="w-10 h-10 object-contain drop-shadow">
-        <span class="text-xl font-bold tracking-wide text-white">Hive<span class="text-amber-400">Spot</span></span>
+      <div class="flex items-center gap-3 cursor-pointer group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <img src="images/logo.png" alt="HiveSpot Logo" class="w-11 h-11 object-contain drop-shadow-md group-hover:scale-105 transition">
+        <span class="text-xl font-black tracking-wider text-white">Hive<span class="text-amber-400">Spot</span></span>
       </div>
       
       <!-- MENU TENGAH (Desktop) -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300 absolute left-1/2 -translate-x-1/2">
-        <button onclick="openAllServicesModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-medium text-gray-300 text-sm">Layanan</button>
-        <button onclick="openShowcaseModal(0)" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-medium text-gray-300 text-sm">Portofolio</button>
-        <button onclick="openLocationModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-medium text-gray-300 text-sm">Lokasi</button>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-bold text-gray-300 absolute left-1/2 -translate-x-1/2">
+        <button onclick="openAllServicesModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm">Layanan</button>
+        <button onclick="openShowcaseModal(0)" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm">Portofolio</button>
+        <button onclick="openLocationModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm">Lokasi</button>
       </nav>
 
       <!-- TOMBOL KANAN & HAMBURGER MOBILE -->
       <div class="flex items-center gap-3">
-        <a href="https://wa.me/6287811299845?text=Halo%20Kak,%20saya%20mau%20tanya-tanya%20seputar%20layanan%20perawatan%20dan%20booking%20cuci%20sepatu%20di%20HiveSpot." target="_blank" class="px-4 md:px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-semibold text-xs hover:from-amber-400 hover:to-amber-500 transition shadow-md shadow-amber-500/20">
-          WhatsApp
+        <a href="https://wa.me/6287811299845?text=Halo%20Kak,%20saya%20mau%20tanya-tanya%20seputar%20layanan%20perawatan%20dan%20booking%20cuci%20sepatu%20di%20HiveSpot." target="_blank" class="px-4 md:px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-extrabold text-xs hover:from-amber-400 hover:to-amber-500 transition shadow-lg flex items-center gap-1.5 border border-amber-400/40">
+          <span>WhatsApp VIP</span>
         </a>
 
         <!-- Tombol Hamburger Mobile -->
-        <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl bg-[#141519] border border-white/10 text-gray-300 hover:text-amber-400 transition focus:outline-none">
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl bg-[#e6d7bc] border border-amber-900/20 text-gray-900 hover:text-amber-600 transition focus:outline-none">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
@@ -65,14 +80,14 @@
     </div>
 
     <!-- Dropdown Menu Mobile -->
-    <div id="mobileMenu" class="hidden md:hidden bg-[#141519]/95 border-b border-white/10 px-6 py-4 space-y-3 backdrop-blur-md">
-      <button onclick="toggleMobileMenu(); openAllServicesModal();" class="block w-full text-left py-2 text-sm font-medium text-gray-300 hover:text-amber-400 transition border-b border-white/5">
+    <div id="mobileMenu" class="hidden md:hidden bg-[#241f1c] border-b border-amber-500/30 px-6 py-4 space-y-3 backdrop-blur-md shadow-xl text-white">
+      <button onclick="toggleMobileMenu(); openAllServicesModal();" class="block w-full text-left py-2 text-sm font-bold text-gray-300 hover:text-amber-400 transition border-b border-white/10">
         🛠️ Layanan
       </button>
-      <button onclick="toggleMobileMenu(); openShowcaseModal(0);" class="block w-full text-left py-2 text-sm font-medium text-gray-300 hover:text-amber-400 transition border-b border-white/5">
+      <button onclick="toggleMobileMenu(); openShowcaseModal(0);" class="block w-full text-left py-2 text-sm font-bold text-gray-300 hover:text-amber-400 transition border-b border-white/10">
         📸 Portofolio
       </button>
-      <button onclick="toggleMobileMenu(); openLocationModal();" class="block w-full text-left py-2 text-sm font-medium text-gray-300 hover:text-amber-400 transition">
+      <button onclick="toggleMobileMenu(); openLocationModal();" class="block w-full text-left py-2 text-sm font-bold text-gray-300 hover:text-amber-400 transition">
         📍 Lokasi Workshop
       </button>
     </div>
@@ -83,13 +98,13 @@
     
     <!-- KOLOM KIRI: Project Showcase -->
     <div id="showcase" class="lg:col-span-3 space-y-3">
-      <h3 class="text-xs font-semibold tracking-wider text-gray-400 uppercase flex items-center gap-1.5">
-        <span>Project Showcase</span>
+      <h3 class="text-xs font-black tracking-wider text-amber-950 uppercase flex items-center gap-1.5">
+        <span>✨ Project Showcase</span>
       </h3>
-      <div class="bg-[#141519]/90 backdrop-blur-md p-4 rounded-2xl border border-white/5 shadow-xl space-y-3.5">
+      <div class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 shadow-xl space-y-3.5 luxury-glow">
         
         <!-- Item 1 -->
-        <div onclick="openShowcaseModal(0)" class="relative rounded-xl overflow-hidden border border-white/15 group h-44 bg-gray-900 cursor-pointer">
+        <div onclick="openShowcaseModal(0)" class="relative rounded-xl overflow-hidden border border-amber-950/30 group h-44 bg-gray-900 cursor-pointer shadow-md card-hover">
           <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=500&auto=format&fit=crop" alt="Cleaned Sneaker" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-3">
             <span class="text-[10px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">AFTER DEEP CLEAN</span>
@@ -98,7 +113,7 @@
         </div>
 
         <!-- Item 2 -->
-        <div onclick="openShowcaseModal(1)" class="relative rounded-xl overflow-hidden border border-white/15 group h-44 bg-gray-900 cursor-pointer">
+        <div onclick="openShowcaseModal(1)" class="relative rounded-xl overflow-hidden border border-amber-950/30 group h-44 bg-gray-900 cursor-pointer shadow-md card-hover">
           <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=500&auto=format&fit=crop" alt="Sneaker Treatment" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-3">
             <span class="text-[10px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">UNYELLOWING TREATMENT</span>
@@ -112,26 +127,27 @@
     <!-- KOLOM TENGAH: Logo, Layanan & Status Toko / Hasil Tracking -->
     <div class="lg:col-span-6 text-center space-y-6 pt-2">
       <div class="space-y-4">
-        <div class="inline-block">
-          <img src="images/logo.png" alt="HiveSpot Logo" class="w-44 h-44 object-contain mx-auto drop-shadow-2xl">
+        <div class="inline-block relative">
+          <div class="absolute inset-0 bg-white/50 blur-3xl rounded-full"></div>
+          <img src="images/logo.png" alt="HiveSpot Logo" class="w-44 h-44 object-contain mx-auto drop-shadow-2xl relative z-10">
         </div>
-        <h1 class="text-4xl font-black tracking-tight text-white">Hive<span class="text-amber-400">Spot</span></h1>
-        <p class="text-sm text-gray-400 max-w-md mx-auto">Keeping your sneakers fresh, clean, and ready for any stride.</p>
+        <h1 class="text-4xl font-black tracking-tight text-gray-900">Hive<span class="text-amber-900">Spot</span></h1>
+        <p class="text-sm font-bold text-amber-950 max-w-md mx-auto">Keeping your sneakers fresh, clean, and ready for any stride.</p>
       </div>
 
       <!-- Service Quick Grid Cards -->
       <div id="katalog" class="grid grid-cols-3 gap-3">
-        <div onclick="openServiceModal('Fast Clean', 'Rp 30.000', 'Pembersihan bagian upper dan midsole secara cepat. Cocok untuk perawatan rutin harian agar sepatu tetap fresh.', 'Estimasi: 1 Hari')" class="bg-[#141519]/90 backdrop-blur-md p-5 rounded-2xl border border-white/5 hover:border-amber-500/40 transition cursor-pointer text-left group shadow-lg">
-          <div class="text-amber-400 mb-1 text-xs font-bold">Rp 30K</div>
-          <div class="font-bold text-sm text-white group-hover:text-amber-400 transition">Fast Clean</div>
+        <div onclick="openServiceModal('Fast Clean', 'Rp 30.000', 'Pembersihan bagian upper dan midsole secara cepat. Cocok untuk perawatan rutin harian agar sepatu tetap fresh.', 'Estimasi: 1 Hari')" class="bg-[#e6d7bc]/95 backdrop-blur-md p-5 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover">
+          <div class="text-amber-900 mb-1 text-xs font-black">Rp 30K</div>
+          <div class="font-black text-sm text-gray-900 group-hover:text-amber-900 transition">Fast Clean</div>
         </div>
-        <div onclick="openServiceModal('Deep Clean', 'Rp 50.000', 'Pembersihan menyeluruh mencakup seluruh bagian sepatu: Upper, Midsole, Outsole, Tali, hingga Insole menggunakan formula khusus yang aman.', 'Estimasi: 1 - 2 Hari')" class="bg-[#141519]/90 backdrop-blur-md p-5 rounded-2xl border border-white/5 hover:border-amber-500/40 transition cursor-pointer text-left group shadow-lg">
-          <div class="text-amber-400 mb-1 text-xs font-bold">Rp 50K</div>
-          <div class="font-bold text-sm text-white group-hover:text-amber-400 transition">Deep Clean</div>
+        <div onclick="openServiceModal('Deep Clean', 'Rp 50.000', 'Pembersihan menyeluruh mencakup seluruh bagian sepatu: Upper, Midsole, Outsole, Tali, hingga Insole menggunakan formula khusus yang aman.', 'Estimasi: 1 - 2 Hari')" class="bg-[#e6d7bc]/95 backdrop-blur-md p-5 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover">
+          <div class="text-amber-900 mb-1 text-xs font-black">Rp 50K</div>
+          <div class="font-black text-sm text-gray-900 group-hover:text-amber-900 transition">Deep Clean</div>
         </div>
-        <div onclick="openServiceModal('Unyellowing', 'Rp 75.000', 'Treatment khusus untuk mengembalikan warna putih midsole sepatu yang sudah menguning karena oksidasi agar kembali seperti baru.', 'Estimasi: 2 Hari')" class="bg-[#141519]/90 backdrop-blur-md p-5 rounded-2xl border border-white/5 hover:border-amber-500/40 transition cursor-pointer text-left group shadow-lg">
-          <div class="text-amber-400 mb-1 text-xs font-bold">Rp 75K</div>
-          <div class="font-bold text-sm text-white group-hover:text-amber-400 transition">Unyellowing</div>
+        <div onclick="openServiceModal('Unyellowing', 'Rp 75.000', 'Treatment khusus untuk mengembalikan warna putih midsole sepatu yang sudah menguning karena oksidasi agar kembali seperti baru.', 'Estimasi: 2 Hari')" class="bg-[#e6d7bc]/95 backdrop-blur-md p-5 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover">
+          <div class="text-amber-900 mb-1 text-xs font-black">Rp 75K</div>
+          <div class="font-black text-sm text-gray-900 group-hover:text-amber-900 transition">Unyellowing</div>
         </div>
       </div>
 
@@ -139,84 +155,84 @@
       <div id="trackingResultContainer" class="mt-4">
         
         <!-- Status Toko Dinamis (Terhubung ke GAS) -->
-        <div id="storeStatusCard" class="bg-[#141519]/90 backdrop-blur-md border border-amber-500/20 rounded-2xl p-4 flex items-center justify-between shadow-xl">
+        <div id="storeStatusCard" class="bg-[#e6d7bc]/95 backdrop-blur-md border border-amber-950/30 rounded-2xl p-4 flex items-center justify-between shadow-md luxury-glow">
           <div class="flex items-center gap-3 text-left">
             <span class="relative flex h-3 w-3" id="storeStatusDotWrapper">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" id="storeStatusPing"></span>
               <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" id="storeStatusDot"></span>
             </span>
             <div>
-              <p class="text-xs font-bold text-white">Workshop Status: <span id="storeStatusText" class="text-emerald-400 font-semibold">Memuat...</span></p>
-              <p id="storeStatusDesc" class="text-[11px] text-gray-400">Menghubungkan ke sistem workshop...</p>
+              <p class="text-xs font-bold text-gray-900">Workshop Status: <span id="storeStatusText" class="text-emerald-700 font-extrabold">Memuat...</span></p>
+              <p id="storeStatusDesc" class="text-[11px] text-gray-700">Menghubungkan ke sistem workshop...</p>
             </div>
           </div>
-          <span class="text-[10px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-1 rounded-lg">Semarang</span>
+          <span class="text-[10px] font-mono bg-amber-950/15 text-amber-950 border border-amber-950/30 px-2.5 py-1 rounded-lg font-bold">Semarang</span>
         </div>
 
-        <!-- Hasil Tracking (Hidden secara default, muncul jika tiket ditemukan) -->
-        <div id="resultArea" class="hidden bg-[#141519]/95 backdrop-blur-md border border-amber-500/30 rounded-2xl p-5 shadow-2xl text-left space-y-3.5">
-          <div class="flex flex-wrap justify-between items-center gap-2 border-b border-white/10 pb-3">
+        <!-- Hasil Tracking (Hidden secara default) -->
+        <div id="resultArea" class="hidden bg-[#e6d7bc]/95 backdrop-blur-md border border-amber-950/40 rounded-2xl p-5 shadow-xl text-left space-y-3.5 luxury-glow">
+          <div class="flex flex-wrap justify-between items-center gap-2 border-b border-amber-950/20 pb-3">
             <div>
-              <span class="text-xs font-mono bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3 py-1 rounded-lg" id="resTicketId"></span>
-              <p class="text-xs text-gray-400 mt-1.5">Pemilik: <span id="resName" class="font-semibold text-white"></span></p>
+              <span class="text-xs font-mono bg-amber-950/15 text-amber-950 border border-amber-950/30 px-3 py-1 rounded-lg font-bold" id="resTicketId"></span>
+              <p class="text-xs text-gray-700 mt-1.5">Pemilik: <span id="resName" class="font-bold text-gray-900"></span></p>
             </div>
-            <span class="text-xs bg-amber-500/20 text-amber-300 border border-amber-500/30 font-semibold px-3 py-1 rounded-full" id="resStatus"></span>
+            <span class="text-xs bg-amber-950/15 text-amber-950 border border-amber-950/30 font-bold px-3 py-1 rounded-full" id="resStatus"></span>
           </div>
 
           <div class="space-y-2">
-            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Daftar Sepatu & Treatment:</p>
+            <p class="text-xs font-bold text-amber-950 uppercase tracking-wider">Daftar Sepatu & Treatment:</p>
             <div id="itemsList" class="space-y-2 max-h-36 overflow-y-auto pr-1"></div>
           </div>
 
-          <div class="flex justify-between items-center border-t border-white/10 pt-3 text-sm">
-            <span class="text-gray-400">Total Biaya:</span>
-            <span id="resCost" class="font-black text-base text-amber-400"></span>
+          <div class="flex justify-between items-center border-t border-amber-950/20 pt-3 text-sm">
+            <span class="text-gray-700 font-semibold">Total Biaya:</span>
+            <span id="resCost" class="font-black text-base text-amber-950"></span>
           </div>
         </div>
 
-        <div id="notFoundArea" class="hidden bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-red-400 text-xs text-center">
+        <div id="notFoundArea" class="hidden bg-red-500/15 border border-red-500/35 rounded-xl p-4 text-red-800 text-xs text-center font-bold">
           ⚠️ Nomor tiket tidak ditemukan. Pastikan format nomor tiket sudah benar.
         </div>
       </div>
     </div>
 
-    <!-- KOLOM KANAN: Form Input Tracking & Info -->
+    <!-- KOLOM KANAN: Form Input Tracking & Info (Aksen Rak Hitam Mewah) -->
     <div id="tracking" class="lg:col-span-3 space-y-4">
-      <div class="bg-[#141519]/90 backdrop-blur-md p-5 rounded-2xl border border-white/10 space-y-3.5 shadow-xl">
-        <div class="flex items-center justify-between border-b border-white/5 pb-2.5">
+      <div class="bg-[#241f1c] text-white p-5 rounded-2xl border border-amber-500/40 space-y-3.5 shadow-2xl luxury-glow">
+        <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
           <span class="font-bold text-xs text-white tracking-wide flex items-center gap-1.5">
             <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             Track Your Kicks
           </span>
-          <span class="text-[10px] text-amber-400/80 font-mono">LIVE SYSTEM</span>
+          <span class="text-[10px] text-amber-400 font-mono font-bold">LIVE SYSTEM</span>
         </div>
         <div class="space-y-3 text-xs">
           <div>
             <input type="text" id="searchInput" placeholder="Masukkan Nomor Tiket (Contoh: CS-0709)" 
-                   class="w-full bg-[#0c0d0f] border border-white/10 rounded-xl px-3.5 py-2.5 text-gray-200 placeholder-gray-500 focus:outline-none focus:border-amber-500 text-xs text-center font-mono">
+                   class="w-full bg-[#1c1816] border border-amber-500/40 rounded-xl px-3.5 py-2.5 text-gray-200 placeholder-gray-400 focus:outline-none focus:border-amber-400 text-xs text-center font-mono shadow-inner">
           </div>
-          <button onclick="cariTiket()" id="btnSearch" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-bold text-xs hover:from-amber-400 hover:to-amber-500 transition shadow-md shadow-amber-500/20 flex items-center justify-center gap-1.5">
+          <button onclick="cariTiket()" id="btnSearch" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-extrabold text-xs hover:from-amber-400 hover:to-amber-500 transition shadow-md shadow-amber-500/20 flex items-center justify-center gap-1.5">
             <span>Cek Status Pesanan</span>
           </button>
         </div>
       </div>
 
-      <div class="bg-[#141519]/90 backdrop-blur-md p-5 rounded-2xl border border-white/10 space-y-3 shadow-xl">
-        <h3 class="font-bold text-xs text-gray-400 uppercase tracking-wider border-b border-white/5 pb-2.5">Informasi Penting</h3>
-        <div class="space-y-2.5 text-xs text-gray-300">
-          <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/5">
-            <p class="font-semibold text-white flex items-center justify-between">
+      <div class="bg-[#e6d7bc]/95 backdrop-blur-md p-5 rounded-2xl border border-amber-950/25 space-y-3 shadow-xl luxury-glow">
+        <h3 class="font-bold text-xs text-amber-950 uppercase tracking-wider border-b border-amber-950/20 pb-2.5">Informasi Penting</h3>
+        <div class="space-y-2.5 text-xs text-gray-800">
+          <div class="bg-[#d8c29a]/60 p-2.5 rounded-xl border border-amber-950/20 shadow-sm">
+            <p class="font-bold text-gray-900 flex items-center justify-between">
               <span>⏱️ Estimasi Pengerjaan</span>
-              <span class="text-amber-400 text-[11px]">1 - 2 Hari</span>
+              <span class="text-amber-950 text-[11px] font-black">1 - 2 Hari</span>
             </p>
-            <p class="text-[11px] text-gray-400 mt-1">Tergantung jenis layanan & tingkat kotor.</p>
+            <p class="text-[11px] text-gray-700 mt-1">Tergantung jenis layanan & tingkat kotor.</p>
           </div>
-          <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/5">
-            <p class="font-semibold text-white flex items-center justify-between">
+          <div class="bg-[#d8c29a]/60 p-2.5 rounded-xl border border-amber-950/20 shadow-sm">
+            <p class="font-bold text-gray-900 flex items-center justify-between">
               <span>🛡️ Garansi Cuci Bersih</span>
-              <span class="text-emerald-400 text-[11px]">1x24 Jam</span>
+              <span class="text-emerald-800 text-[11px] font-black">1x24 Jam</span>
             </p>
-            <p class="text-[11px] text-gray-400 mt-1">Komplain setelah pengambilan langsung ditangani.</p>
+            <p class="text-[11px] text-gray-700 mt-1">Komplain setelah pengambilan langsung ditangani.</p>
           </div>
         </div>
       </div>
@@ -225,20 +241,20 @@
   </main>
 
   <!-- ==================== POPUP MODAL DETAIL LAYANAN ==================== -->
-  <div id="serviceModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
-    <div class="bg-[#141519] border border-amber-500/30 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 relative">
-      <button onclick="closeServiceModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg font-bold">&times;</button>
+  <div id="serviceModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden p-4">
+    <div class="bg-[#e6d7bc] border border-amber-950/40 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 relative">
+      <button onclick="closeServiceModal()" class="absolute top-4 right-4 text-gray-800 hover:text-black text-xl font-bold">&times;</button>
       <div>
-        <span class="text-[10px] font-bold bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded border border-amber-500/30 uppercase">Layanan HiveSpot</span>
-        <h3 id="modalServiceTitle" class="text-xl font-black text-white mt-1"></h3>
+        <span class="text-[10px] font-bold bg-amber-950/20 text-amber-950 px-2 py-0.5 rounded border border-amber-950/30 uppercase">Layanan HiveSpot</span>
+        <h3 id="modalServiceTitle" class="text-xl font-black text-gray-900 mt-1"></h3>
       </div>
-      <p id="modalServiceDesc" class="text-xs text-gray-300 leading-relaxed"></p>
-      <div class="flex justify-between items-center border-t border-white/10 pt-4">
+      <p id="modalServiceDesc" class="text-xs text-gray-800 leading-relaxed font-semibold"></p>
+      <div class="flex justify-between items-center border-t border-amber-950/20 pt-4">
         <div>
-          <p class="text-[10px] text-gray-400">Harga Layanan:</p>
-          <span id="modalServicePrice" class="text-amber-400 font-black text-base"></span>
+          <p class="text-[10px] text-gray-700 font-bold">Harga Layanan:</p>
+          <span id="modalServicePrice" class="text-amber-950 font-black text-base"></span>
         </div>
-        <a href="https://wa.me/6287811299845?text=Halo%20Kak,%20saya%20mau%20tanya-tanya%20seputar%20layanan%20perawatan%20dan%20booking%20cuci%20sepatu%20di%20HiveSpot." target="_blank" class="px-4 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs hover:bg-amber-400 transition">
+        <a href="https://wa.me/6287811299845?text=Halo%20Kak,%20saya%20mau%20tanya-tanya%20seputar%20layanan%20perawatan%20dan%20booking%20cuci%20sepatu%20di%20HiveSpot." target="_blank" class="px-4 py-2 rounded-xl bg-[#241f1c] text-amber-400 font-bold text-xs hover:bg-black transition border border-amber-500/40">
           Booking via WhatsApp
         </a>
       </div>
@@ -246,38 +262,38 @@
   </div>
 
   <!-- ==================== POPUP MODAL SEMUA LAYANAN ==================== -->
-  <div id="allServicesModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
-    <div class="bg-[#141519] border border-amber-500/30 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 relative">
-      <button onclick="closeAllServicesModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg font-bold">&times;</button>
+  <div id="allServicesModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden p-4">
+    <div class="bg-[#e6d7bc] border border-amber-950/40 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 relative">
+      <button onclick="closeAllServicesModal()" class="absolute top-4 right-4 text-gray-800 hover:text-black text-xl font-bold">&times;</button>
       <div>
-        <span class="text-[10px] font-bold bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded border border-amber-500/30 uppercase">Daftar Layanan</span>
-        <h3 class="text-xl font-black text-white mt-1">Pilihan Perawatan Sepatu</h3>
+        <span class="text-[10px] font-bold bg-amber-950/20 text-amber-950 px-2 py-0.5 rounded border border-amber-950/30 uppercase">Daftar Layanan</span>
+        <h3 class="text-xl font-black text-gray-900 mt-1">Pilihan Perawatan Sepatu</h3>
       </div>
       <div class="space-y-2.5 max-h-64 overflow-y-auto pr-1">
-        <div class="p-3 bg-[#0c0d0f] rounded-xl border border-white/5 flex justify-between items-center">
+        <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
           <div>
-            <p class="font-bold text-xs text-white">Fast Clean</p>
-            <p class="text-[10px] text-gray-400">Upper & Midsole quick cleaning (1 Hari)</p>
+            <p class="font-bold text-xs text-gray-900">Fast Clean</p>
+            <p class="text-[10px] text-gray-700">Upper & Midsole quick cleaning (1 Hari)</p>
           </div>
-          <span class="text-amber-400 font-bold text-xs">Rp 30.000</span>
+          <span class="text-amber-950 font-black text-xs">Rp 30.000</span>
         </div>
-        <div class="p-3 bg-[#0c0d0f] rounded-xl border border-white/5 flex justify-between items-center">
+        <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
           <div>
-            <p class="font-bold text-xs text-white">Deep Clean</p>
-            <p class="text-[10px] text-gray-400">Pembersihan total menyeluruh (1-2 Hari)</p>
+            <p class="font-bold text-xs text-gray-900">Deep Clean</p>
+            <p class="text-[10px] text-gray-700">Pembersihan total menyeluruh (1-2 Hari)</p>
           </div>
-          <span class="text-amber-400 font-bold text-xs">Rp 50.000</span>
+          <span class="text-amber-950 font-black text-xs">Rp 50.000</span>
         </div>
-        <div class="p-3 bg-[#0c0d0f] rounded-xl border border-white/5 flex justify-between items-center">
+        <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
           <div>
-            <p class="font-bold text-xs text-white">Unyellowing</p>
-            <p class="text-[10px] text-gray-400">Mengatasi midsole menguning (2 Hari)</p>
+            <p class="font-bold text-xs text-gray-900">Unyellowing</p>
+            <p class="text-[10px] text-gray-700">Mengatasi midsole menguning (2 Hari)</p>
           </div>
-          <span class="text-amber-400 font-bold text-xs">Rp 75.000</span>
+          <span class="text-amber-950 font-black text-xs">Rp 75.000</span>
         </div>
       </div>
-      <div class="border-t border-white/10 pt-3 text-center">
-        <a href="https://wa.me/6287811299845?text=Halo%20Kak,%20saya%20mau%20tanya-tanya%20seputar%20layanan%20perawatan%20dan%20booking%20cuci%20sepatu%20di%20HiveSpot." target="_blank" class="block w-full py-2.5 rounded-xl bg-amber-500 text-black font-bold text-xs hover:bg-amber-400 transition">
+      <div class="border-t border-amber-950/20 pt-3 text-center">
+        <a href="https://wa.me/6287811299845?text=Halo%20Kak,%20saya%20mau%20tanya-tanya%20seputar%20layanan%20perawatan%20dan%20booking%20cuci%20sepatu%20di%20HiveSpot." target="_blank" class="block w-full py-2.5 rounded-xl bg-[#241f1c] text-amber-400 font-bold text-xs hover:bg-black transition border border-amber-500/40">
           Konsultasi & Booking via WhatsApp
         </a>
       </div>
@@ -285,16 +301,16 @@
   </div>
 
   <!-- ==================== POPUP MODAL SHOWCASE ==================== -->
-  <div id="showcaseModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden p-4">
-    <div class="bg-[#141519] border border-white/15 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4 relative">
-      <button onclick="closeShowcaseModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg font-bold z-10">&times;</button>
+  <div id="showcaseModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md hidden p-4">
+    <div class="bg-[#e6d7bc] border border-amber-950/40 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4 relative">
+      <button onclick="closeShowcaseModal()" class="absolute top-4 right-4 text-gray-800 hover:text-black text-xl font-bold z-10">&times;</button>
       
       <div>
-        <span id="scBadge" class="text-[10px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded uppercase"></span>
-        <h3 id="scTitle" class="text-lg font-black text-white mt-1"></h3>
+        <span id="scBadge" class="text-[10px] font-bold bg-amber-600 text-white px-2 py-0.5 rounded uppercase"></span>
+        <h3 id="scTitle" class="text-lg font-black text-gray-900 mt-1"></h3>
       </div>
 
-      <div class="relative rounded-xl overflow-hidden border border-white/10 h-80 bg-black flex items-center justify-center">
+      <div class="relative rounded-xl overflow-hidden border border-amber-950/30 h-80 bg-gray-900 flex items-center justify-center">
         <img id="scImage" src="" alt="Showcase Detail" class="w-full h-full object-cover">
         <div class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-semibold text-white border border-white/10">
           Hasil Treatment HiveSpot
@@ -302,11 +318,11 @@
       </div>
 
       <div class="flex justify-between items-center pt-2">
-        <button onclick="prevSlide()" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs text-white font-semibold transition flex items-center gap-1">
+        <button onclick="prevSlide()" class="px-3 py-1.5 rounded-xl bg-[#d8c29a] hover:bg-[#c8b088] text-xs text-gray-900 font-bold transition flex items-center gap-1 border border-amber-950/20">
           &larr; Sebelumnya
         </button>
-        <span id="scCounter" class="text-xs text-gray-400 font-mono">1 / 2</span>
-        <button onclick="nextSlide()" class="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-xs text-black font-bold transition flex items-center gap-1">
+        <span id="scCounter" class="text-xs text-gray-800 font-mono font-bold">1 / 2</span>
+        <button onclick="nextSlide()" class="px-3 py-1.5 rounded-xl bg-[#241f1c] hover:bg-black text-xs text-amber-400 font-bold transition flex items-center gap-1 border border-amber-500/40">
           Selanjutnya &rarr;
         </button>
       </div>
@@ -314,46 +330,44 @@
   </div>
 
   <!-- ==================== POPUP MODAL LOKASI WORKSHOP ==================== -->
-  <div id="locationModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
-    <div class="bg-[#141519] border border-amber-500/30 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 relative max-h-[90vh] overflow-y-auto">
-      <button onclick="closeLocationModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg font-bold">&times;</button>
+  <div id="locationModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden p-4">
+    <div class="bg-[#e6d7bc] border border-amber-950/40 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeLocationModal()" class="absolute top-4 right-4 text-gray-800 hover:text-black text-xl font-bold">&times;</button>
       <div>
-        <span class="text-[10px] font-bold bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded border border-amber-500/30 uppercase">Workshop HiveSpot</span>
-        <h3 class="text-xl font-black text-white mt-1">Hive Spot Semarang</h3>
+        <span class="text-[10px] font-bold bg-amber-950/20 text-amber-950 px-2 py-0.5 rounded border border-amber-950/30 uppercase">Workshop HiveSpot</span>
+        <h3 class="text-xl font-black text-gray-900 mt-1">Hive Spot Semarang</h3>
       </div>
       
       <!-- Embed Google Maps -->
-      <div class="rounded-xl overflow-hidden border border-white/10 h-48 bg-black">
+      <div class="rounded-xl overflow-hidden border border-amber-950/30 h-48 bg-gray-900">
         <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.297775512345!2d110.416!3d-6.99!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTknMjguNCJTIDExMMKwMjQnNTcuNiJF!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"></iframe>
       </div>
 
-      <div class="space-y-1 text-xs text-gray-300">
-        <p class="font-semibold text-white">📍 Alamat Workshop:</p>
-        <p class="text-gray-400">Semarang, Jawa Tengah (Buka setiap hari jam 09.00 - 20.00 WIB)</p>
+      <div class="space-y-1 text-xs text-gray-800">
+        <p class="font-bold text-gray-900">📍 Alamat Workshop:</p>
+        <p class="text-gray-700">Semarang, Jawa Tengah (Buka setiap hari jam 09.00 - 20.00 WIB)</p>
       </div>
 
-      <div class="border-t border-white/10 pt-3">
-        <a href="https://share.google/Eth9nKzuPjrSvam0Z" target="_blank" class="block w-full py-2.5 rounded-xl bg-amber-500 text-black font-bold text-xs text-center hover:bg-amber-400 transition">
+      <div class="border-t border-amber-950/20 pt-3">
+        <a href="https://share.google/Eth9nKzuPjrSvam0Z" target="_blank" class="block w-full py-2.5 rounded-xl bg-[#241f1c] text-amber-400 font-bold text-xs text-center hover:bg-black transition border border-amber-500/40">
           Buka di Google Maps
         </a>
       </div>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="border-t border-amber-500/15 py-8 text-center text-xs text-gray-400 relative z-10 honeycomb-pattern mt-auto">
-    <p>&copy; 2026 HiveSpot Semarang. All rights reserved.</p>
+  <!-- Footer (Luxury Espresso) -->
+  <footer class="border-t border-amber-500/30 py-8 text-center text-xs text-white relative z-10 shadow-inner bg-[#241f1c]">
+    <p class="font-bold tracking-wider">&copy; 2026 HiveSpot Semarang. All rights reserved.</p>
   </footer>
 
   <!-- Script Logic -->
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycby2omN0gDy2YyY9cIlLzWLeCIki0OmQpAaIZC6HyhJf8FGTCHL7Jh-BU4ST7ryXQ1N7/exec";
 
-    // Load Status Toko & Auto-Check URL Parameter saat halaman dibuka
     document.addEventListener("DOMContentLoaded", function() {
       checkStoreStatus();
 
-      // Tangkap parameter 'ticket' dari URL secara otomatis
       const urlParams = new URLSearchParams(window.location.search);
       const ticketId = urlParams.get('ticket');
 
@@ -361,13 +375,11 @@
         const inputEl = document.getElementById('searchInput');
         if (inputEl) {
           inputEl.value = ticketId;
-          // Langsung jalankan fungsi pencarian otomatis
           cariTiket();
         }
       }
     });
 
-    // Fungsi Toggle Menu Mobile
     function toggleMobileMenu() {
       const menu = document.getElementById('mobileMenu');
       menu.classList.toggle('hidden');
@@ -385,13 +397,13 @@
 
         if (result.success && result.status === "TUTUP") {
           statusText.innerText = "Store Closed";
-          statusText.className = "text-red-400 font-semibold";
+          statusText.className = "text-red-600 font-bold";
           statusDesc.innerText = "Mohon maaf, workshop sedang tutup / libur sementara.";
           dot.className = "relative inline-flex rounded-full h-3 w-3 bg-red-500";
           ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75";
         } else {
           statusText.innerText = "Store Open";
-          statusText.className = "text-emerald-400 font-semibold";
+          statusText.className = "text-emerald-700 font-bold";
           statusDesc.innerText = "Siap menerima titipan & drop sepatu hari ini (09.00 - 20.00)";
           dot.className = "relative inline-flex rounded-full h-3 w-3 bg-emerald-500";
           ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75";
@@ -505,12 +517,12 @@
           if (Array.isArray(data.items) && data.items.length > 0) {
             data.items.forEach((item, index) => {
               itemsList.innerHTML += `
-                <div class="flex justify-between items-center p-2.5 bg-[#0c0d0f] rounded-xl border border-white/5 text-xs">
+                <div class="flex justify-between items-center p-2.5 bg-[#d8c29a] rounded-xl border border-amber-950/20 text-xs shadow-sm">
                   <div>
-                    <p class="font-semibold text-white">${index + 1}. ${item.shoe_model || '-'}</p>
-                    <p class="text-[10px] text-gray-400">Layanan: <span class="text-amber-400">${item.service_type || '-'}</span></p>
+                    <p class="font-bold text-gray-900">${index + 1}. ${item.shoe_model || '-'}</p>
+                    <p class="text-[10px] text-gray-700">Layanan: <span class="text-amber-950 font-black">${item.service_type || '-'}</span></p>
                   </div>
-                  <p class="font-bold text-gray-200">
+                  <p class="font-extrabold text-gray-900">
                     ${item.cost ? `Rp ${Number(item.cost).toLocaleString('id-ID')}` : '-'}
                   </p>
                 </div>
