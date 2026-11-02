@@ -23,10 +23,10 @@
       background-image: radial-gradient(rgba(245, 158, 11, 0.08) 1px, transparent 1px);
       background-size: 20px 20px;
     }
-    #ai-chat-history::-webkit-scrollbar {
+    #ai-chat-history::-webkit-scrollbar, #modalBody::-webkit-scrollbar {
       width: 4px;
     }
-    #ai-chat-history::-webkit-scrollbar-thumb {
+    #ai-chat-history::-webkit-scrollbar-thumb, #modalBody::-webkit-scrollbar-thumb {
       background: #4b5563;
       border-radius: 4px;
     }
@@ -50,6 +50,27 @@
           Masuk Dashboard
         </button>
       </form>
+    </div>
+  </div>
+
+  <!-- Modal Popup Detail Kondisi Sepatu -->
+  <div id="conditionModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-[#141519] border border-amber-500/30 p-6 rounded-2xl shadow-2xl w-full max-w-lg space-y-4 relative">
+      <div class="flex justify-between items-center border-b border-white/10 pb-3">
+        <div>
+          <h3 id="modalTitle" class="text-sm font-bold text-amber-400 uppercase tracking-wider">Detail Kondisi Sepatu</h3>
+          <p id="modalSubTitle" class="text-[11px] text-gray-400 font-mono"></p>
+        </div>
+        <button onclick="closeConditionModal()" class="text-gray-400 hover:text-white text-xl font-bold">&times;</button>
+      </div>
+      <div id="modalBody" class="space-y-3 max-h-[60vh] overflow-y-auto pr-1">
+        <!-- Konten kondisi dinamis -->
+      </div>
+      <div class="pt-2 border-t border-white/10 text-right">
+        <button onclick="closeConditionModal()" class="bg-white/10 hover:bg-white/20 text-gray-200 text-xs px-4 py-2 rounded-xl transition">
+          Tutup
+        </button>
+      </div>
     </div>
   </div>
 
@@ -114,16 +135,14 @@
           </div>
         </div>
 
-        <!-- Tombol Kustom Foto Kondisi Before (2 Tombol Terpisah: Kamera & Galeri) -->
+        <!-- Tombol Kustom Foto Kondisi Before -->
         <div class="bg-[#0c0d0f] p-3.5 rounded-xl border border-white/10 space-y-2">
-          <label class="block text-xs font-bold text-amber-400">📸 Foto Kondisi Awal (Before) - Bukti Pelanggan</label>
-          <p class="text-[11px] text-gray-400">Gunakan tombol kamera untuk jepret langsung atau galeri untuk memilih foto. Foto akan terakumulasi otomatis.</p>
+          <label class="block text-xs font-bold text-amber-400">📸 Foto Kondisi Awal (Before) - Kualitas Original</label>
+          <p class="text-[11px] text-gray-400">Gunakan tombol kamera atau galeri. Foto dikirim tanpa kompresi agar kualitas gambar tetap tajam.</p>
           
-          <!-- Input File Tersembunyi (Kamera & Galeri) -->
           <input type="file" id="inputCamera" accept="image/*" capture="environment" class="hidden" onchange="handleFileSelect(this)">
           <input type="file" id="inputGallery" accept="image/*" multiple class="hidden" onchange="handleFileSelect(this)">
 
-          <!-- Dua Tombol Kustom Interaktif -->
           <div class="grid grid-cols-2 gap-2">
             <button type="button" onclick="document.getElementById('inputCamera').click()" class="bg-amber-500 hover:bg-amber-400 text-black font-bold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/10 cursor-pointer">
               <span>📷 Buka Kamera</span>
@@ -133,7 +152,6 @@
             </button>
           </div>
 
-          <!-- Indikator & Tombol Reset -->
           <div class="flex items-center justify-between pt-1">
             <div id="fileChosenIndicator" class="text-[11px] text-emerald-400 font-medium hidden">
               ✅ <span id="fileCountText">0 foto dipilih & siap dikirim</span>
@@ -144,10 +162,10 @@
           </div>
         </div>
 
-        <!-- Section Daftar Sepatu (Multi Item) -->
+        <!-- Section Daftar Sepatu (Multi Item) dengan Kondisi Detail -->
         <div class="border-t border-white/10 pt-4">
           <div class="flex justify-between items-center mb-2">
-            <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider">Daftar Sepatu & Layanan</label>
+            <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider">Daftar Sepatu & Kondisi Fisik</label>
             <button type="button" onclick="tambahBarisSepatu()" class="text-xs bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 border border-amber-500/30 px-2.5 py-1 rounded-xl font-semibold transition">
               + Tambah Sepatu
             </button>
@@ -155,23 +173,101 @@
 
           <!-- Container Dynamic Inputs -->
           <div id="shoeItemsContainer" class="space-y-3">
-            <div class="shoe-item grid grid-cols-1 md:grid-cols-3 gap-2 p-3 bg-[#0c0d0f] rounded-xl border border-white/10 relative">
-              <div>
-                <label class="block text-[10px] text-gray-500 mb-1">Merk / Jenis Sepatu</label>
-                <input type="text" placeholder="misal: Nike Jordan 1" class="input-shoe w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500" required>
+            <div class="shoe-item p-4 bg-[#0c0d0f] rounded-xl border border-white/10 relative space-y-3">
+              <div class="flex justify-between items-start gap-2">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-2 flex-1">
+                  <div>
+                    <label class="block text-[10px] text-gray-400 mb-1">Merk / Jenis Sepatu</label>
+                    <input type="text" placeholder="misal: Nike Jordan 1" class="input-shoe w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500" required>
+                  </div>
+                  <div>
+                    <label class="block text-[10px] text-gray-400 mb-1">Layanan</label>
+                    <select class="select-service w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                      <option value="Fast Clean">Fast Clean</option>
+                      <option value="Deep Clean">Deep Clean</option>
+                      <option value="Unyellowing">Unyellowing</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-[10px] text-gray-400 mb-1">Biaya (Rp)</label>
+                    <input type="number" placeholder="50000" class="input-cost w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500 font-mono" oninput="hitungTotalBiaya()" required>
+                  </div>
+                </div>
+                <div class="pt-5">
+                  <button type="button" onclick="hapusBarisSepatu(this)" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1">
+                    ✕ Hapus
+                  </button>
+                </div>
               </div>
-              <div>
-                <label class="block text-[10px] text-gray-500 mb-1">Layanan</label>
-                <select class="select-service w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-500">
-                  <option value="Fast Clean">Fast Clean</option>
-                  <option value="Deep Clean">Deep Clean</option>
-                  <option value="Unyellowing">Unyellowing</option>
-                </select>
+
+              <!-- Pengecekan Kondisi per Bagian Sepatu -->
+              <div class="border-t border-white/5 pt-3">
+                <p class="text-[11px] font-bold text-amber-400 mb-2">🔍 Kondisi Fisik Bagian Sepatu:</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs">
+                  
+                  <div class="bg-[#141519] p-2.5 rounded-lg border border-white/5 space-y-1.5">
+                    <div class="flex justify-between items-center">
+                      <span class="font-semibold text-gray-300">Outsole</span>
+                      <label class="flex items-center gap-1 text-[10px] text-amber-400 cursor-pointer">
+                        <input type="checkbox" class="cond-normal rounded bg-black border-white/20" onchange="toggleConditionMode(this, 'outsole')"> Normal
+                      </label>
+                    </div>
+                    <input type="text" placeholder="Kondisi / Ketik manual..." class="cond-input-outsole w-full bg-[#0c0d0f] border border-white/10 rounded px-2 py-1 text-[11px] text-white focus:outline-none focus:border-amber-500">
+                  </div>
+
+                  <div class="bg-[#141519] p-2.5 rounded-lg border border-white/5 space-y-1.5">
+                    <div class="flex justify-between items-center">
+                      <span class="font-semibold text-gray-300">Midsole</span>
+                      <label class="flex items-center gap-1 text-[10px] text-amber-400 cursor-pointer">
+                        <input type="checkbox" class="cond-normal rounded bg-black border-white/20" onchange="toggleConditionMode(this, 'midsole')"> Normal
+                      </label>
+                    </div>
+                    <input type="text" placeholder="Kondisi / Ketik manual..." class="cond-input-midsole w-full bg-[#0c0d0f] border border-white/10 rounded px-2 py-1 text-[11px] text-white focus:outline-none focus:border-amber-500">
+                  </div>
+
+                  <div class="bg-[#141519] p-2.5 rounded-lg border border-white/5 space-y-1.5">
+                    <div class="flex justify-between items-center">
+                      <span class="font-semibold text-gray-300">Upper</span>
+                      <label class="flex items-center gap-1 text-[10px] text-amber-400 cursor-pointer">
+                        <input type="checkbox" class="cond-normal rounded bg-black border-white/20" onchange="toggleConditionMode(this, 'upper')"> Normal
+                      </label>
+                    </div>
+                    <input type="text" placeholder="Kondisi / Ketik manual..." class="cond-input-upper w-full bg-[#0c0d0f] border border-white/10 rounded px-2 py-1 text-[11px] text-white focus:outline-none focus:border-amber-500">
+                  </div>
+
+                  <div class="bg-[#141519] p-2.5 rounded-lg border border-white/5 space-y-1.5">
+                    <div class="flex justify-between items-center">
+                      <span class="font-semibold text-gray-300">Tongue (Lidah)</span>
+                      <label class="flex items-center gap-1 text-[10px] text-amber-400 cursor-pointer">
+                        <input type="checkbox" class="cond-normal rounded bg-black border-white/20" onchange="toggleConditionMode(this, 'tongue')"> Normal
+                      </label>
+                    </div>
+                    <input type="text" placeholder="Kondisi / Ketik manual..." class="cond-input-tongue w-full bg-[#0c0d0f] border border-white/10 rounded px-2 py-1 text-[11px] text-white focus:outline-none focus:border-amber-500">
+                  </div>
+
+                  <div class="bg-[#141519] p-2.5 rounded-lg border border-white/5 space-y-1.5">
+                    <div class="flex justify-between items-center">
+                      <span class="font-semibold text-gray-300">Insole</span>
+                      <label class="flex items-center gap-1 text-[10px] text-amber-400 cursor-pointer">
+                        <input type="checkbox" class="cond-normal rounded bg-black border-white/20" onchange="toggleConditionMode(this, 'insole')"> Normal
+                      </label>
+                    </div>
+                    <input type="text" placeholder="Kondisi / Ketik manual..." class="cond-input-insole w-full bg-[#0c0d0f] border border-white/10 rounded px-2 py-1 text-[11px] text-white focus:outline-none focus:border-amber-500">
+                  </div>
+
+                  <div class="bg-[#141519] p-2.5 rounded-lg border border-white/5 space-y-1.5">
+                    <div class="flex justify-between items-center">
+                      <span class="font-semibold text-gray-300">Tali Sepatu</span>
+                      <label class="flex items-center gap-1 text-[10px] text-amber-400 cursor-pointer">
+                        <input type="checkbox" class="cond-normal rounded bg-black border-white/20" onchange="toggleConditionMode(this, 'laces')"> Normal
+                      </label>
+                    </div>
+                    <input type="text" placeholder="Kondisi / Ketik manual..." class="cond-input-laces w-full bg-[#0c0d0f] border border-white/10 rounded px-2 py-1 text-[11px] text-white focus:outline-none focus:border-amber-500">
+                  </div>
+
+                </div>
               </div>
-              <div>
-                <label class="block text-[10px] text-gray-500 mb-1">Biaya (Rp)</label>
-                <input type="number" placeholder="50000" class="input-cost w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500 font-mono" oninput="hitungTotalBiaya()" required>
-              </div>
+
             </div>
           </div>
         </div>
@@ -207,7 +303,7 @@
               <th class="p-3 rounded-l-xl">No. Tiket</th>
               <th class="p-3">Pelanggan</th>
               <th class="p-3">Metode</th>
-              <th class="p-3">Daftar Sepatu</th>
+              <th class="p-3">Daftar Sepatu & Kondisi</th>
               <th class="p-3">Total Biaya</th>
               <th class="p-3">Status</th>
               <th class="p-3 rounded-r-xl">Aksi</th>
@@ -260,7 +356,7 @@
   const API_URL = "https://script.google.com/macros/s/AKfycby2omN0gDy2YyY9cIlLzWLeCIki0OmQpAaIZC6HyhJf8FGTCHL7Jh-BU4ST7ryXQ1N7/exec";
 
   let activeTickets = [];
-  let selectedFilesArray = []; // Array global penampung multi foto
+  let selectedFilesArray = [];
 
   window.onload = function() {
     checkAuth();
@@ -345,7 +441,6 @@
     checkAuth();
   }
 
-  // --- LOGIKA AKUMULASI MULTI FOTO (KAMERA & GALERI) ---
   function handleFileSelect(input) {
     const indicator = document.getElementById('fileChosenIndicator');
     const countText = document.getElementById('fileCountText');
@@ -358,7 +453,7 @@
     }
 
     if (selectedFilesArray.length > 0) {
-      countText.innerText = `${selectedFilesArray.length} foto dipilih & siap dikirim`;
+      countText.innerText = `${selectedFilesArray.length} foto dipilih (Original Quality)`;
       indicator.classList.remove('hidden');
       resetBtn.classList.remove('hidden');
     } else {
@@ -366,7 +461,6 @@
       resetBtn.classList.add('hidden');
     }
 
-    // Reset input value supaya bisa memilih file/kamera yang sama kembali
     input.value = '';
   }
 
@@ -378,7 +472,6 @@
     document.getElementById('inputGallery').value = '';
   }
 
-  // --- LOGIKA STORE STATUS (GOOGLE SHEETS) DENGAN OPTIMISTIC UI ---
   async function loadStoreStatus() {
     const label = document.getElementById("storeStatusLabel");
     const toggle = document.getElementById("storeToggle");
@@ -436,41 +529,128 @@
     } catch (err) {
       checkbox.checked = !checkbox.checked;
       loadStoreStatus();
-      console.warn("Gagal sinkron status toko:", err);
     }
   }
 
-  // --- LOGIKA MULTI SEPATU DINAMIS ---
+  function toggleConditionMode(checkbox, partName) {
+    const container = checkbox.closest('.shoe-item');
+    const inputField = container.querySelector(`.cond-input-${partName}`);
+    
+    if (checkbox.checked) {
+      inputField.value = "Normal";
+      inputField.disabled = true;
+      inputField.classList.add("opacity-50");
+    } else {
+      inputField.value = "";
+      inputField.disabled = false;
+      inputField.classList.remove("opacity-50");
+      inputField.focus();
+    }
+  }
+
   function tambahBarisSepatu() {
     const container = document.getElementById('shoeItemsContainer');
     const div = document.createElement('div');
-    div.className = "shoe-item grid grid-cols-1 md:grid-cols-3 gap-2 p-3 bg-[#0c0d0f] rounded-xl border border-white/10 relative pr-10";
+    div.className = "shoe-item p-4 bg-[#0c0d0f] rounded-xl border border-white/10 relative space-y-3";
     div.innerHTML = `
-      <div>
-        <label class="block text-[10px] text-gray-500 mb-1">Merk / Jenis Sepatu</label>
-        <input type="text" placeholder="misal: Adidas Ultraboost" class="input-shoe w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500" required>
+      <div class="flex justify-between items-start gap-2">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 flex-1">
+          <div>
+            <label class="block text-[10px] text-gray-400 mb-1">Merk / Jenis Sepatu</label>
+            <input type="text" placeholder="misal: Adidas Ultraboost" class="input-shoe w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500" required>
+          </div>
+          <div>
+            <label class="block text-[10px] text-gray-400 mb-1">Layanan</label>
+            <select class="select-service w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-500">
+              <option value="Fast Clean">Fast Clean</option>
+              <option value="Deep Clean">Deep Clean</option>
+              <option value="Unyellowing">Unyellowing</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] text-gray-400 mb-1">Biaya (Rp)</label>
+            <input type="number" placeholder="50000" class="input-cost w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500 font-mono" oninput="hitungTotalBiaya()" required>
+          </div>
+        </div>
+        <div class="pt-5">
+          <button type="button" onclick="hapusBarisSepatu(this)" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1">
+            ✕ Hapus
+          </button>
+        </div>
       </div>
-      <div>
-        <label class="block text-[10px] text-gray-500 mb-1">Layanan</label>
-        <select class="select-service w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-500">
-          <option value="Fast Clean">Fast Clean</option>
-          <option value="Deep Clean">Deep Clean</option>
-          <option value="Unyellowing">Unyellowing</option>
-        </select>
+
+      <div class="border-t border-white/5 pt-3">
+        <p class="text-[11px] font-bold text-amber-400 mb-2">🔍 Kondisi Fisik Bagian Sepatu:</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs">
+          
+          <div class="bg-[#141519] p-2.5 rounded-lg border border-white/5 space-y-1.5">
+            <div class="flex justify-between items-center">
+              <span class="font-semibold text-gray-300">Outsole</span>
+              <label class="flex items-center gap-1 text-[10px] text-amber-400 cursor-pointer">
+                <input type="checkbox" class="cond-normal rounded bg-black border-white/20" onchange="toggleConditionMode(this, 'outsole')"> Normal
+              </label>
+            </div>
+            <input type="text" placeholder="Kondisi / Ketik manual..." class="cond-input-outsole w-full bg-[#0c0d0f] border border-white/10 rounded px-2 py-1 text-[11px] text-white focus:outline-none focus:border-amber-500">
+          </div>
+
+          <div class="bg-[#141519] p-2.5 rounded-lg border border-white/5 space-y-1.5">
+            <div class="flex justify-between items-center">
+              <span class="font-semibold text-gray-300">Midsole</span>
+              <label class="flex items-center gap-1 text-[10px] text-amber-400 cursor-pointer">
+                <input type="checkbox" class="cond-normal rounded bg-black border-white/20" onchange="toggleConditionMode(this, 'midsole')"> Normal
+              </label>
+            </div>
+            <input type="text" placeholder="Kondisi / Ketik manual..." class="cond-input-midsole w-full bg-[#0c0d0f] border border-white/10 rounded px-2 py-1 text-[11px] text-white focus:outline-none focus:border-amber-500">
+          </div>
+
+          <div class="bg-[#141519] p-2.5 rounded-lg border border-white/5 space-y-1.5">
+            <div class="flex justify-between items-center">
+              <span class="font-semibold text-gray-300">Upper</span>
+              <label class="flex items-center gap-1 text-[10px] text-amber-400 cursor-pointer">
+                <input type="checkbox" class="cond-normal rounded bg-black border-white/20" onchange="toggleConditionMode(this, 'upper')"> Normal
+              </label>
+            </div>
+            <input type="text" placeholder="Kondisi / Ketik manual..." class="cond-input-upper w-full bg-[#0c0d0f] border border-white/10 rounded px-2 py-1 text-[11px] text-white focus:outline-none focus:border-amber-500">
+          </div>
+
+          <div class="bg-[#141519] p-2.5 rounded-lg border border-white/5 space-y-1.5">
+            <div class="flex justify-between items-center">
+              <span class="font-semibold text-gray-300">Tongue (Lidah)</span>
+              <label class="flex items-center gap-1 text-[10px] text-amber-400 cursor-pointer">
+                <input type="checkbox" class="cond-normal rounded bg-black border-white/20" onchange="toggleConditionMode(this, 'tongue')"> Normal
+              </label>
+            </div>
+            <input type="text" placeholder="Kondisi / Ketik manual..." class="cond-input-tongue w-full bg-[#0c0d0f] border border-white/10 rounded px-2 py-1 text-[11px] text-white focus:outline-none focus:border-amber-500">
+          </div>
+
+          <div class="bg-[#141519] p-2.5 rounded-lg border border-white/5 space-y-1.5">
+            <div class="flex justify-between items-center">
+              <span class="font-semibold text-gray-300">Insole</span>
+              <label class="flex items-center gap-1 text-[10px] text-amber-400 cursor-pointer">
+                <input type="checkbox" class="cond-normal rounded bg-black border-white/20" onchange="toggleConditionMode(this, 'insole')"> Normal
+              </label>
+            </div>
+            <input type="text" placeholder="Kondisi / Ketik manual..." class="cond-input-insole w-full bg-[#0c0d0f] border border-white/10 rounded px-2 py-1 text-[11px] text-white focus:outline-none focus:border-amber-500">
+          </div>
+
+          <div class="bg-[#141519] p-2.5 rounded-lg border border-white/5 space-y-1.5">
+            <div class="flex justify-between items-center">
+              <span class="font-semibold text-gray-300">Tali Sepatu</span>
+              <label class="flex items-center gap-1 text-[10px] text-amber-400 cursor-pointer">
+                <input type="checkbox" class="cond-normal rounded bg-black border-white/20" onchange="toggleConditionMode(this, 'laces')"> Normal
+              </label>
+            </div>
+            <input type="text" placeholder="Kondisi / Ketik manual..." class="cond-input-laces w-full bg-[#0c0d0f] border border-white/10 rounded px-2 py-1 text-[11px] text-white focus:outline-none focus:border-amber-500">
+          </div>
+
+        </div>
       </div>
-      <div>
-        <label class="block text-[10px] text-gray-500 mb-1">Biaya (Rp)</label>
-        <input type="number" placeholder="50000" class="input-cost w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500 font-mono" oninput="hitungTotalBiaya()" required>
-      </div>
-      <button type="button" onclick="hapusBarisSepatu(this)" class="absolute top-2 right-2 text-red-400 hover:text-red-300 font-bold p-1 text-xs">
-        ✕
-      </button>
     `;
     container.appendChild(div);
   }
 
   function hapusBarisSepatu(btn) {
-    btn.parentElement.remove();
+    btn.closest('.shoe-item').remove();
     hitungTotalBiaya();
   }
 
@@ -484,19 +664,15 @@
     return total;
   }
 
-  // --- FUNGSI TANPA KOMPRESI (RESOLUSI ASLI) ---
-  function compressImage(file, maxWidth = 800, quality = 0.7) {
+  function readFileAsBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = event => {
-        resolve(event.target.result);
-      };
+      reader.onload = () => resolve(reader.result);
       reader.onerror = error => reject(error);
     });
   }
 
-  // --- API OPERATIONS ---
   async function loadTickets() {
     const tbody = document.getElementById('ticketTableBody');
     const userPin = getUserPin();
@@ -523,10 +699,17 @@
     const tbody = document.getElementById('ticketTableBody');
     tbody.innerHTML = '';
 
-    tickets.forEach(t => {
+    tickets.forEach((t, tIndex) => {
       let shoesDetailHtml = '';
       if (Array.isArray(t.items) && t.items.length > 0) {
-        shoesDetailHtml = t.items.map(i => `<div class="text-xs">▪ <b class="text-white">${i.shoe_model}</b> (${i.service_type})</div>`).join('');
+        shoesDetailHtml = t.items.map((i, iIndex) => `
+          <div class="text-xs mb-1.5 flex items-center justify-between gap-2 bg-[#0c0d0f] p-1.5 rounded-lg border border-white/5">
+            <div>▪ <b class="text-white">${i.shoe_model}</b> (${i.service_type})</div>
+            <button type="button" onclick="showConditionModal(${tIndex}, ${iIndex})" class="bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] px-2 py-0.5 rounded font-medium transition flex items-center gap-1 cursor-pointer">
+              🔍 Condition
+            </button>
+          </div>
+        `).join('');
       } else {
         shoesDetailHtml = `<div class="text-xs">▪ <b class="text-white">${t.shoe_model || '-'}</b> (${t.service_type || '-'})</div>`;
       }
@@ -544,7 +727,7 @@
           <span class="text-[11px] text-gray-400 font-mono">${t.phone_number || t.phone || '-'}</span>
         </td>
         <td class="p-3">${deliveryBadge}</td>
-        <td class="p-3">${shoesDetailHtml}</td>
+        <td class="p-3 max-w-xs">${shoesDetailHtml}</td>
         <td class="p-3 font-semibold text-gray-200 font-mono">Rp ${Number(t.total_cost || t.total || 0).toLocaleString('id-ID')}</td>
         <td class="p-3">
           <select onchange="updateStatus('${t.ticket_id}', this.value)" class="bg-[#0c0d0f] border border-white/10 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-amber-500">
@@ -563,6 +746,53 @@
     });
   }
 
+    function showConditionModal(ticketIndex, itemIndex) {
+        const ticket = activeTickets[ticketIndex];
+        if (!ticket || !ticket.items || !ticket.items[itemIndex]) return;
+
+        const item = ticket.items[itemIndex];
+        const cond = item.conditions || {};
+
+        document.getElementById("modalTitle").innerText = `Kondisi Fisik: ${item.shoe_model || 'Sepatu'}`;
+        document.getElementById("modalSubTitle").innerText = `Tiket: ${ticket.ticket_id} | Layanan: ${item.service_type || '-'}`;
+
+        const modalBody = document.getElementById("modalBody");
+        modalBody.innerHTML = `
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
+              <span class="text-gray-400 block text-[10px]">Outsole</span>
+              <span class="font-semibold text-white">${cond.outsole && cond.outsole.trim() !== '' ? cond.outsole : 'Normal'}</span>
+            </div>
+            <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
+              <span class="text-gray-400 block text-[10px]">Midsole</span>
+              <span class="font-semibold text-white">${cond.midsole && cond.midsole.trim() !== '' ? cond.midsole : 'Normal'}</span>
+            </div>
+            <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
+              <span class="text-gray-400 block text-[10px]">Upper</span>
+              <span class="font-semibold text-white">${cond.upper && cond.upper.trim() !== '' ? cond.upper : 'Normal'}</span>
+            </div>
+            <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
+              <span class="text-gray-400 block text-[10px]">Tongue (Lidah)</span>
+              <span class="font-semibold text-white">${cond.tongue && cond.tongue.trim() !== '' ? cond.tongue : 'Normal'}</span>
+            </div>
+            <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
+              <span class="text-gray-400 block text-[10px]">Insole</span>
+              <span class="font-semibold text-white">${cond.insole && cond.insole.trim() !== '' ? cond.insole : 'Normal'}</span>
+            </div>
+            <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
+              <span class="text-gray-400 block text-[10px]">Tali Sepatu</span>
+              <span class="font-semibold text-white">${cond.laces && cond.laces.trim() !== '' ? cond.laces : 'Normal'}</span>
+            </div>
+          </div>
+        `;
+
+        document.getElementById("conditionModal").classList.remove("hidden");
+      }
+
+  function closeConditionModal() {
+    document.getElementById("conditionModal").classList.add("hidden");
+  }
+
   async function simpanOrder(e) {
     e.preventDefault();
     const userPin = getUserPin();
@@ -572,17 +802,32 @@
     const items = [];
 
     shoeElements.forEach(el => {
+      // Ambil nilai secara spesifik dari masing-masing baris sepatu (.shoe-item)
+      const getCondValue = (partClass, defaultVal = 'Normal') => {
+        const input = el.querySelector(partClass);
+        if (!input) return defaultVal;
+        const val = input.value.trim();
+        return val === '' ? defaultVal : val;
+      };
+
       items.push({
         shoe_model: el.querySelector('.input-shoe').value,
         service_type: el.querySelector('.select-service').value,
-        cost: Number(el.querySelector('.input-cost').value) || 0
+        cost: Number(el.querySelector('.input-cost').value) || 0,
+        conditions: {
+          outsole: getCondValue('.cond-input-outsole'),
+          midsole: getCondValue('.cond-input-midsole'),
+          upper: getCondValue('.cond-input-upper'),
+          tongue: getCondValue('.cond-input-tongue'),
+          insole: getCondValue('.cond-input-insole'),
+          laces: getCondValue('.cond-input-laces')
+        }
       });
     });
 
     const totalCost = hitungTotalBiaya();
     const deliveryType = document.getElementById('inputDeliveryType').value;
     
-    // Proses file dari array global selectedFilesArray
     const photosArray = [];
     const btn = document.getElementById('btnSubmit');
     btn.disabled = true;
@@ -591,14 +836,14 @@
       for (let i = 0; i < selectedFilesArray.length; i++) {
         const file = selectedFilesArray[i];
         try {
-          btn.innerText = `Memproses Foto ${i + 1} dari ${selectedFilesArray.length}...`;
-          const fileBase64 = await compressImage(file, 800, 0.7);
+          btn.innerText = `Membaca File ${i + 1} dari ${selectedFilesArray.length}...`;
+          const fileBase64 = await readFileAsBase64(file);
           photosArray.push({
-            filename: file.name.replace(/\.[^/.]+$/, "") + ".jpg",
+            filename: file.name,
             base64: fileBase64
           });
         } catch (err) {
-          console.warn("Gagal memproses foto ke-" + (i+1), err);
+          console.warn("Gagal membaca file ke-" + (i+1), err);
         }
       }
     }
@@ -624,31 +869,12 @@
       const result = await res.json();
 
       if (result.success) {
-        alert(`Order Berhasil Disimpan!\nNomor Tiket: ${result.ticket_id}\nNotifikasi & Foto Before telah diproses.`);
+        alert(`Order Berhasil Disimpan!
+Nomor Tiket: ${result.ticket_id}
+Notifikasi & Kondisi Sepatu terkirim ke WhatsApp.`);
         document.getElementById('orderForm').reset();
-        resetSelectedPhotos(); // Bersihkan array foto setelah sukses
-        document.getElementById('shoeItemsContainer').innerHTML = `
-          <div class="shoe-item grid grid-cols-1 md:grid-cols-3 gap-2 p-3 bg-[#0c0d0f] rounded-xl border border-white/10 relative">
-            <div>
-              <label class="block text-[10px] text-gray-500 mb-1">Merk / Jenis Sepatu</label>
-              <input type="text" placeholder="misal: Nike Jordan 1" class="input-shoe w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500" required>
-            </div>
-            <div>
-              <label class="block text-[10px] text-gray-500 mb-1">Layanan</label>
-              <select class="select-service w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-500">
-                <option value="Fast Clean">Fast Clean</option>
-                <option value="Deep Clean">Deep Clean</option>
-                <option value="Unyellowing">Unyellowing</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-[10px] text-gray-500 mb-1">Biaya (Rp)</label>
-              <input type="number" placeholder="50000" class="input-cost w-full bg-[#141519] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-amber-500 font-mono" oninput="hitungTotalBiaya()" required>
-            </div>
-          </div>
-        `;
-        hitungTotalBiaya();
-        loadTickets();
+        resetSelectedPhotos();
+        location.reload();
       } else {
         alert("Gagal menyimpan order: " + (result.error || "PIN tidak valid"));
         if (result.error && result.error.includes("403")) logoutAdmin();
