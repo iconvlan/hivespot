@@ -57,8 +57,9 @@
       </div>
       
       <!-- MENU TENGAH (Desktop) -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-bold text-gray-300 absolute left-1/2 -translate-x-1/2">
-        <button onclick="openAllServicesModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm">Layanan</button>
+      <nav class="hidden md:flex items-center gap-7 text-sm font-bold text-gray-300 absolute left-1/2 -translate-x-1/2">
+        <button onclick="openAllServicesModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm">Layanan & Harga</button>
+        <button onclick="openPromoModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm text-amber-400 flex items-center gap-1">Promo & Event</button>
         <button onclick="openShowcaseModal(0)" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm">Portofolio</button>
         <button onclick="openLocationModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm">Lokasi</button>
       </nav>
@@ -82,7 +83,10 @@
     <!-- Dropdown Menu Mobile -->
     <div id="mobileMenu" class="hidden md:hidden bg-[#241f1c] border-b border-amber-500/30 px-6 py-4 space-y-3 backdrop-blur-md shadow-xl text-white">
       <button onclick="toggleMobileMenu(); openAllServicesModal();" class="block w-full text-left py-2 text-sm font-bold text-gray-300 hover:text-amber-400 transition border-b border-white/10">
-        🛠️ Layanan
+        🛠️ Layanan & Harga
+      </button>
+      <button onclick="toggleMobileMenu(); openPromoModal();" class="block w-full text-left py-2 text-sm font-bold text-amber-400 hover:text-amber-300 transition border-b border-white/10">
+        🔥 Promo & Event Minggu Ini
       </button>
       <button onclick="toggleMobileMenu(); openShowcaseModal(0);" class="block w-full text-left py-2 text-sm font-bold text-gray-300 hover:text-amber-400 transition border-b border-white/10">
         📸 Portofolio
@@ -96,10 +100,10 @@
   <!-- Main Layout -->
   <main class="max-w-[90rem] mx-auto px-4 md:px-8 py-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10 my-auto">
     
-    <!-- KOLOM KIRI: Project Showcase (3 Item: Fast Clean, Deep Clean, Unyellowing) -->
+    <!-- KOLOM KIRI: Project Showcase -->
     <div id="showcase" class="lg:col-span-3 space-y-3">
       <h3 class="text-xs font-black tracking-wider text-amber-950 uppercase flex items-center gap-1.5">
-        <span>✨ Project Showcase</span>
+        <span>Project Showcase</span>
       </h3>
       <div class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 shadow-xl space-y-3.5 luxury-glow">
         
@@ -117,7 +121,7 @@
           <img src="images/deep-clean.jpg" alt="Deep Clean Showcase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-2.5">
             <span class="text-[9px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">DEEP CLEAN</span>
-            <p class="text-xs font-bold text-white mt-1">Air Jordan Treatment</p>
+            <p class="text-xs font-bold text-white mt-1">Detailed Treatment</p>
           </div>
         </div>
 
@@ -133,38 +137,48 @@
       </div>
     </div>
 
-    <!-- KOLOM TENGAH: Logo Animasi GIF (Tengah), Layanan & Status -->
+    <!-- KOLOM TENGAH: Logo Animasi GIF, 3 Kategori Utama & Status -->
     <div class="lg:col-span-6 text-center space-y-6 pt-2">
       <div class="space-y-4">
         <div class="inline-block relative">
           <div class="absolute inset-0 bg-white/50 blur-3xl rounded-full"></div>
-          <!-- LOGO TENGAH BERGERAK (Ganti 'images/logo-animasi.gif' dengan nama file GIF transparan buatanmu) -->
-          <img src="images/logo-animasi.gif" alt="HiveSpot Animated Logo" class="w-44 h-44 object-contain mx-auto drop-shadow-2xl relative z-10" style="mix-blend-mode: screen;">
+          <img src="images/logo-animasi.gif" alt="HiveSpot Animated Logo" class="w-80 h-80 object-contain mx-auto drop-shadow-2xl relative z-10" style="mix-blend-mode: screen;">
         </div>
         <h1 class="text-4xl font-black tracking-tight text-gray-900">Hive<span class="text-amber-900">Spot</span></h1>
         <p class="text-sm font-bold text-amber-950 max-w-md mx-auto">Keeping your sneakers fresh, clean, and ready for any stride.</p>
       </div>
 
-      <!-- Service Quick Grid Cards -->
+      <!-- 3 Kategori Utama Service -->
       <div id="katalog" class="grid grid-cols-3 gap-3">
-        <div onclick="openServiceModal('Fast Clean', 'Rp 30.000', 'Pembersihan bagian upper dan midsole secara cepat. Cocok untuk perawatan rutin harian agar sepatu tetap fresh.', 'Estimasi: 1 Hari')" class="bg-[#e6d7bc]/95 backdrop-blur-md p-5 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover">
-          <div class="text-amber-900 mb-1 text-xs font-black">Rp 30K</div>
-          <div class="font-black text-sm text-gray-900 group-hover:text-amber-900 transition">Fast Clean</div>
+        <div onclick="openAllServicesModal()" class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover flex flex-col justify-between">
+          <div>
+            <div class="text-[10px] font-bold text-amber-900 uppercase">Kategori 1</div>
+            <div class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Shoes Clean</div>
+          </div>
+          <p class="text-[10px] text-gray-700 mt-2 hidden sm:block">General & Daily Wear (Mulai Rp 15K)</p>
         </div>
-        <div onclick="openServiceModal('Deep Clean', 'Rp 50.000', 'Pembersihan menyeluruh mencakup seluruh bagian sepatu: Upper, Midsole, Outsole, Tali, hingga Insole menggunakan formula khusus yang aman.', 'Estimasi: 1 - 2 Hari')" class="bg-[#e6d7bc]/95 backdrop-blur-md p-5 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover">
-          <div class="text-amber-900 mb-1 text-xs font-black">Rp 50K</div>
-          <div class="font-black text-sm text-gray-900 group-hover:text-amber-900 transition">Deep Clean</div>
+
+        <div onclick="openAllServicesModal()" class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover flex flex-col justify-between">
+          <div>
+            <div class="text-[10px] font-bold text-amber-900 uppercase">Kategori 2</div>
+            <div class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Specialty Care</div>
+          </div>
+          <p class="text-[10px] text-gray-700 mt-2 hidden sm:block">Leather, Suede & Nubuck</p>
         </div>
-        <div onclick="openServiceModal('Unyellowing', 'Rp 75.000', 'Treatment khusus untuk mengembalikan warna putih midsole sepatu yang sudah menguning karena oksidasi agar kembali seperti baru.', 'Estimasi: 2 Hari')" class="bg-[#e6d7bc]/95 backdrop-blur-md p-5 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover">
-          <div class="text-amber-900 mb-1 text-xs font-black">Rp 75K</div>
-          <div class="font-black text-sm text-gray-900 group-hover:text-amber-900 transition">Unyellowing</div>
+
+        <div onclick="openAllServicesModal()" class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover flex flex-col justify-between">
+          <div>
+            <div class="text-[10px] font-bold text-amber-900 uppercase">Kategori 3</div>
+            <div class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Shoes Treatment</div>
+          </div>
+          <p class="text-[10px] text-gray-700 mt-2 hidden sm:block">Unyellowing & Restoration</p>
         </div>
       </div>
 
       <!-- AREA STATIS: STATUS TOKO & HASIL TRACKING -->
       <div id="trackingResultContainer" class="mt-4">
         
-        <!-- Status Toko Dinamis (Terhubung ke GAS) -->
+        <!-- Status Toko Dinamis -->
         <div id="storeStatusCard" class="bg-[#e6d7bc]/95 backdrop-blur-md border border-amber-950/30 rounded-2xl p-4 flex items-center justify-between shadow-md luxury-glow">
           <div class="flex items-center gap-3 text-left">
             <span class="relative flex h-3 w-3" id="storeStatusDotWrapper">
@@ -179,7 +193,7 @@
           <span class="text-[10px] font-mono bg-amber-950/15 text-amber-950 border border-amber-950/30 px-2.5 py-1 rounded-lg font-bold">Semarang</span>
         </div>
 
-        <!-- Hasil Tracking (Hidden secara default) -->
+        <!-- Hasil Tracking -->
         <div id="resultArea" class="hidden bg-[#e6d7bc]/95 backdrop-blur-md border border-amber-950/40 rounded-2xl p-5 shadow-xl text-left space-y-3.5 luxury-glow">
           <div class="flex flex-wrap justify-between items-center gap-2 border-b border-amber-950/20 pb-3">
             <div>
@@ -206,7 +220,7 @@
       </div>
     </div>
 
-    <!-- KOLOM KANAN: Form Input Tracking & Info -->
+    <!-- KOLOM KANAN: Form Input Tracking, Info & Special Perks -->
     <div id="tracking" class="lg:col-span-3 space-y-4">
       <div class="bg-[#241f1c] text-white p-5 rounded-2xl border border-amber-500/40 space-y-3.5 shadow-2xl luxury-glow">
         <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
@@ -233,7 +247,7 @@
           <div class="bg-[#d8c29a]/60 p-2.5 rounded-xl border border-amber-950/20 shadow-sm">
             <p class="font-bold text-gray-900 flex items-center justify-between">
               <span>⏱️ Estimasi Pengerjaan</span>
-              <span class="text-amber-950 text-[11px] font-black">1 - 2 Hari</span>
+              <span class="text-amber-950 text-[11px] font-black">1 - 3 Hari</span>
             </p>
             <p class="text-[11px] text-gray-700 mt-1">Tergantung jenis layanan & tingkat kotor.</p>
           </div>
@@ -246,11 +260,58 @@
           </div>
         </div>
       </div>
+
+      <!-- Special Perks & Free Coffee Promo -->
+      <div class="bg-gradient-to-br from-[#241f1c] to-[#3a322b] text-white p-5 rounded-2xl border border-amber-500/40 space-y-2.5 shadow-xl luxury-glow">
+        <div class="flex items-center gap-2 border-b border-white/10 pb-2">
+          <span class="text-base">☕</span>
+          <h3 class="font-black text-xs text-amber-400 uppercase tracking-wider">HiveSpot Special Perks</h3>
+        </div>
+        <div class="space-y-2 text-xs text-gray-300">
+          <div class="flex items-start gap-2">
+            <span class="text-amber-400 font-bold">✓</span>
+            <p><b>Free Coffee ( Hot / Ice )</b> khusus layanan Super Fast Clean sambil menunggu di workshop.</p>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-amber-400 font-bold">✓</span>
+            <p><b>Free Pickup & Delivery</b> area Tembalang & Undip <span class="text-amber-400 font-bold">(Jam & Jadwal ditentukan oleh pihak workshop)</span>.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </main>
 
-  <!-- ==================== POPUP MODAL DETAIL LAYANAN ==================== -->
+  <!-- ==================== POPUP MODAL PROMO & EVENT ==================== -->
+  <div id="promoModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md hidden p-4">
+    <div class="bg-[#e6d7bc] border border-amber-950/40 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closePromoModal()" class="absolute top-4 right-4 text-gray-800 hover:text-black text-xl font-bold z-10">&times;</button>
+      <div>
+        <span class="text-[10px] font-bold bg-amber-600 text-white px-2 py-0.5 rounded uppercase">Edisi Minggu Ini</span>
+        <h3 class="text-xl font-black text-gray-900 mt-1">Promo & Event HiveSpot</h3>
+      </div>
+
+      <!-- Area Brosur / Poster Promo -->
+      <div class="space-y-3">
+        <div class="rounded-xl overflow-hidden border border-amber-950/30 bg-gray-900 shadow-md">
+          <img src="images/brosur.png" alt="Brosur Promo HiveSpot" class="w-full h-auto object-cover" onerror="this.src='images/deep-clean.jpg'">
+        </div>
+        <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 text-xs text-gray-900 space-y-1">
+          <p class="font-black text-amber-950">📢 Info Promo Aktif:</p>
+          <p>Pantau terus brosur mingguan kami di sini atau langsung tanyakan paket diskon khusus mahasiswa Undip via WhatsApp!</p>
+        </div>
+      </div>
+
+      <div class="border-t border-amber-950/20 pt-3 text-center">
+        <a href="https://wa.me/6287811299845?text=Halo%20Kak,%20saya%20mau%20tanya%20seputar%20promo%20dan%20event%20minggu%20ini%20di%20HiveSpot." target="_blank" class="block w-full py-2.5 rounded-xl bg-[#241f1c] text-amber-400 font-bold text-xs hover:bg-black transition border border-amber-500/40">
+          Klaim Promo via WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== POPUP MODAL DETAIL LAYANAN (SINGLE) ==================== -->
   <div id="serviceModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden p-4">
     <div class="bg-[#e6d7bc] border border-amber-950/40 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 relative">
       <button onclick="closeServiceModal()" class="absolute top-4 right-4 text-gray-800 hover:text-black text-xl font-bold">&times;</button>
@@ -271,46 +332,112 @@
     </div>
   </div>
 
-  <!-- ==================== POPUP MODAL SEMUA LAYANAN ==================== -->
+  <!-- ==================== POPUP MODAL SEMUA LAYANAN (PRICELIST LENGKAP) ==================== -->
   <div id="allServicesModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden p-4">
-    <div class="bg-[#e6d7bc] border border-amber-950/40 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 relative">
+    <div class="bg-[#e6d7bc] border border-amber-950/40 rounded-2xl max-w-xl w-full p-6 shadow-2xl space-y-4 relative max-h-[90vh] overflow-y-auto">
       <button onclick="closeAllServicesModal()" class="absolute top-4 right-4 text-gray-800 hover:text-black text-xl font-bold">&times;</button>
       <div>
-        <span class="text-[10px] font-bold bg-amber-950/20 text-amber-950 px-2 py-0.5 rounded border border-amber-950/30 uppercase">Daftar Layanan</span>
-        <h3 class="text-xl font-black text-gray-900 mt-1">Pilihan Perawatan Sepatu</h3>
+        <span class="text-[10px] font-bold bg-amber-950/20 text-amber-950 px-2 py-0.5 rounded border border-amber-950/30 uppercase">Daftar Harga Resmi</span>
+        <h3 class="text-xl font-black text-gray-900 mt-1">HiveSpot Price List</h3>
       </div>
-      <div class="space-y-2.5 max-h-64 overflow-y-auto pr-1">
-        <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
-          <div>
-            <p class="font-bold text-xs text-gray-900">Fast Clean</p>
-            <p class="text-[10px] text-gray-700">Upper & Midsole quick cleaning (1 Hari)</p>
+
+      <div class="space-y-4 text-xs">
+        
+        <!-- Kategori 1: Shoes Clean -->
+        <div>
+          <p class="font-extrabold text-amber-950 uppercase tracking-wider mb-2 border-b border-amber-950/20 pb-1">Shoes Clean (General & Daily Wear)</p>
+          <div class="space-y-2">
+            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
+              <div>
+                <p class="font-bold text-gray-900">Super Fast Clean <span class="text-[10px] font-normal text-gray-700">(30-60 Min - Bisa Ditunggu)</span></p>
+                <p class="text-[10px] text-gray-700">Type: For General / Canvas / Mesh + <b>FREE Coffee ( Hot / Ice )</b></p>
+              </div>
+              <span class="text-amber-950 font-black text-xs">Rp 15.000</span>
+            </div>
+            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
+              <div>
+                <p class="font-bold text-gray-900">Fast Clean <span class="text-[10px] font-normal text-gray-700">(1 Hari)</span></p>
+                <p class="text-[10px] text-gray-700">Type: For General / All Materials (Upper, tongue, midsole, outsole)</p>
+              </div>
+              <span class="text-amber-950 font-black text-xs">Rp 20.000</span>
+            </div>
+            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
+              <div>
+                <p class="font-bold text-gray-900">Deep Clean <span class="text-[10px] font-normal text-gray-700">(2 - 3 Hari)</span></p>
+                <p class="text-[10px] text-gray-700">Type: For General / Sneakers / Running (Insole, outsole, upper, lacing)</p>
+              </div>
+              <span class="text-amber-950 font-black text-xs">Rp 25.000</span>
+            </div>
+            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
+              <div>
+                <p class="font-bold text-gray-900">Hard Clean <span class="text-[10px] font-normal text-gray-700">(2 - 3 Hari)</span></p>
+                <p class="text-[10px] text-gray-700">Type: For Heavy Duty / Muddy Shoes (Kotor berat / bau)</p>
+              </div>
+              <span class="text-amber-950 font-black text-xs">Rp 30.000</span>
+            </div>
+            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
+              <div>
+                <p class="font-bold text-gray-900">Express Clean <span class="text-[10px] font-normal text-gray-700">(24 Jam)</span></p>
+                <p class="text-[10px] text-gray-700">Type: For Express / Urgent Needs (Deep clean kilat)</p>
+              </div>
+              <span class="text-amber-950 font-black text-xs">Rp 40.000</span>
+            </div>
           </div>
-          <span class="text-amber-950 font-black text-xs">Rp 30.000</span>
         </div>
-        <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
-          <div>
-            <p class="font-bold text-xs text-gray-900">Deep Clean</p>
-            <p class="text-[10px] text-gray-700">Pembersihan total menyeluruh (1-2 Hari)</p>
+
+        <!-- Kategori 2: Specialty Care -->
+        <div>
+          <p class="font-extrabold text-amber-950 uppercase tracking-wider mb-2 border-b border-amber-950/20 pb-1">Specialty Care (Leather, Suede & Nubuck)</p>
+          <div class="space-y-2">
+            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
+              <div>
+                <p class="font-bold text-gray-900">Leather Care & Conditioning <span class="text-[10px] font-normal text-gray-700">(2 - 3 Hari)</span></p>
+                <p class="text-[10px] text-gray-700">Type: Genuine / Synthetic Leather (Anti-crack lotion)</p>
+              </div>
+              <span class="text-amber-950 font-black text-xs">Rp 25k - 30k</span>
+            </div>
+            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
+              <div>
+                <p class="font-bold text-gray-900">Suede & Nubuck Treatment <span class="text-[10px] font-normal text-gray-700">(2 - 3 Hari)</span></p>
+                <p class="text-[10px] text-gray-700">Type: Suede / Nubuck Shoes (Suede eraser & gentle care)</p>
+              </div>
+              <span class="text-amber-950 font-black text-xs">Rp 25k - 30k</span>
+            </div>
           </div>
-          <span class="text-amber-950 font-black text-xs">Rp 50.000</span>
         </div>
-        <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
-          <div>
-            <p class="font-bold text-xs text-gray-900">Unyellowing</p>
-            <p class="text-[10px] text-gray-700">Mengatasi midsole menguning (2 Hari)</p>
+
+        <!-- Kategori 3: Shoes Treatment -->
+        <div>
+          <p class="font-extrabold text-amber-950 uppercase tracking-wider mb-2 border-b border-amber-950/20 pb-1">Shoes Treatment</p>
+          <div class="space-y-2">
+            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
+              <div>
+                <p class="font-bold text-gray-900">Unyellowing <span class="text-[10px] font-normal text-gray-700">(2 - 3 Hari)</span></p>
+                <p class="text-[10px] text-gray-700">Type: For Yellowed Midsole (Menghilangkan kuning oksidasi)</p>
+              </div>
+              <span class="text-amber-950 font-black text-xs">Rp 30.000</span>
+            </div>
+            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
+              <div>
+                <p class="font-bold text-gray-900">Unyellowing + Deep Clean <span class="text-[10px] font-normal text-gray-700">(3 - 4 Hari)</span></p>
+                <p class="text-[10px] text-gray-700">Type: Complete Midsole & Upper Restoration</p>
+              </div>
+              <span class="text-amber-950 font-black text-xs">Rp 50.000</span>
+            </div>
           </div>
-          <span class="text-amber-950 font-black text-xs">Rp 75.000</span>
         </div>
+
       </div>
+
       <div class="border-t border-amber-950/20 pt-3 text-center">
-        <a href="https://wa.me/6287811299845?text=Halo%20Kak,%20saya%20mau%20tanya-tanya%20seputar%20layanan%20perawatan%20dan%20booking%20cuci%20sepatu%20di%20HiveSpot." target="_blank" class="block w-full py-2.5 rounded-xl bg-[#241f1c] text-amber-400 font-bold text-xs hover:bg-black transition border border-amber-500/40">
-          Konsultasi & Booking via WhatsApp
+        <a href="https://wa.me/6287811299845?text=Halo%20Kak,%20saya%20mau%20booking%20layanan%20perawatan%20sepatu%20di%20HiveSpot." target="_blank" class="block w-full py-2.5 rounded-xl bg-[#241f1c] text-amber-400 font-bold text-xs hover:bg-black transition border border-amber-500/40">
+          Booking & Konsultasi via WhatsApp
         </a>
       </div>
     </div>
   </div>
 
-  <!-- ==================== POPUP MODAL SHOWCASE (3 Foto Lokal) ==================== -->
+  <!-- ==================== POPUP MODAL SHOWCASE ==================== -->
   <div id="showcaseModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md hidden p-4">
     <div class="bg-[#e6d7bc] border border-amber-950/40 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4 relative">
       <button onclick="closeShowcaseModal()" class="absolute top-4 right-4 text-gray-800 hover:text-black text-xl font-bold z-10">&times;</button>
@@ -355,7 +482,7 @@
 
       <div class="space-y-1 text-xs text-gray-800">
         <p class="font-bold text-gray-900">📍 Alamat Workshop:</p>
-        <p class="text-gray-700">Semarang, Jawa Tengah (Buka setiap hari jam 09.00 - 20.00 WIB)</p>
+        <p class="text-gray-700">Semarang, Jawa Tengah (Buka setiap hari jam 09.00 - 21.00 WIB)</p>
       </div>
 
       <div class="border-t border-amber-950/20 pt-3">
@@ -366,9 +493,29 @@
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="border-t border-amber-500/30 py-8 text-center text-xs text-white relative z-10 shadow-inner bg-[#241f1c]">
-    <p class="font-bold tracking-wider">&copy; 2026 HiveSpot Semarang. All rights reserved.</p>
+  <!-- Footer (Rapi, Simetris & Center di Tengah) -->
+  <footer class="border-t border-amber-500/30 py-6 text-center text-xs text-white relative z-10 shadow-inner bg-[#241f1c]">
+    <div class="max-w-[90rem] mx-auto px-4 md:px-8 flex flex-col items-center justify-center gap-3">
+      
+      <!-- Social Media Links (Centered & Balanced) -->
+      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 font-bold text-gray-300">
+        <a href="https://instagram.com/hivespot.semarang" target="_blank" class="hover:text-amber-400 transition flex items-center gap-1.5">
+          <span>📷 Instagram: @hivespot.semarang</span>
+        </a>
+        <span class="text-gray-600 hidden sm:inline">|</span>
+        <a href="https://tiktok.com/@hivespot.semarang" target="_blank" class="hover:text-amber-400 transition flex items-center gap-1.5">
+          <span>🎵 TikTok: @hivespot.semarang <span class="text-[9px] bg-amber-500 text-black px-1.5 py-0.5 rounded font-black">Soon</span></span>
+        </a>
+        <span class="text-gray-600 hidden sm:inline">|</span>
+        <a href="https://youtube.com/@hivespot.semarang" target="_blank" class="hover:text-amber-400 transition flex items-center gap-1.5">
+          <span>▶️ YouTube: @hivespot.semarang <span class="text-[9px] bg-amber-500 text-black px-1.5 py-0.5 rounded font-black">Soon</span></span>
+        </a>
+      </div>
+
+      <!-- Copyright -->
+      <p class="font-semibold tracking-wider text-gray-400 text-[11px] pt-1 border-t border-white/10 w-full max-w-md">&copy; 2026 HiveSpot Semarang. All rights reserved.</p>
+      
+    </div>
   </footer>
 
   <!-- Script Logic -->
@@ -423,21 +570,18 @@
       }
     }
 
-    function openServiceModal(title, price, desc, duration) {
-      document.getElementById('modalServiceTitle').innerText = title;
-      document.getElementById('modalServicePrice').innerText = price;
-      document.getElementById('modalServiceDesc').innerText = `${desc} (${duration})`;
-      document.getElementById('serviceModal').classList.remove('hidden');
-    }
-    function closeServiceModal() {
-      document.getElementById('serviceModal').classList.add('hidden');
-    }
-
     function openAllServicesModal() {
       document.getElementById('allServicesModal').classList.remove('hidden');
     }
     function closeAllServicesModal() {
       document.getElementById('allServicesModal').classList.add('hidden');
+    }
+
+    function openPromoModal() {
+      document.getElementById('promoModal').classList.remove('hidden');
+    }
+    function closePromoModal() {
+      document.getElementById('promoModal').classList.add('hidden');
     }
 
     function openLocationModal() {
@@ -447,7 +591,7 @@
       document.getElementById('locationModal').classList.add('hidden');
     }
 
-    // Data Showcase (3 Foto Lokal di folder images/)
+    // Data Showcase
     const showcaseData = [
       {
         title: "Fast Clean Daily Treatment",
