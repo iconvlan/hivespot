@@ -673,7 +673,7 @@
     });
   }
 
-  async function loadTickets() {
+async function loadTickets() {
     const tbody = document.getElementById('ticketTableBody');
     const userPin = getUserPin();
     if (!userPin) return;
@@ -681,16 +681,17 @@
     tbody.innerHTML = '<tr><td colspan="7" class="p-6 text-center text-gray-500">Memuat data tiket...</td></tr>';
 
     try {
-      const res = await fetch(`${API_URL}?api_key=CleanShoesAdmin2026!Key`);
+      const res = await fetch(`${API_URL}?action=getTickets`);
       const result = await res.json();
 
-      if (result.success && result.data.length > 0) {
+      if (result.success && Array.isArray(result.data) && result.data.length > 0) {
         activeTickets = result.data;
         renderTable(result.data);
       } else {
         tbody.innerHTML = '<tr><td colspan="7" class="p-6 text-center text-gray-500">Belum ada order aktif.</td></tr>';
       }
     } catch (err) {
+      console.error(err);
       tbody.innerHTML = '<tr><td colspan="7" class="p-6 text-center text-gray-500">Gagal memuat dari server.</td></tr>';
     }
   }
@@ -746,48 +747,48 @@
     });
   }
 
-    function showConditionModal(ticketIndex, itemIndex) {
-        const ticket = activeTickets[ticketIndex];
-        if (!ticket || !ticket.items || !ticket.items[itemIndex]) return;
+  function showConditionModal(ticketIndex, itemIndex) {
+    const ticket = activeTickets[ticketIndex];
+    if (!ticket || !ticket.items || !ticket.items[itemIndex]) return;
 
-        const item = ticket.items[itemIndex];
-        const cond = item.conditions || {};
+    const item = ticket.items[itemIndex];
+    const cond = item.conditions || {};
 
-        document.getElementById("modalTitle").innerText = `Kondisi Fisik: ${item.shoe_model || 'Sepatu'}`;
-        document.getElementById("modalSubTitle").innerText = `Tiket: ${ticket.ticket_id} | Layanan: ${item.service_type || '-'}`;
+    document.getElementById("modalTitle").innerText = `Kondisi Fisik: ${item.shoe_model}`;
+    document.getElementById("modalSubTitle").innerText = `Tiket: ${ticket.ticket_id} | Layanan: ${item.service_type}`;
 
-        const modalBody = document.getElementById("modalBody");
-        modalBody.innerHTML = `
-          <div class="grid grid-cols-2 gap-2 text-xs">
-            <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
-              <span class="text-gray-400 block text-[10px]">Outsole</span>
-              <span class="font-semibold text-white">${cond.outsole && cond.outsole.trim() !== '' ? cond.outsole : 'Normal'}</span>
-            </div>
-            <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
-              <span class="text-gray-400 block text-[10px]">Midsole</span>
-              <span class="font-semibold text-white">${cond.midsole && cond.midsole.trim() !== '' ? cond.midsole : 'Normal'}</span>
-            </div>
-            <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
-              <span class="text-gray-400 block text-[10px]">Upper</span>
-              <span class="font-semibold text-white">${cond.upper && cond.upper.trim() !== '' ? cond.upper : 'Normal'}</span>
-            </div>
-            <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
-              <span class="text-gray-400 block text-[10px]">Tongue (Lidah)</span>
-              <span class="font-semibold text-white">${cond.tongue && cond.tongue.trim() !== '' ? cond.tongue : 'Normal'}</span>
-            </div>
-            <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
-              <span class="text-gray-400 block text-[10px]">Insole</span>
-              <span class="font-semibold text-white">${cond.insole && cond.insole.trim() !== '' ? cond.insole : 'Normal'}</span>
-            </div>
-            <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
-              <span class="text-gray-400 block text-[10px]">Tali Sepatu</span>
-              <span class="font-semibold text-white">${cond.laces && cond.laces.trim() !== '' ? cond.laces : 'Normal'}</span>
-            </div>
-          </div>
-        `;
+    const modalBody = document.getElementById("modalBody");
+    modalBody.innerHTML = `
+      <div class="grid grid-cols-2 gap-2 text-xs">
+        <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
+          <span class="text-gray-400 block text-[10px]">Outsole</span>
+          <span class="font-semibold text-white">${cond.outsole || 'Normal'}</span>
+        </div>
+        <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
+          <span class="text-gray-400 block text-[10px]">Midsole</span>
+          <span class="font-semibold text-white">${cond.midsole || 'Normal'}</span>
+        </div>
+        <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
+          <span class="text-gray-400 block text-[10px]">Upper</span>
+          <span class="font-semibold text-white">${cond.upper || 'Normal'}</span>
+        </div>
+        <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
+          <span class="text-gray-400 block text-[10px]">Tongue (Lidah)</span>
+          <span class="font-semibold text-white">${cond.tongue || 'Normal'}</span>
+        </div>
+        <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
+          <span class="text-gray-400 block text-[10px]">Insole</span>
+          <span class="font-semibold text-white">${cond.insole || 'Normal'}</span>
+        </div>
+        <div class="bg-[#0c0d0f] p-2.5 rounded-xl border border-white/10">
+          <span class="text-gray-400 block text-[10px]">Tali Sepatu</span>
+          <span class="font-semibold text-white">${cond.laces || 'Normal'}</span>
+        </div>
+      </div>
+    `;
 
-        document.getElementById("conditionModal").classList.remove("hidden");
-      }
+    document.getElementById("conditionModal").classList.remove("hidden");
+  }
 
   function closeConditionModal() {
     document.getElementById("conditionModal").classList.add("hidden");
