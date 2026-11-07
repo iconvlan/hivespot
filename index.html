@@ -14,7 +14,7 @@
           colors: {
             luxuryGold: '#c5a875',
             softGoldBg: '#d8c29a',
-            espressoCard: '#241f1c', // Cokelat espresso gelap elegan untuk kontras
+            espressoCard: '#241f1c',
             creamCard: '#e6d7bc',
           }
         }
@@ -65,7 +65,7 @@
 
       <!-- TOMBOL KANAN & HAMBURGER MOBILE -->
       <div class="flex items-center gap-3">
-        <a href="https://wa.me/6285645416616?text=Halo%20Kak,%20saya%20mau%20tanya-tanya%20seputar%20layanan%20perawatan%20dan%20booking%20cuci%20sepatu%20di%20HiveSpot." target="_blank" class="px-4 md:px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-extrabold text-xs hover:from-amber-400 hover:to-amber-500 transition shadow-lg flex items-center gap-1.5 border border-amber-400/40">
+        <a href="https://wa.me/6287811299845?text=Halo%20Kak,%20saya%20mau%20tanya-tanya%20seputar%20layanan%20perawatan%20dan%20booking%20cuci%20sepatu%20di%20HiveSpot." target="_blank" class="px-4 md:px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-extrabold text-xs hover:from-amber-400 hover:to-amber-500 transition shadow-lg flex items-center gap-1.5 border border-amber-400/40">
           <span>WhatsApp VIP</span>
         </a>
 
@@ -96,40 +96,50 @@
   <!-- Main Layout -->
   <main class="max-w-[90rem] mx-auto px-4 md:px-8 py-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10 my-auto">
     
-    <!-- KOLOM KIRI: Project Showcase -->
+    <!-- KOLOM KIRI: Project Showcase (3 Item: Fast Clean, Deep Clean, Unyellowing) -->
     <div id="showcase" class="lg:col-span-3 space-y-3">
       <h3 class="text-xs font-black tracking-wider text-amber-950 uppercase flex items-center gap-1.5">
         <span>✨ Project Showcase</span>
       </h3>
       <div class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 shadow-xl space-y-3.5 luxury-glow">
         
-        <!-- Item 1 -->
-        <div onclick="openShowcaseModal(0)" class="relative rounded-xl overflow-hidden border border-amber-950/30 group h-44 bg-gray-900 cursor-pointer shadow-md card-hover">
-          <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=500&auto=format&fit=crop" alt="Cleaned Sneaker" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-3">
-            <span class="text-[10px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">AFTER DEEP CLEAN</span>
-            <p class="text-xs font-bold text-white mt-1.5">Air Jordan 1 Retro High</p>
+        <!-- Item 1: Fast Clean -->
+        <div onclick="openShowcaseModal(0)" class="relative rounded-xl overflow-hidden border border-amber-950/30 group h-36 bg-gray-900 cursor-pointer shadow-md card-hover">
+          <img src="images/fast-clean.jpg" alt="Fast Clean Showcase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-2.5">
+            <span class="text-[9px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">FAST CLEAN</span>
+            <p class="text-xs font-bold text-white mt-1">Daily Maintenance</p>
           </div>
         </div>
 
-        <!-- Item 2 -->
-        <div onclick="openShowcaseModal(1)" class="relative rounded-xl overflow-hidden border border-amber-950/30 group h-44 bg-gray-900 cursor-pointer shadow-md card-hover">
-          <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=500&auto=format&fit=crop" alt="Sneaker Treatment" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-3">
-            <span class="text-[10px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">UNYELLOWING TREATMENT</span>
-            <p class="text-xs font-bold text-white mt-1.5">Nike Air Force 1 Restoration</p>
+        <!-- Item 2: Deep Clean -->
+        <div onclick="openShowcaseModal(1)" class="relative rounded-xl overflow-hidden border border-amber-950/30 group h-36 bg-gray-900 cursor-pointer shadow-md card-hover">
+          <img src="images/deep-clean.jpg" alt="Deep Clean Showcase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-2.5">
+            <span class="text-[9px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">DEEP CLEAN</span>
+            <p class="text-xs font-bold text-white mt-1">Air Jordan Treatment</p>
+          </div>
+        </div>
+
+        <!-- Item 3: Unyellowing -->
+        <div onclick="openShowcaseModal(2)" class="relative rounded-xl overflow-hidden border border-amber-950/30 group h-36 bg-gray-900 cursor-pointer shadow-md card-hover">
+          <img src="images/unyellowing.jpg" alt="Unyellowing Showcase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-2.5">
+            <span class="text-[9px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">UNYELLOWING</span>
+            <p class="text-xs font-bold text-white mt-1">Midsole Restoration</p>
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- KOLOM TENGAH: Logo, Layanan & Status Toko / Hasil Tracking -->
+    <!-- KOLOM TENGAH: Logo Animasi GIF (Tengah), Layanan & Status -->
     <div class="lg:col-span-6 text-center space-y-6 pt-2">
       <div class="space-y-4">
         <div class="inline-block relative">
           <div class="absolute inset-0 bg-white/50 blur-3xl rounded-full"></div>
-          <img src="images/logo.png" alt="HiveSpot Logo" class="w-44 h-44 object-contain mx-auto drop-shadow-2xl relative z-10">
+          <!-- LOGO TENGAH BERGERAK (Ganti 'images/logo-animasi.gif' dengan nama file GIF transparan buatanmu) -->
+          <img src="images/logo-animasi.gif" alt="HiveSpot Animated Logo" class="w-44 h-44 object-contain mx-auto drop-shadow-2xl relative z-10" style="mix-blend-mode: screen;">
         </div>
         <h1 class="text-4xl font-black tracking-tight text-gray-900">Hive<span class="text-amber-900">Spot</span></h1>
         <p class="text-sm font-bold text-amber-950 max-w-md mx-auto">Keeping your sneakers fresh, clean, and ready for any stride.</p>
@@ -196,7 +206,7 @@
       </div>
     </div>
 
-    <!-- KOLOM KANAN: Form Input Tracking & Info (Aksen Rak Hitam Mewah) -->
+    <!-- KOLOM KANAN: Form Input Tracking & Info -->
     <div id="tracking" class="lg:col-span-3 space-y-4">
       <div class="bg-[#241f1c] text-white p-5 rounded-2xl border border-amber-500/40 space-y-3.5 shadow-2xl luxury-glow">
         <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
@@ -254,7 +264,7 @@
           <p class="text-[10px] text-gray-700 font-bold">Harga Layanan:</p>
           <span id="modalServicePrice" class="text-amber-950 font-black text-base"></span>
         </div>
-        <a href="https://wa.me/6285645416616?text=Halo%20Kak,%20saya%20mau%20tanya-tanya%20seputar%20layanan%20perawatan%20dan%20booking%20cuci%20sepatu%20di%20HiveSpot." target="_blank" class="px-4 py-2 rounded-xl bg-[#241f1c] text-amber-400 font-bold text-xs hover:bg-black transition border border-amber-500/40">
+        <a href="https://wa.me/6287811299845?text=Halo%20Kak,%20saya%20mau%20tanya-tanya%20seputar%20layanan%20perawatan%20dan%20booking%20cuci%20sepatu%20di%20HiveSpot." target="_blank" class="px-4 py-2 rounded-xl bg-[#241f1c] text-amber-400 font-bold text-xs hover:bg-black transition border border-amber-500/40">
           Booking via WhatsApp
         </a>
       </div>
@@ -293,14 +303,14 @@
         </div>
       </div>
       <div class="border-t border-amber-950/20 pt-3 text-center">
-        <a href="https://wa.me/6285645416616?text=Halo%20Kak,%20saya%20mau%20tanya-tanya%20seputar%20layanan%20perawatan%20dan%20booking%20cuci%20sepatu%20di%20HiveSpot." target="_blank" class="block w-full py-2.5 rounded-xl bg-[#241f1c] text-amber-400 font-bold text-xs hover:bg-black transition border border-amber-500/40">
+        <a href="https://wa.me/6287811299845?text=Halo%20Kak,%20saya%20mau%20tanya-tanya%20seputar%20layanan%20perawatan%20dan%20booking%20cuci%20sepatu%20di%20HiveSpot." target="_blank" class="block w-full py-2.5 rounded-xl bg-[#241f1c] text-amber-400 font-bold text-xs hover:bg-black transition border border-amber-500/40">
           Konsultasi & Booking via WhatsApp
         </a>
       </div>
     </div>
   </div>
 
-  <!-- ==================== POPUP MODAL SHOWCASE ==================== -->
+  <!-- ==================== POPUP MODAL SHOWCASE (3 Foto Lokal) ==================== -->
   <div id="showcaseModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md hidden p-4">
     <div class="bg-[#e6d7bc] border border-amber-950/40 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4 relative">
       <button onclick="closeShowcaseModal()" class="absolute top-4 right-4 text-gray-800 hover:text-black text-xl font-bold z-10">&times;</button>
@@ -321,7 +331,7 @@
         <button onclick="prevSlide()" class="px-3 py-1.5 rounded-xl bg-[#d8c29a] hover:bg-[#c8b088] text-xs text-gray-900 font-bold transition flex items-center gap-1 border border-amber-950/20">
           &larr; Sebelumnya
         </button>
-        <span id="scCounter" class="text-xs text-gray-800 font-mono font-bold">1 / 2</span>
+        <span id="scCounter" class="text-xs text-gray-800 font-mono font-bold">1 / 3</span>
         <button onclick="nextSlide()" class="px-3 py-1.5 rounded-xl bg-[#241f1c] hover:bg-black text-xs text-amber-400 font-bold transition flex items-center gap-1 border border-amber-500/40">
           Selanjutnya &rarr;
         </button>
@@ -356,7 +366,7 @@
     </div>
   </div>
 
-  <!-- Footer (Luxury Espresso) -->
+  <!-- Footer -->
   <footer class="border-t border-amber-500/30 py-8 text-center text-xs text-white relative z-10 shadow-inner bg-[#241f1c]">
     <p class="font-bold tracking-wider">&copy; 2026 HiveSpot Semarang. All rights reserved.</p>
   </footer>
@@ -437,16 +447,22 @@
       document.getElementById('locationModal').classList.add('hidden');
     }
 
+    // Data Showcase (3 Foto Lokal di folder images/)
     const showcaseData = [
       {
-        title: "Air Jordan 1 Retro High",
-        badge: "AFTER DEEP CLEAN",
-        image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop"
+        title: "Fast Clean Daily Treatment",
+        badge: "FAST CLEAN",
+        image: "images/fast-clean.jpg"
       },
       {
-        title: "Nike Air Force 1 Sole Restoration",
-        badge: "UNYELLOWING TREATMENT",
-        image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=800&auto=format&fit=crop"
+        title: "Deep Clean Detailed Treatment",
+        badge: "DEEP CLEAN",
+        image: "images/deep-clean.jpg"
+      },
+      {
+        title: "Unyellowing Midsole Restoration",
+        badge: "UNYELLOWING",
+        image: "images/unyellowing.jpg"
       }
     ];
     let currentIndex = 0;
