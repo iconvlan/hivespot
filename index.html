@@ -111,8 +111,8 @@
         <div onclick="openShowcaseModal(0)" class="relative rounded-xl overflow-hidden border border-amber-950/30 group h-36 bg-gray-900 cursor-pointer shadow-md card-hover">
           <img src="images/fast-clean.jpg" alt="Fast Clean Showcase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-2.5">
-            <span class="text-[9px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">FAST CLEAN</span>
-            <p class="text-xs font-bold text-white mt-1">Daily Maintenance</p>
+            <span class="text-[9px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">FLASH ZAP</span>
+            <p class="text-xs font-bold text-white mt-1">Express 30 - 60 Mins</p>
           </div>
         </div>
 
@@ -121,7 +121,7 @@
           <img src="images/deep-clean.jpg" alt="Deep Clean Showcase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-2.5">
             <span class="text-[9px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">DEEP CLEAN</span>
-            <p class="text-xs font-bold text-white mt-1">Detailed Treatment</p>
+            <p class="text-xs font-bold text-white mt-1">Reguler, White & Leather</p>
           </div>
         </div>
 
@@ -150,28 +150,28 @@
 
       <!-- 3 Kategori Utama Service -->
       <div id="katalog" class="grid grid-cols-3 gap-3">
-        <div onclick="openAllServicesModal()" class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover flex flex-col justify-between">
+        <div onclick="openAllServicesModal('cleaning')" class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover flex flex-col justify-between">
           <div>
             <div class="text-[10px] font-bold text-amber-900 uppercase">Kategori 1</div>
-            <div class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Shoes Clean</div>
+            <div class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Cleaning Services</div>
           </div>
-          <p class="text-[10px] text-gray-700 mt-2 hidden sm:block">General & Daily Wear (Mulai Rp 15K)</p>
+          <p class="text-[10px] text-gray-700 mt-2 hidden sm:block">Flash Zap & Deep Clean (Mulai 15K)</p>
         </div>
 
-        <div onclick="openAllServicesModal()" class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover flex flex-col justify-between">
+        <div onclick="openAllServicesModal('specialty')" class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover flex flex-col justify-between">
           <div>
             <div class="text-[10px] font-bold text-amber-900 uppercase">Kategori 2</div>
             <div class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Specialty Care</div>
           </div>
-          <p class="text-[10px] text-gray-700 mt-2 hidden sm:block">Leather, Suede & Nubuck</p>
+          <p class="text-[10px] text-gray-700 mt-2 hidden sm:block">Unyellowing Midsole (35K - 45K)</p>
         </div>
 
-        <div onclick="openAllServicesModal()" class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover flex flex-col justify-between">
+        <div onclick="openAllServicesModal('addon')" class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover flex flex-col justify-between">
           <div>
             <div class="text-[10px] font-bold text-amber-900 uppercase">Kategori 3</div>
-            <div class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Shoes Treatment</div>
+            <div class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Add-On Service</div>
           </div>
-          <p class="text-[10px] text-gray-700 mt-2 hidden sm:block">Unyellowing & Restoration</p>
+          <p class="text-[10px] text-gray-700 mt-2 hidden sm:block">One Day Service (+15K)</p>
         </div>
       </div>
 
@@ -249,7 +249,7 @@
               <span>⏱️ Estimasi Pengerjaan</span>
               <span class="text-amber-950 text-[11px] font-black">1 - 3 Hari</span>
             </p>
-            <p class="text-[11px] text-gray-700 mt-1">Tergantung jenis layanan & tingkat kotor.</p>
+            <p class="text-[11px] text-gray-700 mt-1">Flash Zap 30-60 mnt, Deep Clean & Unyellowing 1-3 hari.</p>
           </div>
           <div class="bg-[#d8c29a]/60 p-2.5 rounded-xl border border-amber-950/20 shadow-sm">
             <p class="font-bold text-gray-900 flex items-center justify-between">
@@ -270,7 +270,7 @@
         <div class="space-y-2 text-xs text-gray-300">
           <div class="flex items-start gap-2">
             <span class="text-amber-400 font-bold">✓</span>
-            <p><b>Free Coffee ( Hot / Ice )</b> khusus layanan Super Fast Clean sambil menunggu di workshop.</p>
+            <p><b>Free Coffee</b> khusus layanan <b>Flash Zap</b> (30-60 mins) sambil ditunggu di workshop.</p>
           </div>
           <div class="flex items-start gap-2">
             <span class="text-amber-400 font-bold">✓</span>
@@ -332,107 +332,262 @@
     </div>
   </div>
 
-  <!-- ==================== POPUP MODAL SEMUA LAYANAN (PRICELIST LENGKAP) ==================== -->
-  <div id="allServicesModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden p-4">
-    <div class="bg-[#e6d7bc] border border-amber-950/40 rounded-2xl max-w-xl w-full p-6 shadow-2xl space-y-4 relative max-h-[90vh] overflow-y-auto">
-      <button onclick="closeAllServicesModal()" class="absolute top-4 right-4 text-gray-800 hover:text-black text-xl font-bold">&times;</button>
-      <div>
-        <span class="text-[10px] font-bold bg-amber-950/20 text-amber-950 px-2 py-0.5 rounded border border-amber-950/30 uppercase">Daftar Harga Resmi</span>
-        <h3 class="text-xl font-black text-gray-900 mt-1">HiveSpot Price List</h3>
+  <!-- ==================== POPUP MODAL SEMUA LAYANAN (KREATIF PRICELIST + MULTI SEPATU) ==================== -->
+  <div id="allServicesModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md hidden p-4">
+    <div class="bg-[#e6d7bc] border border-amber-950/40 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4 relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeAllServicesModal()" class="absolute top-4 right-4 text-gray-800 hover:text-black text-xl font-bold leading-none">&times;</button>
+      
+      <!-- Header Modal -->
+      <div class="flex flex-wrap items-end justify-between gap-2 border-b border-amber-950/20 pb-3 pr-6">
+        <div>
+          <span class="text-[10px] font-black bg-[#241f1c] text-amber-400 px-2.5 py-0.5 rounded-full uppercase tracking-wider">Official Rate Card</span>
+          <h3 class="text-2xl font-black text-gray-900 mt-1 tracking-tight">Hive<span class="text-amber-900">Spot</span> Price List</h3>
+        </div>
+        <span class="text-[11px] font-mono font-bold text-amber-950 bg-[#d8c29a] px-3 py-1 rounded-xl border border-amber-950/25">hivespot.site</span>
       </div>
 
+      <!-- Filter Tab Interaktif -->
+      <div class="grid grid-cols-4 gap-1.5 bg-[#241f1c] p-1.5 rounded-xl border border-amber-500/30 text-[11px] font-extrabold">
+        <button id="tab-all" onclick="filterPriceTab('all')" class="price-tab py-2 px-2 rounded-lg bg-amber-500 text-black transition cursor-pointer">Semua</button>
+        <button id="tab-cleaning" onclick="filterPriceTab('cleaning')" class="price-tab py-2 px-2 rounded-lg text-gray-300 hover:text-amber-400 transition cursor-pointer">Cleaning</button>
+        <button id="tab-specialty" onclick="filterPriceTab('specialty')" class="price-tab py-2 px-2 rounded-lg text-gray-300 hover:text-amber-400 transition cursor-pointer">Unyellowing</button>
+        <button id="tab-addon" onclick="filterPriceTab('addon')" class="price-tab py-2 px-2 rounded-lg text-gray-300 hover:text-amber-400 transition cursor-pointer">Add-On</button>
+      </div>
+
+      <!-- Konten Price List -->
       <div class="space-y-4 text-xs">
-        
-        <!-- Kategori 1: Shoes Clean -->
-        <div>
-          <p class="font-extrabold text-amber-950 uppercase tracking-wider mb-2 border-b border-amber-950/20 pb-1">Shoes Clean (General & Daily Wear)</p>
-          <div class="space-y-2">
-            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
+
+        <!-- KATEGORI 1: CLEANING SERVICES -->
+        <div id="section-cleaning" class="price-section space-y-2.5">
+          <div class="flex items-center justify-between border-b border-amber-950/20 pb-1">
+            <p class="font-black text-amber-950 uppercase tracking-wider">⚡ Cleaning Services</p>
+            <span class="text-[10px] font-bold text-gray-700">Klik paket untuk pilih</span>
+          </div>
+
+          <!-- Flash Zap -->
+          <div class="p-3.5 bg-[#241f1c] text-white rounded-2xl border border-amber-500/40 shadow-md space-y-2.5">
+            <div class="flex flex-wrap items-center justify-between gap-2">
               <div>
-                <p class="font-bold text-gray-900">Super Fast Clean <span class="text-[10px] font-normal text-gray-700">(30-60 Min - Bisa Ditunggu)</span></p>
-                <p class="text-[10px] text-gray-700">Type: For General / Canvas / Mesh + <b>FREE Coffee ( Hot / Ice )</b></p>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="font-black text-sm text-amber-400">Flash Zap</span>
+                  <span class="text-[10px] font-mono bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-md border border-amber-400/30">Express 30 - 60 mins</span>
+                </div>
+                <p class="text-[11px] text-gray-300 mt-1">Pembersihan kilat bagian luar dan midsole untuk perawatan harian (kecuali white shoes).</p>
               </div>
-              <span class="text-amber-950 font-black text-xs">Rp 15.000</span>
+              <span class="text-[10px] font-bold bg-amber-500 text-black px-2.5 py-1 rounded-lg">☕ Bisa Ditunggu + Free Coffee</span>
             </div>
-            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
-              <div>
-                <p class="font-bold text-gray-900">Fast Clean <span class="text-[10px] font-normal text-gray-700">(1 Hari)</span></p>
-                <p class="text-[10px] text-gray-700">Type: For General / All Materials (Upper, tongue, midsole, outsole)</p>
-              </div>
-              <span class="text-amber-950 font-black text-xs">Rp 20.000</span>
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <button type="button" data-theme="dark" onclick="selectEstimator(this, 'Flash Zap (Ringan - Express 30-60 mins)', 15000)" class="service-option-btn flex items-center justify-between px-3 py-2 rounded-xl bg-[#1a1614] hover:bg-amber-500/15 border border-white/10 hover:border-amber-400/50 transition text-left cursor-pointer">
+                <span class="opt-label text-gray-300 font-semibold">Ringan</span>
+                <span class="opt-price font-black text-amber-400 font-mono">15k</span>
+              </button>
+              <button type="button" data-theme="dark" onclick="selectEstimator(this, 'Flash Zap (Sedang - Express 30-60 mins)', 20000)" class="service-option-btn flex items-center justify-between px-3 py-2 rounded-xl bg-[#1a1614] hover:bg-amber-500/15 border border-white/10 hover:border-amber-400/50 transition text-left cursor-pointer">
+                <span class="opt-label text-gray-300 font-semibold">Sedang</span>
+                <span class="opt-price font-black text-amber-400 font-mono">20k</span>
+              </button>
             </div>
-            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
+          </div>
+
+          <!-- Deep Clean Reguler Shoes -->
+          <div class="p-3.5 bg-[#d8c29a] rounded-2xl border border-amber-950/25 shadow-sm space-y-2.5">
+            <div class="flex flex-wrap items-start justify-between gap-2">
               <div>
-                <p class="font-bold text-gray-900">Deep Clean <span class="text-[10px] font-normal text-gray-700">(2 - 3 Hari)</span></p>
-                <p class="text-[10px] text-gray-700">Type: For General / Sneakers / Running (Insole, outsole, upper, lacing)</p>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="font-black text-sm text-gray-900">Deep Clean Reguler Shoes</span>
+                  <span class="text-[10px] font-mono font-bold bg-amber-950/15 text-amber-950 px-2 py-0.5 rounded-md">1 - 3 days</span>
+                </div>
+                <p class="text-[11px] text-gray-800 mt-1">Pencucian mendalam menyeluruh untuk bahan umum seperti canvas, mesh & running shoes.</p>
               </div>
-              <span class="text-amber-950 font-black text-xs">Rp 25.000</span>
             </div>
-            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
-              <div>
-                <p class="font-bold text-gray-900">Hard Clean <span class="text-[10px] font-normal text-gray-700">(2 - 3 Hari)</span></p>
-                <p class="text-[10px] text-gray-700">Type: For Heavy Duty / Muddy Shoes (Kotor berat / bau)</p>
-              </div>
-              <span class="text-amber-950 font-black text-xs">Rp 30.000</span>
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" data-theme="light" onclick="selectEstimator(this, 'Deep Clean Reguler Shoes (Ringan)', 25000)" class="service-option-btn flex flex-col sm:flex-row sm:items-center justify-between px-3 py-2 rounded-xl bg-[#e6d7bc] hover:bg-amber-950/15 border border-amber-950/20 text-gray-900 transition cursor-pointer">
+                <span class="opt-label font-bold text-[11px]">Ringan</span>
+                <span class="opt-price font-black font-mono text-xs text-amber-950">25k</span>
+              </button>
+              <button type="button" data-theme="light" onclick="selectEstimator(this, 'Deep Clean Reguler Shoes (Sedang)', 30000)" class="service-option-btn flex flex-col sm:flex-row sm:items-center justify-between px-3 py-2 rounded-xl bg-[#e6d7bc] hover:bg-amber-950/15 border border-amber-950/20 text-gray-900 transition cursor-pointer">
+                <span class="opt-label font-bold text-[11px]">Sedang</span>
+                <span class="opt-price font-black font-mono text-xs text-amber-950">30k</span>
+              </button>
+              <button type="button" data-theme="light" onclick="selectEstimator(this, 'Deep Clean Reguler Shoes (Berat)', 35000)" class="service-option-btn flex flex-col sm:flex-row sm:items-center justify-between px-3 py-2 rounded-xl bg-[#e6d7bc] hover:bg-amber-950/15 border border-amber-950/20 text-gray-900 transition cursor-pointer">
+                <span class="opt-label font-bold text-[11px]">Berat</span>
+                <span class="opt-price font-black font-mono text-xs text-amber-950">35k</span>
+              </button>
             </div>
-            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
-              <div>
-                <p class="font-bold text-gray-900">Express Clean <span class="text-[10px] font-normal text-gray-700">(24 Jam)</span></p>
-                <p class="text-[10px] text-gray-700">Type: For Express / Urgent Needs (Deep clean kilat)</p>
+          </div>
+
+          <!-- Deep Clean White Shoes -->
+          <div class="p-3.5 bg-[#d8c29a] rounded-2xl border border-amber-950/25 shadow-sm space-y-2.5">
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-black text-sm text-gray-900">Deep Clean White Shoes</span>
+                <span class="text-[10px] font-mono font-bold bg-amber-950/15 text-amber-950 px-2 py-0.5 rounded-md">1 - 3 days</span>
               </div>
-              <span class="text-amber-950 font-black text-xs">Rp 40.000</span>
+              <p class="text-[11px] text-gray-800 mt-1">Treatment khusus sepatu putih untuk mengangkat noda membandel serta membantu mengembalikan kecerahannya.</p>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" data-theme="light" onclick="selectEstimator(this, 'Deep Clean White Shoes (Ringan)', 25000)" class="service-option-btn flex flex-col sm:flex-row sm:items-center justify-between px-3 py-2 rounded-xl bg-[#e6d7bc] hover:bg-amber-950/15 border border-amber-950/20 text-gray-900 transition cursor-pointer">
+                <span class="opt-label font-bold text-[11px]">Ringan</span>
+                <span class="opt-price font-black font-mono text-xs text-amber-950">25k</span>
+              </button>
+              <button type="button" data-theme="light" onclick="selectEstimator(this, 'Deep Clean White Shoes (Sedang)', 30000)" class="service-option-btn flex flex-col sm:flex-row sm:items-center justify-between px-3 py-2 rounded-xl bg-[#e6d7bc] hover:bg-amber-950/15 border border-amber-950/20 text-gray-900 transition cursor-pointer">
+                <span class="opt-label font-bold text-[11px]">Sedang</span>
+                <span class="opt-price font-black font-mono text-xs text-amber-950">30k</span>
+              </button>
+              <button type="button" data-theme="light" onclick="selectEstimator(this, 'Deep Clean White Shoes (Berat)', 35000)" class="service-option-btn flex flex-col sm:flex-row sm:items-center justify-between px-3 py-2 rounded-xl bg-[#e6d7bc] hover:bg-amber-950/15 border border-amber-950/20 text-gray-900 transition cursor-pointer">
+                <span class="opt-label font-bold text-[11px]">Berat</span>
+                <span class="opt-price font-black font-mono text-xs text-amber-950">35k</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Deep Clean Leather Shoes -->
+          <div class="p-3.5 bg-[#d8c29a] rounded-2xl border border-amber-950/25 shadow-sm space-y-2.5">
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-black text-sm text-gray-900">Deep Clean Leather Shoes</span>
+                <span class="text-[10px] font-mono font-bold bg-amber-950/15 text-amber-950 px-2 py-0.5 rounded-md">1 - 3 days</span>
+              </div>
+              <p class="text-[11px] text-gray-800 mt-1">Perawatan khusus dan pembersihan mendalam untuk material kulit (leather) menggunakan formula yang aman agar tidak merusak tekstur bahan.</p>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" data-theme="light" onclick="selectEstimator(this, 'Deep Clean Leather Shoes (Ringan)', 25000)" class="service-option-btn flex flex-col sm:flex-row sm:items-center justify-between px-3 py-2 rounded-xl bg-[#e6d7bc] hover:bg-amber-950/15 border border-amber-950/20 text-gray-900 transition cursor-pointer">
+                <span class="opt-label font-bold text-[11px]">Ringan</span>
+                <span class="opt-price font-black font-mono text-xs text-amber-950">25k</span>
+              </button>
+              <button type="button" data-theme="light" onclick="selectEstimator(this, 'Deep Clean Leather Shoes (Sedang)', 30000)" class="service-option-btn flex flex-col sm:flex-row sm:items-center justify-between px-3 py-2 rounded-xl bg-[#e6d7bc] hover:bg-amber-950/15 border border-amber-950/20 text-gray-900 transition cursor-pointer">
+                <span class="opt-label font-bold text-[11px]">Sedang</span>
+                <span class="opt-price font-black font-mono text-xs text-amber-950">30k</span>
+              </button>
+              <button type="button" data-theme="light" onclick="selectEstimator(this, 'Deep Clean Leather Shoes (Berat)', 35000)" class="service-option-btn flex flex-col sm:flex-row sm:items-center justify-between px-3 py-2 rounded-xl bg-[#e6d7bc] hover:bg-amber-950/15 border border-amber-950/20 text-gray-900 transition cursor-pointer">
+                <span class="opt-label font-bold text-[11px]">Berat</span>
+                <span class="opt-price font-black font-mono text-xs text-amber-950">35k</span>
+              </button>
             </div>
           </div>
         </div>
 
-        <!-- Kategori 2: Specialty Care -->
-        <div>
-          <p class="font-extrabold text-amber-950 uppercase tracking-wider mb-2 border-b border-amber-950/20 pb-1">Specialty Care (Leather, Suede & Nubuck)</p>
-          <div class="space-y-2">
-            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
-              <div>
-                <p class="font-bold text-gray-900">Leather Care & Conditioning <span class="text-[10px] font-normal text-gray-700">(2 - 3 Hari)</span></p>
-                <p class="text-[10px] text-gray-700">Type: Genuine / Synthetic Leather (Anti-crack lotion)</p>
+        <!-- KATEGORI 2: SPECIALTY CARE (TREATMENT) -->
+        <div id="section-specialty" class="price-section space-y-2.5">
+          <div class="flex items-center justify-between border-b border-amber-950/20 pb-1">
+            <p class="font-black text-amber-950 uppercase tracking-wider">🧪 Specialty Care (Treatment)</p>
+            <span class="text-[10px] font-bold text-gray-700">Midsole Oxidation</span>
+          </div>
+
+          <div class="p-3.5 bg-[#d8c29a] rounded-2xl border border-amber-950/25 shadow-sm space-y-2.5">
+            <div>
+              <div class="flex items-center justify-between gap-2 flex-wrap">
+                <span class="font-black text-sm text-gray-900">Unyellowing</span>
+                <span class="text-[10px] font-black bg-amber-950 text-amber-300 px-2.5 py-0.5 rounded-full">Midsole Care</span>
               </div>
-              <span class="text-amber-950 font-black text-xs">Rp 25k - 30k</span>
+              <p class="text-[11px] text-gray-800 mt-1">Treatment khusus untuk mengatasi dan mengembalikan warna kuning (oksidasi) pada midsole sepatu akibat usia atau penyimpanan.</p>
             </div>
-            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
-              <div>
-                <p class="font-bold text-gray-900">Suede & Nubuck Treatment <span class="text-[10px] font-normal text-gray-700">(2 - 3 Hari)</span></p>
-                <p class="text-[10px] text-gray-700">Type: Suede / Nubuck Shoes (Suede eraser & gentle care)</p>
-              </div>
-              <span class="text-amber-950 font-black text-xs">Rp 25k - 30k</span>
+
+            <div class="space-y-2">
+              <button type="button" data-theme="light" onclick="selectEstimator(this, 'Unyellowing (Ringan)', 35000)" class="service-option-btn w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl bg-[#e6d7bc] hover:bg-amber-950/15 border border-amber-950/20 text-gray-900 transition text-left cursor-pointer">
+                <div>
+                  <span class="opt-label font-black text-xs">Ringan</span>
+                  <span class="opt-sub text-[10px] opacity-80 block sm:inline sm:ml-1.5">(kekuningan tipis pada bagian pinggir/permukaan midsole)</span>
+                </div>
+                <span class="opt-price font-black font-mono text-xs text-amber-950 shrink-0">35k</span>
+              </button>
+
+              <button type="button" data-theme="light" onclick="selectEstimator(this, 'Unyellowing (Sedang)', 40000)" class="service-option-btn w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl bg-[#e6d7bc] hover:bg-amber-950/15 border border-amber-950/20 text-gray-900 transition text-left cursor-pointer">
+                <div>
+                  <span class="opt-label font-black text-xs">Sedang</span>
+                  <span class="opt-sub text-[10px] opacity-80 block sm:inline sm:ml-1.5">(kekuningan merata pada seluruh bagian midsole)</span>
+                </div>
+                <span class="opt-price font-black font-mono text-xs text-amber-950 shrink-0">40k</span>
+              </button>
+
+              <button type="button" data-theme="light" onclick="selectEstimator(this, 'Unyellowing (Berat)', 45000)" class="service-option-btn w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl bg-[#e6d7bc] hover:bg-amber-950/15 border border-amber-950/20 text-gray-900 transition text-left cursor-pointer">
+                <div>
+                  <span class="opt-label font-black text-xs">Berat</span>
+                  <span class="opt-sub text-[10px] opacity-80 block sm:inline sm:ml-1.5">(kekuningan pekat/coklat yang sudah menahun)</span>
+                </div>
+                <span class="opt-price font-black font-mono text-xs text-amber-950 shrink-0">45k</span>
+              </button>
             </div>
           </div>
         </div>
 
-        <!-- Kategori 3: Shoes Treatment -->
-        <div>
-          <p class="font-extrabold text-amber-950 uppercase tracking-wider mb-2 border-b border-amber-950/20 pb-1">Shoes Treatment</p>
-          <div class="space-y-2">
-            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
-              <div>
-                <p class="font-bold text-gray-900">Unyellowing <span class="text-[10px] font-normal text-gray-700">(2 - 3 Hari)</span></p>
-                <p class="text-[10px] text-gray-700">Type: For Yellowed Midsole (Menghilangkan kuning oksidasi)</p>
+        <!-- KATEGORI 3: ADD-ON SERVICE -->
+        <div id="section-addon" class="price-section space-y-2.5">
+          <div class="flex items-center justify-between border-b border-amber-950/20 pb-1">
+            <p class="font-black text-amber-950 uppercase tracking-wider">🚀 Add-On Service</p>
+            <span class="text-[10px] font-bold text-gray-700">Priority Boost</span>
+          </div>
+
+          <div class="p-3.5 bg-[#d8c29a] rounded-2xl border border-amber-950/25 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="font-black text-sm text-gray-900">One Day Service</span>
+                <span class="text-[10px] font-mono font-bold bg-emerald-800 text-white px-2 py-0.5 rounded-md">Selesai 1 Hari</span>
               </div>
-              <span class="text-amber-950 font-black text-xs">Rp 30.000</span>
+              <p class="text-[11px] text-gray-800">Layanan prioritas agar sepatu selesai dalam waktu 1 hari (kecuali sepatu putih dan unyellowing).</p>
+              <p class="text-[11px] font-black text-amber-950">Biaya + 15k dari harga jenis layanan yang dipilih</p>
             </div>
-            <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 flex justify-between items-center shadow-sm">
-              <div>
-                <p class="font-bold text-gray-900">Unyellowing + Deep Clean <span class="text-[10px] font-normal text-gray-700">(3 - 4 Hari)</span></p>
-                <p class="text-[10px] text-gray-700">Type: Complete Midsole & Upper Restoration</p>
-              </div>
-              <span class="text-amber-950 font-black text-xs">Rp 50.000</span>
-            </div>
+            <label id="oneDayAddonLabel" class="inline-flex items-center gap-2 bg-[#e6d7bc] px-3.5 py-2.5 rounded-xl border border-amber-950/30 font-extrabold text-xs text-gray-900 cursor-pointer shrink-0 select-none transition">
+              <input type="checkbox" id="oneDayAddonCheckbox" onchange="updateDraftPreview()" class="w-4 h-4 accent-amber-500 rounded cursor-pointer">
+              <span>+15k One Day</span>
+            </label>
           </div>
         </div>
 
-      </div>
+        <!-- Builder Tambah Sepatu & Keranjang Booking -->
+        <div class="p-4 bg-[#241f1c] text-white rounded-2xl border border-amber-500/40 shadow-xl space-y-3.5">
+          <div class="flex items-center justify-between border-b border-white/10 pb-2">
+            <span class="font-black text-xs text-amber-400 uppercase tracking-wider">👟 Daftar Sepatu Booking</span>
+            <span id="totalPairsBadge" class="text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full">0 Pasang</span>
+          </div>
 
-      <div class="border-t border-amber-950/20 pt-3 text-center">
-        <a href="https://wa.me/6287811299845?text=Halo%20Kak,%20saya%20mau%20booking%20layanan%20perawatan%20sepatu%20di%20HiveSpot." target="_blank" class="block w-full py-2.5 rounded-xl bg-[#241f1c] text-amber-400 font-bold text-xs hover:bg-black transition border border-amber-500/40">
-          Booking & Konsultasi via WhatsApp
-        </a>
+          <!-- Input Detail Sepatu yang Sedang Dirakit -->
+          <div class="bg-[#1a1614] p-3 rounded-xl border border-white/10 space-y-2.5">
+            <div class="flex items-center justify-between gap-2 text-[11px]">
+              <span class="text-gray-400">Layanan Aktif:</span>
+              <span id="draftServiceText" class="font-bold text-amber-400 text-right">Belum pilih paket di atas</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-2 items-center">
+              <div class="sm:col-span-7">
+                <label class="block text-[10px] text-gray-400 mb-1">Nama / Model Sepatu (Opsional)</label>
+                <input type="text" id="shoeModelInput" placeholder="Contoh: Jordan 1 / Vans Old Skool"
+                       class="w-full bg-[#241f1c] border border-amber-500/30 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-amber-400">
+              </div>
+
+              <div class="sm:col-span-5">
+                <label class="block text-[10px] text-gray-400 mb-1">Jumlah Pasang</label>
+                <div class="flex items-center justify-between bg-[#241f1c] border border-amber-500/30 rounded-lg px-2 py-1.5">
+                  <button type="button" onclick="adjustShoeQty(-1)" class="w-6 h-6 rounded-md bg-white/10 hover:bg-amber-500 hover:text-black font-black text-xs transition cursor-pointer">-</button>
+                  <span id="shoeQtyDisplay" class="font-mono font-black text-xs text-amber-400">1</span>
+                  <button type="button" onclick="adjustShoeQty(1)" class="w-6 h-6 rounded-md bg-white/10 hover:bg-amber-500 hover:text-black font-black text-xs transition cursor-pointer">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-1 border-t border-white/10">
+              <span class="text-[11px] text-gray-300">Subtotal Item Ini: <b id="draftSubtotalText" class="text-amber-400 font-mono">Rp 0</b></span>
+              <button type="button" onclick="addShoeToBookingList()" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black text-[11px] transition cursor-pointer shadow">
+                + Tambah ke Daftar
+              </button>
+            </div>
+          </div>
+
+          <!-- List Sepatu yang Sudah Masuk -->
+          <div id="bookingItemsContainer" class="space-y-2 max-h-44 overflow-y-auto pr-1">
+            <p id="emptyBookingHint" class="text-[11px] text-gray-400 text-center py-2 italic">Belum ada sepatu ditambahkan. Pilih layanan di atas lalu klik "+ Tambah ke Daftar".</p>
+          </div>
+
+          <!-- Grand Total & Tombol WA -->
+          <div class="flex items-center justify-between border-t border-white/10 pt-2.5">
+            <span class="text-xs font-bold text-gray-300">Estimasi Total Keseluruhan:</span>
+            <span id="estTotalPrice" class="text-base font-black text-amber-400 font-mono">Rp 0</span>
+          </div>
+
+          <button type="button" onclick="bookingSelectedServiceWA()" class="block w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-black text-xs text-center hover:from-amber-400 hover:to-amber-500 transition shadow-md cursor-pointer">
+            Kirim Order Booking via WhatsApp
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
@@ -522,8 +677,14 @@
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycby2omN0gDy2YyY9cIlLzWLeCIki0OmQpAaIZC6HyhJf8FGTCHL7Jh-BU4ST7ryXQ1N7/exec";
 
+    let estBasePrice = 0;
+    let estServiceName = "";
+    let draftShoeQty = 1;
+    let bookingCart = [];
+
     document.addEventListener("DOMContentLoaded", function() {
       checkStoreStatus();
+      renderBookingList();
 
       const urlParams = new URLSearchParams(window.location.search);
       const ticketId = urlParams.get('ticket');
@@ -570,11 +731,259 @@
       }
     }
 
-    function openAllServicesModal() {
+    function openAllServicesModal(initialTab = 'all') {
+      filterPriceTab(initialTab);
       document.getElementById('allServicesModal').classList.remove('hidden');
     }
     function closeAllServicesModal() {
       document.getElementById('allServicesModal').classList.add('hidden');
+    }
+
+    function filterPriceTab(tab) {
+      const tabs = document.querySelectorAll('.price-tab');
+      tabs.forEach(btn => {
+        btn.className = "price-tab py-2 px-2 rounded-lg text-gray-300 hover:text-amber-400 transition cursor-pointer";
+      });
+      const activeBtn = document.getElementById(`tab-${tab}`);
+      if (activeBtn) {
+        activeBtn.className = "price-tab py-2 px-2 rounded-lg bg-amber-500 text-black font-black transition cursor-pointer";
+      }
+
+      const sections = {
+        cleaning: document.getElementById('section-cleaning'),
+        specialty: document.getElementById('section-specialty'),
+        addon: document.getElementById('section-addon')
+      };
+
+      Object.entries(sections).forEach(([key, el]) => {
+        if (!el) return;
+        if (tab === 'all' || tab === key) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      });
+    }
+
+    function resetOptionButtonStyles() {
+      document.querySelectorAll('.service-option-btn').forEach(btn => {
+        const theme = btn.getAttribute('data-theme');
+        const labelEl = btn.querySelector('.opt-label');
+        const priceEl = btn.querySelector('.opt-price');
+
+        if (labelEl) {
+          labelEl.innerText = labelEl.innerText.replace(/^✓\s*/, '');
+        }
+
+        if (theme === 'dark') {
+          btn.classList.remove('bg-gradient-to-r', 'from-amber-500', 'to-amber-600', 'border-amber-300', 'ring-2', 'ring-amber-400', 'shadow-lg', 'scale-[1.02]');
+          btn.classList.add('bg-[#1a1614]', 'border-white/10');
+          if (labelEl) {
+            labelEl.classList.remove('text-black', 'font-black');
+            labelEl.classList.add('text-gray-300');
+          }
+          if (priceEl) {
+            priceEl.classList.remove('text-black');
+            priceEl.classList.add('text-amber-400');
+          }
+        } else {
+          btn.classList.remove('bg-[#241f1c]', 'text-white', 'border-amber-500', 'ring-2', 'ring-amber-600', 'shadow-lg', 'scale-[1.02]');
+          btn.classList.add('bg-[#e6d7bc]', 'border-amber-950/20', 'text-gray-900');
+          if (priceEl) {
+            priceEl.classList.remove('text-amber-400');
+            priceEl.classList.add('text-amber-950');
+          }
+        }
+      });
+    }
+
+    function selectEstimator(btnEl, serviceName, price) {
+      resetOptionButtonStyles();
+
+      if (btnEl) {
+        const theme = btnEl.getAttribute('data-theme');
+        const labelEl = btnEl.querySelector('.opt-label');
+        const priceEl = btnEl.querySelector('.opt-price');
+
+        if (labelEl && !labelEl.innerText.startsWith('✓')) {
+          labelEl.innerText = `✓ ${labelEl.innerText}`;
+        }
+
+        if (theme === 'dark') {
+          btnEl.classList.remove('bg-[#1a1614]', 'border-white/10');
+          btnEl.classList.add('bg-gradient-to-r', 'from-amber-500', 'to-amber-600', 'border-amber-300', 'ring-2', 'ring-amber-400', 'shadow-lg', 'scale-[1.02]');
+          if (labelEl) {
+            labelEl.classList.remove('text-gray-300');
+            labelEl.classList.add('text-black', 'font-black');
+          }
+          if (priceEl) {
+            priceEl.classList.remove('text-amber-400');
+            priceEl.classList.add('text-black');
+          }
+        } else {
+          btnEl.classList.remove('bg-[#e6d7bc]', 'border-amber-950/20', 'text-gray-900');
+          btnEl.classList.add('bg-[#241f1c]', 'text-white', 'border-amber-500', 'ring-2', 'ring-amber-600', 'shadow-lg', 'scale-[1.02]');
+          if (priceEl) {
+            priceEl.classList.remove('text-amber-950');
+            priceEl.classList.add('text-amber-400');
+          }
+        }
+      }
+
+      estServiceName = serviceName;
+      estBasePrice = price;
+      updateDraftPreview();
+    }
+
+    function adjustShoeQty(delta) {
+      draftShoeQty = Math.max(1, draftShoeQty + delta);
+      document.getElementById('shoeQtyDisplay').innerText = draftShoeQty;
+      updateDraftPreview();
+    }
+
+    function updateDraftPreview() {
+      const checkbox = document.getElementById('oneDayAddonCheckbox');
+      const addonLabel = document.getElementById('oneDayAddonLabel');
+      const isOneDay = checkbox ? checkbox.checked : false;
+      const addonFee = isOneDay ? 15000 : 0;
+
+      if (addonLabel) {
+        if (isOneDay) {
+          addonLabel.classList.remove('bg-[#e6d7bc]', 'text-gray-900', 'border-amber-950/30');
+          addonLabel.classList.add('bg-[#241f1c]', 'text-amber-400', 'border-amber-500', 'ring-2', 'ring-amber-600');
+        } else {
+          addonLabel.classList.remove('bg-[#241f1c]', 'text-amber-400', 'border-amber-500', 'ring-2', 'ring-amber-600');
+          addonLabel.classList.add('bg-[#e6d7bc]', 'text-gray-900', 'border-amber-950/30');
+        }
+      }
+
+      const draftServiceEl = document.getElementById('draftServiceText');
+      const draftSubtotalEl = document.getElementById('draftSubtotalText');
+
+      if (!estServiceName || estBasePrice <= 0) {
+        draftServiceEl.innerText = isOneDay ? "Pilih layanan (+ One Day Service)" : "Belum pilih paket di atas";
+        draftSubtotalEl.innerText = "Rp 0";
+        return;
+      }
+
+      const unitPrice = estBasePrice + addonFee;
+      const subtotal = unitPrice * draftShoeQty;
+      draftServiceEl.innerText = `${estServiceName}${isOneDay ? ' + One Day Service' : ''}`;
+      draftSubtotalEl.innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
+    }
+
+    function addShoeToBookingList() {
+      if (!estServiceName || estBasePrice <= 0) {
+        alert("Pilih jenis layanan & levelnya dulu ya Kak sebelum ditambahkan ke daftar!");
+        return;
+      }
+
+      const modelInput = document.getElementById('shoeModelInput');
+      const rawModel = modelInput ? modelInput.value.trim() : '';
+      const checkbox = document.getElementById('oneDayAddonCheckbox');
+      const isOneDay = checkbox ? checkbox.checked : false;
+      const addonFee = isOneDay ? 15000 : 0;
+      const unitPrice = estBasePrice + addonFee;
+
+      bookingCart.push({
+        id: Date.now() + Math.random(),
+        model: rawModel || `Sepatu #${bookingCart.length + 1}`,
+        service: estServiceName,
+        oneDay: isOneDay,
+        qty: draftShoeQty,
+        unitPrice: unitPrice,
+        subtotal: unitPrice * draftShoeQty
+      });
+
+      if (modelInput) modelInput.value = '';
+      draftShoeQty = 1;
+      document.getElementById('shoeQtyDisplay').innerText = '1';
+      updateDraftPreview();
+      renderBookingList();
+    }
+
+    function removeBookingItem(itemId) {
+      bookingCart = bookingCart.filter(item => item.id !== itemId);
+      renderBookingList();
+    }
+
+    function renderBookingList() {
+      const container = document.getElementById('bookingItemsContainer');
+      const badgeEl = document.getElementById('totalPairsBadge');
+      const totalEl = document.getElementById('estTotalPrice');
+
+      const totalPairs = bookingCart.reduce((sum, item) => sum + item.qty, 0);
+      const grandTotal = bookingCart.reduce((sum, item) => sum + item.subtotal, 0);
+
+      badgeEl.innerText = `${totalPairs} Pasang`;
+      totalEl.innerText = `Rp ${grandTotal.toLocaleString('id-ID')}`;
+
+      if (bookingCart.length === 0) {
+        container.innerHTML = `<p id="emptyBookingHint" class="text-[11px] text-gray-400 text-center py-2 italic">Belum ada sepatu ditambahkan. Pilih layanan di atas lalu klik "+ Tambah ke Daftar".</p>`;
+        return;
+      }
+
+      container.innerHTML = bookingCart.map((item, idx) => `
+        <div class="flex items-center justify-between gap-2 bg-[#1a1614] border border-amber-500/25 rounded-xl px-3 py-2 text-xs">
+          <div class="min-w-0">
+            <p class="font-bold text-white truncate">${idx + 1}. ${item.model} <span class="text-amber-400 font-mono">(${item.qty}x)</span></p>
+            <p class="text-[10px] text-gray-300 truncate">${item.service}${item.oneDay ? ' + One Day Service' : ''}</p>
+          </div>
+          <div class="flex items-center gap-2.5 shrink-0">
+            <span class="font-mono font-black text-amber-400">Rp ${item.subtotal.toLocaleString('id-ID')}</span>
+            <button type="button" onclick="removeBookingItem(${item.id})" class="text-red-400 hover:text-red-300 font-bold text-sm leading-none cursor-pointer" title="Hapus">&times;</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function bookingSelectedServiceWA() {
+      let itemsToSend = [...bookingCart];
+
+      // Jika user sudah pilih layanan tapi belum klik "+ Tambah ke Daftar", masukkan otomatis
+      if (itemsToSend.length === 0 && estServiceName && estBasePrice > 0) {
+        const modelInput = document.getElementById('shoeModelInput');
+        const rawModel = modelInput ? modelInput.value.trim() : '';
+        const checkbox = document.getElementById('oneDayAddonCheckbox');
+        const isOneDay = checkbox ? checkbox.checked : false;
+        const unitPrice = estBasePrice + (isOneDay ? 15000 : 0);
+
+        itemsToSend.push({
+          model: rawModel || 'Sepatu #1',
+          service: estServiceName,
+          oneDay: isOneDay,
+          qty: draftShoeQty,
+          unitPrice: unitPrice,
+          subtotal: unitPrice * draftShoeQty
+        });
+      }
+
+      if (itemsToSend.length === 0) {
+        alert("Pilih jenis layanan terlebih dahulu lalu tambahkan sepatu ke daftar booking ya Kak!");
+        return;
+      }
+
+      const totalPairs = itemsToSend.reduce((sum, item) => sum + item.qty, 0);
+      const grandTotal = itemsToSend.reduce((sum, item) => sum + item.subtotal, 0);
+
+      const detailLines = itemsToSend.map((item, idx) =>
+        `${idx + 1}. *${item.model}* (${item.qty} pasang)\n` +
+        `   - Layanan: ${item.service}\n` +
+        `   - Add-On: ${item.oneDay ? 'One Day Service (+15k)' : '-'}\n` +
+        `   - Subtotal: *Rp ${item.subtotal.toLocaleString('id-ID')}*`
+      ).join('\n\n');
+
+      const narasi =
+        `Halo Kak HiveSpot!\n` +
+        `Saya mau order booking perawatan sepatu dengan rincian berikut:\n\n` +
+        `${detailLines}\n\n` +
+        `-------------------------\n` +
+        `Total Sepatu: *${totalPairs} Pasang*\n` +
+        `Estimasi Total: *Rp ${grandTotal.toLocaleString('id-ID')}*\n\n` +
+        `Mohon info jadwal drop-off / pickup-nya ya Kak. Terima kasih!`;
+
+      const waUrl = `https://wa.me/6287811299845?text=${encodeURIComponent(narasi)}`;
+      window.open(waUrl, '_blank');
     }
 
     function openPromoModal() {
@@ -594,12 +1003,12 @@
     // Data Showcase
     const showcaseData = [
       {
-        title: "Fast Clean Daily Treatment",
-        badge: "FAST CLEAN",
+        title: "Flash Zap Express Treatment",
+        badge: "FLASH ZAP",
         image: "images/fast-clean.jpg"
       },
       {
-        title: "Deep Clean Detailed Treatment",
+        title: "Deep Clean Reguler, White & Leather",
         badge: "DEEP CLEAN",
         image: "images/deep-clean.jpg"
       },
