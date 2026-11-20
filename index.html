@@ -39,6 +39,20 @@
       transform: translateY(-4px);
       box-shadow: 0 20px 30px -10px rgba(40, 30, 15, 0.35);
     }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-float-slow {
+      animation: floatSlow 3s ease-in-out infinite;
+    }
+    .animate-step-enter {
+      animation: fadeSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
   </style>
 </head>
 <body class="brushed-metal text-gray-900 font-sans antialiased selection:bg-amber-800 selection:text-white min-h-screen flex flex-col justify-between relative overflow-x-hidden">
@@ -57,8 +71,9 @@
       </div>
       
       <!-- MENU TENGAH (Desktop) -->
-      <nav class="hidden md:flex items-center gap-7 text-sm font-bold text-gray-300 absolute left-1/2 -translate-x-1/2">
+      <nav class="hidden md:flex items-center gap-6 text-sm font-bold text-gray-300 absolute left-1/2 -translate-x-1/2">
         <button onclick="openAllServicesModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm">Layanan & Harga</button>
+        <button onclick="openHowToOrderModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm flex items-center gap-1">Cara Order</button>
         <button onclick="openPromoModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm text-amber-400 flex items-center gap-1">Promo & Event</button>
         <button onclick="openShowcaseModal(0)" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm">Portofolio</button>
         <button onclick="openLocationModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm">Lokasi</button>
@@ -84,6 +99,9 @@
     <div id="mobileMenu" class="hidden md:hidden bg-[#241f1c] border-b border-amber-500/30 px-6 py-4 space-y-3 backdrop-blur-md shadow-xl text-white">
       <button onclick="toggleMobileMenu(); openAllServicesModal();" class="block w-full text-left py-2 text-sm font-bold text-gray-300 hover:text-amber-400 transition border-b border-white/10">
         🛠️ Layanan & Harga
+      </button>
+      <button onclick="toggleMobileMenu(); openHowToOrderModal();" class="block w-full text-left py-2 text-sm font-bold text-gray-300 hover:text-amber-400 transition border-b border-white/10">
+        📲 Panduan Cara Order Online
       </button>
       <button onclick="toggleMobileMenu(); openPromoModal();" class="block w-full text-left py-2 text-sm font-bold text-amber-400 hover:text-amber-300 transition border-b border-white/10">
         🔥 Promo & Event Minggu Ini
@@ -242,7 +260,12 @@
       </div>
 
       <div class="bg-[#e6d7bc]/95 backdrop-blur-md p-5 rounded-2xl border border-amber-950/25 space-y-3 shadow-xl luxury-glow">
-        <h3 class="font-bold text-xs text-amber-950 uppercase tracking-wider border-b border-amber-950/20 pb-2.5">Informasi Penting</h3>
+        <div class="flex items-center justify-between border-b border-amber-950/20 pb-2.5">
+          <h3 class="font-bold text-xs text-amber-950 uppercase tracking-wider">Informasi Penting</h3>
+          <button onclick="openHowToOrderModal()" class="text-[10px] font-black bg-[#241f1c] text-amber-400 px-2.5 py-1 rounded-lg hover:bg-black transition cursor-pointer border border-amber-500/30">
+            📲 Cara Order
+          </button>
+        </div>
         <div class="space-y-2.5 text-xs text-gray-800">
           <div class="bg-[#d8c29a]/60 p-2.5 rounded-xl border border-amber-950/20 shadow-sm">
             <p class="font-bold text-gray-900 flex items-center justify-between">
@@ -282,6 +305,76 @@
     </div>
 
   </main>
+
+  <!-- ==================== POPUP MODAL CARA ORDER / BOOKING ONLINE (ANIMASI INTERAKTIF) ==================== -->
+  <div id="howToOrderModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
+    <div class="bg-[#e6d7bc] border border-amber-950/40 rounded-2xl max-w-xl w-full p-5 sm:p-6 shadow-2xl space-y-4 relative max-h-[92vh] overflow-y-auto">
+      <button onclick="closeHowToOrderModal()" class="absolute top-4 right-4 text-gray-800 hover:text-black text-2xl font-bold leading-none cursor-pointer z-10">&times;</button>
+
+      <!-- Header -->
+      <div class="pr-6">
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-black bg-[#241f1c] text-amber-400 px-2.5 py-0.5 rounded-full uppercase tracking-wider">Panduan Booking Online</span>
+          <span id="orderAutoBadge" class="text-[10px] font-mono font-bold text-emerald-800 bg-emerald-500/20 px-2 py-0.5 rounded-full">● Auto-Play</span>
+        </div>
+        <h3 class="text-xl sm:text-2xl font-black text-gray-900 mt-1 tracking-tight">Cara Order di Hive<span class="text-amber-900">Spot</span></h3>
+        <p class="text-[11px] text-gray-700 font-semibold">5 langkah praktis dari pilih layanan sampai sepatu bersih & bisa di-track online.</p>
+      </div>
+
+      <!-- Progress Bars ala Story -->
+      <div class="grid grid-cols-5 gap-1.5" id="orderProgressBars">
+        <button type="button" onclick="goToOrderStep(0)" class="h-1.5 rounded-full bg-amber-950/20 overflow-hidden cursor-pointer p-0 border-0">
+          <div id="orderProg0" class="h-full bg-[#241f1c] w-0 transition-all duration-100"></div>
+        </button>
+        <button type="button" onclick="goToOrderStep(1)" class="h-1.5 rounded-full bg-amber-950/20 overflow-hidden cursor-pointer p-0 border-0">
+          <div id="orderProg1" class="h-full bg-[#241f1c] w-0 transition-all duration-100"></div>
+        </button>
+        <button type="button" onclick="goToOrderStep(2)" class="h-1.5 rounded-full bg-amber-950/20 overflow-hidden cursor-pointer p-0 border-0">
+          <div id="orderProg2" class="h-full bg-[#241f1c] w-0 transition-all duration-100"></div>
+        </button>
+        <button type="button" onclick="goToOrderStep(3)" class="h-1.5 rounded-full bg-amber-950/20 overflow-hidden cursor-pointer p-0 border-0">
+          <div id="orderProg3" class="h-full bg-[#241f1c] w-0 transition-all duration-100"></div>
+        </button>
+        <button type="button" onclick="goToOrderStep(4)" class="h-1.5 rounded-full bg-amber-950/20 overflow-hidden cursor-pointer p-0 border-0">
+          <div id="orderProg4" class="h-full bg-[#241f1c] w-0 transition-all duration-100"></div>
+        </button>
+      </div>
+
+      <!-- Stage Animasi Interaktif -->
+      <div class="bg-[#241f1c] text-white rounded-2xl border border-amber-500/40 p-4 sm:p-5 shadow-xl relative overflow-hidden min-h-[275px] flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+          <span id="orderStepBadge" class="text-[10px] font-mono font-black bg-amber-500 text-black px-2.5 py-0.5 rounded-md uppercase">LANGKAH 1 / 5</span>
+          <button type="button" onclick="toggleOrderAutoPlay()" id="btnToggleOrderPlay" class="text-[10px] font-bold text-amber-400 hover:text-amber-300 bg-white/5 px-2.5 py-1 rounded-lg border border-white/10 cursor-pointer">
+            ⏸ Jeda
+          </button>
+        </div>
+
+        <!-- Konten Dinamis per Step -->
+        <div id="orderStageContent" class="my-auto py-3"></div>
+
+        <!-- Navigasi Langkah -->
+        <div class="flex items-center justify-between pt-2.5 border-t border-white/10 text-xs">
+          <button type="button" onclick="prevOrderStep()" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-gray-200 font-bold transition cursor-pointer">
+            &larr; Sebelumnya
+          </button>
+          <div class="flex items-center gap-1.5" id="orderStepDots"></div>
+          <button type="button" onclick="nextOrderStep()" class="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black transition cursor-pointer">
+            Lanjut &rarr;
+          </button>
+        </div>
+      </div>
+
+      <!-- Tombol Aksi Langsung -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+        <button type="button" onclick="closeHowToOrderModal(); openAllServicesModal();" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-black text-xs hover:from-amber-400 hover:to-amber-500 transition shadow-md cursor-pointer">
+          🛠️ Mulai Pilih Layanan Sekarang
+        </button>
+        <a href="https://wa.me/6285645416616?text=Halo%20Kak%20HiveSpot,%20saya%20mau%20tanya-tanya%20atau%20langsung%20booking%20cuci%20sepatu%20nih." target="_blank" class="w-full py-3 rounded-xl bg-[#241f1c] text-amber-400 font-bold text-xs text-center hover:bg-black transition border border-amber-500/40 flex items-center justify-center gap-1.5">
+          <span>💬 Langsung Chat Admin WA</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- ==================== POPUP MODAL PROMO & EVENT ==================== -->
   <div id="promoModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md hidden p-4">
@@ -682,6 +775,143 @@
     let draftShoeQty = 1;
     let bookingCart = [];
 
+    // State Animasi Cara Order
+    const orderStepsData = [
+      {
+        badge: "LANGKAH 1 / 5",
+        icon: "🛠️",
+        title: "Buka Menu Layanan & Harga",
+        desc: "Klik 'Layanan & Harga' atau pilih kategori Cleaning Services, Specialty Care (Unyellowing), atau Add-On Service untuk membuka daftar harga.",
+        mockup: `
+          <div class="bg-[#1a1614] border border-amber-500/30 rounded-xl p-3 space-y-2 text-left">
+            <div class="flex items-center justify-between text-[10px] text-amber-400 font-bold">
+              <span>HiveSpot Price List</span>
+              <span class="bg-amber-500/20 px-2 py-0.5 rounded">hivespot.site</span>
+            </div>
+            <div class="grid grid-cols-3 gap-1.5 text-[10px]">
+              <div class="bg-[#241f1c] p-2 rounded-lg border border-amber-500 text-amber-300 font-bold">⚡ Cleaning<br><span class="text-gray-400 font-normal">15k - 35k</span></div>
+              <div class="bg-[#241f1c] p-2 rounded-lg border border-white/10 text-gray-300 font-bold">🧪 Unyellowing<br><span class="text-gray-400 font-normal">35k - 45k</span></div>
+              <div class="bg-[#241f1c] p-2 rounded-lg border border-white/10 text-gray-300 font-bold">🚀 Add-On<br><span class="text-gray-400 font-normal">+15k One Day</span></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        badge: "LANGKAH 2 / 5",
+        icon: "👟",
+        title: "Pilih Paket, Isi Nama Sepatu & Jumlah",
+        desc: "Klik level layanan (Ringan/Sedang/Berat), centang '+15k One Day' bila perlu, isi 'Nama / Model Sepatu (Opsional)' seperti Jordan 1 / Vans Old Skool, lalu atur Jumlah Pasang.",
+        mockup: `
+          <div class="bg-[#1a1614] border border-amber-500/30 rounded-xl p-3 space-y-2 text-left">
+            <div class="flex items-center justify-between text-[10px]">
+              <span class="text-gray-400">Layanan Aktif:</span>
+              <span class="text-amber-400 font-bold">Deep Clean Reguler (Sedang)</span>
+            </div>
+            <div class="grid grid-cols-12 gap-1.5 items-center text-[10px]">
+              <div class="col-span-7 bg-[#241f1c] border border-amber-500/30 rounded-lg px-2.5 py-1.5 text-gray-200 truncate">Jordan 1 / Vans Old Skool</div>
+              <div class="col-span-5 bg-[#241f1c] border border-amber-500/30 rounded-lg px-2 py-1.5 flex items-center justify-between font-mono font-bold text-amber-400">
+                <span>-</span><span>1</span><span>+</span>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        badge: "LANGKAH 3 / 5",
+        icon: "➕",
+        title: "Klik '+ Tambah ke Daftar' & Cek Total",
+        desc: "Tekan '+ Tambah ke Daftar' untuk memasukkan sepatu ke 'DAFTAR SEPATU BOOKING' (bisa tambah beberapa pasang sekaligus) lalu cek Estimasi Total Keseluruhan.",
+        mockup: `
+          <div class="bg-[#241f1c] border border-amber-500/40 rounded-xl p-3 space-y-2.5 text-left shadow-inner">
+            <div class="flex items-center justify-between border-b border-white/10 pb-1.5">
+              <span class="font-black text-[10px] text-amber-400 uppercase tracking-wider">👟 DAFTAR SEPATU BOOKING</span>
+              <span class="text-[9px] font-mono font-bold bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">1 Pasang</span>
+            </div>
+
+            <div class="bg-[#1a1614] p-2.5 rounded-lg border border-white/10 space-y-2">
+              <div class="flex items-center justify-between text-[10px]">
+                <span class="text-gray-400">Layanan Aktif:</span>
+                <span class="font-bold text-amber-400">Deep Clean Reguler (Sedang)</span>
+              </div>
+
+              <div class="grid grid-cols-12 gap-1.5 items-center text-[10px]">
+                <div class="col-span-7">
+                  <div class="text-[9px] text-gray-400 mb-0.5">Nama / Model Sepatu (Opsional)</div>
+                  <div class="bg-[#241f1c] border border-amber-500/40 rounded-md px-2 py-1 text-white font-semibold truncate">Vans Old Skool</div>
+                </div>
+                <div class="col-span-5">
+                  <div class="text-[9px] text-gray-400 mb-0.5">Jumlah Pasang</div>
+                  <div class="bg-[#241f1c] border border-amber-500/40 rounded-md px-1.5 py-1 flex items-center justify-between font-mono font-bold text-amber-400">
+                    <span class="px-1 bg-white/10 rounded text-gray-300">-</span>
+                    <span>1</span>
+                    <span class="px-1 bg-white/10 rounded text-gray-300">+</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between pt-1 border-t border-white/10 text-[10px]">
+                <span class="text-gray-300">Subtotal Item Ini: <b class="text-amber-400 font-mono">Rp 30.000</b></span>
+                <span class="px-2.5 py-1 rounded-md bg-amber-500 text-black font-black text-[9px] shadow">+ Tambah ke Daftar</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between bg-[#1a1614] border border-amber-500/25 rounded-lg px-2.5 py-1.5 text-[10px]">
+              <span class="font-bold text-white">1. Vans Old Skool <span class="text-amber-400 font-mono">(1x)</span></span>
+              <span class="font-mono font-black text-amber-400">Rp 30.000</span>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-white/10 pt-1.5 text-[10px]">
+              <span class="font-bold text-gray-300">Estimasi Total Keseluruhan:</span>
+              <span class="text-xs font-black text-amber-400 font-mono">Rp 30.000</span>
+            </div>
+
+            <div class="w-full py-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 text-black font-black text-[10px] text-center shadow">
+              Kirim Order Booking via WhatsApp
+            </div>
+          </div>
+        `
+      },
+      {
+        badge: "LANGKAH 4 / 5",
+        icon: "📲",
+        title: "Kirim Order Booking via WhatsApp",
+        desc: "Klik 'Kirim Order Booking via WhatsApp' agar rincian sepatu, layanan, dan estimasi total terkirim ke admin, lalu atur jadwal drop-off atau free pickup Tembalang & Undip.",
+        mockup: `
+          <div class="bg-[#1a1614] border border-emerald-500/40 rounded-xl p-3 space-y-1.5 text-left">
+            <div class="flex items-center justify-between text-[10px] font-bold">
+              <span class="text-emerald-400">● WhatsApp HiveSpot</span>
+              <span class="text-amber-300">Free Pickup Tembalang</span>
+            </div>
+            <p class="text-[10px] text-gray-300 leading-relaxed bg-[#241f1c] p-2 rounded-lg border border-white/10 font-mono">
+              "Halo Kak HiveSpot! Saya mau order booking:<br>
+              1. *Vans Old Skool* (1 pasang) - Deep Clean Reguler (Sedang)..."
+            </p>
+          </div>
+        `
+      },
+      {
+        badge: "LANGKAH 5 / 5",
+        icon: "🔍",
+        title: "Cek Progress di 'Track Your Kicks'",
+        desc: "Setelah dapat Nomor Tiket (contoh: CS-0709), masukkan di kolom 'Track Your Kicks' pada halaman utama untuk memantau status sepatu kapan saja.",
+        mockup: `
+          <div class="bg-[#1a1614] border border-amber-500/40 rounded-xl p-3 space-y-2 text-left">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono font-black bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded">CS-0709</span>
+              <span class="text-[10px] font-bold bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full">✓ Siap Diantar / Diambil</span>
+            </div>
+            <p class="text-[10px] text-gray-300">Garansi cuci bersih 1x24 jam setelah pengambilan.</p>
+          </div>
+        `
+      }
+    ];
+
+    let currentOrderStep = 0;
+    let orderAutoPlaying = true;
+    let orderTimer = null;
+    let orderStepProgress = 0;
+    const ORDER_STEP_DURATION = 4200; // 4.2 detik per slide
+
     document.addEventListener("DOMContentLoaded", function() {
       checkStoreStatus();
       renderBookingList();
@@ -701,6 +931,124 @@
     function toggleMobileMenu() {
       const menu = document.getElementById('mobileMenu');
       menu.classList.toggle('hidden');
+    }
+
+    // ==================== LOGIC MODAL CARA ORDER ====================
+    function openHowToOrderModal() {
+      document.getElementById('howToOrderModal').classList.remove('hidden');
+      currentOrderStep = 0;
+      orderAutoPlaying = true;
+      updateOrderPlayUI();
+      renderOrderStep();
+      startOrderTimer();
+    }
+
+    function closeHowToOrderModal() {
+      document.getElementById('howToOrderModal').classList.add('hidden');
+      stopOrderTimer();
+    }
+
+    function startOrderTimer() {
+      stopOrderTimer();
+      orderStepProgress = 0;
+      const tickMs = 50;
+      orderTimer = setInterval(() => {
+        if (!orderAutoPlaying) return;
+        orderStepProgress += (tickMs / ORDER_STEP_DURATION) * 100;
+        const bar = document.getElementById(`orderProg${currentOrderStep}`);
+        if (bar) bar.style.width = `${Math.min(100, orderStepProgress)}%`;
+
+        if (orderStepProgress >= 100) {
+          currentOrderStep = (currentOrderStep + 1) % orderStepsData.length;
+          orderStepProgress = 0;
+          renderOrderStep();
+        }
+      }, tickMs);
+    }
+
+    function stopOrderTimer() {
+      if (orderTimer) {
+        clearInterval(orderTimer);
+        orderTimer = null;
+      }
+    }
+
+    function toggleOrderAutoPlay() {
+      orderAutoPlaying = !orderAutoPlaying;
+      updateOrderPlayUI();
+    }
+
+    function updateOrderPlayUI() {
+      const btn = document.getElementById('btnToggleOrderPlay');
+      const badge = document.getElementById('orderAutoBadge');
+      if (btn) btn.innerText = orderAutoPlaying ? '⏸ Jeda' : '▶ Putar';
+      if (badge) {
+        badge.innerText = orderAutoPlaying ? '● Auto-Play' : '❚❚ Dijeda';
+        badge.className = orderAutoPlaying
+          ? 'text-[10px] font-mono font-bold text-emerald-800 bg-emerald-500/20 px-2 py-0.5 rounded-full'
+          : 'text-[10px] font-mono font-bold text-amber-900 bg-amber-500/25 px-2 py-0.5 rounded-full';
+      }
+    }
+
+    function goToOrderStep(idx) {
+      currentOrderStep = idx;
+      orderStepProgress = 0;
+      renderOrderStep();
+    }
+
+    function nextOrderStep() {
+      currentOrderStep = (currentOrderStep + 1) % orderStepsData.length;
+      orderStepProgress = 0;
+      renderOrderStep();
+    }
+
+    function prevOrderStep() {
+      currentOrderStep = (currentOrderStep - 1 + orderStepsData.length) % orderStepsData.length;
+      orderStepProgress = 0;
+      renderOrderStep();
+    }
+
+    function renderOrderStep() {
+      const step = orderStepsData[currentOrderStep];
+      document.getElementById('orderStepBadge').innerText = step.badge;
+
+      // Update progress bars
+      for (let i = 0; i < orderStepsData.length; i++) {
+        const bar = document.getElementById(`orderProg${i}`);
+        if (!bar) continue;
+        if (i < currentOrderStep) {
+          bar.style.width = '100%';
+        } else if (i > currentOrderStep) {
+          bar.style.width = '0%';
+        } else {
+          bar.style.width = `${orderStepProgress}%`;
+        }
+      }
+
+      // Update dots
+      const dotsEl = document.getElementById('orderStepDots');
+      if (dotsEl) {
+        dotsEl.innerHTML = orderStepsData.map((_, i) => `
+          <button type="button" onclick="goToOrderStep(${i})" class="w-2 h-2 rounded-full transition cursor-pointer ${i === currentOrderStep ? 'bg-amber-400 scale-125' : 'bg-white/25 hover:bg-white/50'}"></button>
+        `).join('');
+      }
+
+      // Render animasi stage
+      const stageEl = document.getElementById('orderStageContent');
+      stageEl.innerHTML = `
+        <div class="animate-step-enter space-y-3 text-center">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-amber-500/15 border border-amber-400/40 flex items-center justify-center text-2xl animate-float-slow shadow-lg">
+            ${step.icon}
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-base sm:text-lg font-black text-amber-400">${step.title}</h4>
+            <p class="text-xs text-gray-300 leading-relaxed max-w-md mx-auto">${step.desc}</p>
+          </div>
+          <div class="pt-1 max-w-md mx-auto">
+            ${step.mockup}
+          </div>
+        </div>
+      `;
     }
 
     async function checkStoreStatus() {
@@ -940,7 +1288,6 @@
     function bookingSelectedServiceWA() {
       let itemsToSend = [...bookingCart];
 
-      // Jika user sudah pilih layanan tapi belum klik "+ Tambah ke Daftar", masukkan otomatis
       if (itemsToSend.length === 0 && estServiceName && estBasePrice > 0) {
         const modelInput = document.getElementById('shoeModelInput');
         const rawModel = modelInput ? modelInput.value.trim() : '';
