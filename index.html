@@ -4,7 +4,77 @@
   <link rel="icon" href="images/logo.png" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hive.Spot - Premium Sneaker Care & Tracking</title>
+  <title>HiveSpot - Cuci Sepatu Semarang &amp; Sneaker Care Tembalang</title>
+  <meta name="description" content="Jasa cuci sepatu Semarang &amp; Tembalang (HiveSpot). Perawatan Flash Zap, Deep Clean canvas/leather/white shoes, unyellowing midsole, &amp; tracking pesanan online." />
+  <meta name="keywords" content="cuci sepatu semarang, laundry sepatu semarang, cuci sepatu tembalang, cuci sepatu undip, sneaker care semarang, unyellowing sepatu semarang, hivespot" />
+  <meta name="author" content="HiveSpot Semarang" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://hivespot.site/" />
+
+  <!-- Open Graph / WhatsApp / Social Preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="id_ID" />
+  <meta property="og:site_name" content="HiveSpot Semarang" />
+  <meta property="og:url" content="https://hivespot.site/" />
+  <meta property="og:title" content="HiveSpot - Cuci Sepatu Semarang &amp; Sneaker Care Tembalang" />
+  <meta property="og:description" content="Perawatan sepatu profesional di Semarang &amp; Tembalang. Flash Zap 30-60 menit, Deep Clean, Unyellowing Midsole, dan live tracking status cucian." />
+  <meta property="og:image" content="https://hivespot.site/images/logo.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="HiveSpot - Cuci Sepatu Semarang &amp; Sneaker Care Tembalang" />
+  <meta name="twitter:description" content="Jasa cuci sepatu Semarang &amp; Tembalang. Deep clean, unyellowing midsole, free coffee &amp; free pickup area Tembalang &amp; Undip." />
+  <meta name="twitter:image" content="https://hivespot.site/images/logo.png" />
+
+  <!-- Structured Data: LocalBusiness (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "HiveSpot - Cuci Sepatu Semarang & Sneaker Care",
+    "image": "https://hivespot.site/images/logo.png",
+    "url": "https://hivespot.site/",
+    "telephone": "+6285645416616",
+    "priceRange": "Rp15.000 - Rp45.000",
+    "description": "Jasa cuci sepatu profesional di Tembalang, Semarang. Melayani Flash Zap express, Deep Clean Reguler, White Shoes, Leather Shoes, dan Unyellowing Midsole.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tembalang, Semarang",
+      "addressRegion": "Jawa Tengah",
+      "addressCountry": "ID"
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Semarang"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Tembalang"
+      }
+    ],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "09:00",
+      "closes": "21:00"
+    },
+    "sameAs": [
+      "https://instagram.com/hivespot.semarang",
+      "https://tiktok.com/@hivespot.semarang",
+      "https://youtube.com/@hivespot.semarang"
+    ]
+  }
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -71,7 +141,7 @@
       </div>
       
       <!-- MENU TENGAH (Desktop) -->
-      <nav class="hidden md:flex items-center gap-6 text-sm font-bold text-gray-300 absolute left-1/2 -translate-x-1/2">
+      <nav aria-label="Menu Utama" class="hidden md:flex items-center gap-6 text-sm font-bold text-gray-300 absolute left-1/2 -translate-x-1/2">
         <button onclick="openAllServicesModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm">Layanan & Harga</button>
         <button onclick="openHowToOrderModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm flex items-center gap-1">Cara Order</button>
         <button onclick="openPromoModal()" class="hover:text-amber-400 transition bg-transparent border-0 cursor-pointer p-0 font-bold text-sm text-amber-400 flex items-center gap-1">Promo & Event</button>
@@ -86,7 +156,7 @@
         </a>
 
         <!-- Tombol Hamburger Mobile -->
-        <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl bg-[#e6d7bc] border border-amber-900/20 text-gray-900 hover:text-amber-600 transition focus:outline-none">
+        <button onclick="toggleMobileMenu()" aria-label="Buka Menu" class="md:hidden p-2 rounded-xl bg-[#e6d7bc] border border-amber-900/20 text-gray-900 hover:text-amber-600 transition focus:outline-none">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
@@ -120,14 +190,14 @@
     
     <!-- KOLOM KIRI: Project Showcase -->
     <div id="showcase" class="lg:col-span-3 space-y-3">
-      <h3 class="text-xs font-black tracking-wider text-amber-950 uppercase flex items-center gap-1.5">
+      <h2 class="text-xs font-black tracking-wider text-amber-950 uppercase flex items-center gap-1.5">
         <span>Project Showcase</span>
-      </h3>
+      </h2>
       <div class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 shadow-xl space-y-3.5 luxury-glow">
         
         <!-- Item 1: Fast Clean -->
         <div onclick="openShowcaseModal(0)" class="relative rounded-xl overflow-hidden border border-amber-950/30 group h-36 bg-gray-900 cursor-pointer shadow-md card-hover">
-          <img src="images/fast-clean.jpg" alt="Fast Clean Showcase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <img src="images/fast-clean.jpg" alt="Fast Clean Showcase Cuci Sepatu Semarang" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-2.5">
             <span class="text-[9px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">FLASH ZAP</span>
             <p class="text-xs font-bold text-white mt-1">Express 30 - 60 Mins</p>
@@ -136,7 +206,7 @@
 
         <!-- Item 2: Deep Clean -->
         <div onclick="openShowcaseModal(1)" class="relative rounded-xl overflow-hidden border border-amber-950/30 group h-36 bg-gray-900 cursor-pointer shadow-md card-hover">
-          <img src="images/deep-clean.jpg" alt="Deep Clean Showcase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <img src="images/deep-clean.jpg" alt="Deep Clean Showcase Sneaker Care Semarang" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-2.5">
             <span class="text-[9px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">DEEP CLEAN</span>
             <p class="text-xs font-bold text-white mt-1">Reguler, White & Leather</p>
@@ -145,7 +215,7 @@
 
         <!-- Item 3: Unyellowing -->
         <div onclick="openShowcaseModal(2)" class="relative rounded-xl overflow-hidden border border-amber-950/30 group h-36 bg-gray-900 cursor-pointer shadow-md card-hover">
-          <img src="images/unyellowing.jpg" alt="Unyellowing Showcase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <img src="images/unyellowing.jpg" alt="Unyellowing Midsole Showcase Semarang" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-2.5">
             <span class="text-[9px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded w-max">UNYELLOWING</span>
             <p class="text-xs font-bold text-white mt-1">Midsole Restoration</p>
@@ -157,13 +227,14 @@
 
     <!-- KOLOM TENGAH: Logo Animasi GIF, 3 Kategori Utama & Status -->
     <div class="lg:col-span-6 text-center space-y-6 pt-2">
-      <div class="space-y-4">
+      <div class="space-y-3">
         <div class="inline-block relative">
           <div class="absolute inset-0 bg-white/50 blur-3xl rounded-full"></div>
-          <img src="images/logo-animasi.gif" alt="HiveSpot Animated Logo" class="w-80 h-80 object-contain mx-auto drop-shadow-2xl relative z-10" style="mix-blend-mode: screen;">
+          <img src="images/logo-animasi.gif" alt="HiveSpot Cuci Sepatu Semarang Animated Logo" class="w-80 h-80 object-contain mx-auto drop-shadow-2xl relative z-10" style="mix-blend-mode: screen;">
         </div>
-        <h1 class="text-4xl font-black tracking-tight text-gray-900">Hive<span class="text-amber-900">Spot</span></h1>
+        <h1 class="text-4xl font-black tracking-tight text-gray-900">Hive<span class="text-amber-900">Spot</span> <span class="sr-only">- Cuci Sepatu Semarang &amp; Sneaker Care</span></h1>
         <p class="text-sm font-bold text-amber-950 max-w-md mx-auto">Keeping your sneakers fresh, clean, and ready for any stride.</p>
+        <p class="text-xs text-gray-800 max-w-lg mx-auto leading-relaxed">Jasa <strong>cuci sepatu Semarang</strong> &amp; perawatan <em>sneaker care</em> profesional area <strong>Tembalang &amp; Undip</strong> — Flash Zap, Deep Clean, hingga Unyellowing Midsole.</p>
       </div>
 
       <!-- 3 Kategori Utama Service -->
@@ -171,7 +242,7 @@
         <div onclick="openAllServicesModal('cleaning')" class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover flex flex-col justify-between">
           <div>
             <div class="text-[10px] font-bold text-amber-900 uppercase">Kategori 1</div>
-            <div class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Cleaning Services</div>
+            <h2 class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Cleaning Services</h2>
           </div>
           <p class="text-[10px] text-gray-700 mt-2 hidden sm:block">Flash Zap & Deep Clean (Mulai 15K)</p>
         </div>
@@ -179,7 +250,7 @@
         <div onclick="openAllServicesModal('specialty')" class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover flex flex-col justify-between">
           <div>
             <div class="text-[10px] font-bold text-amber-900 uppercase">Kategori 2</div>
-            <div class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Specialty Care</div>
+            <h2 class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Specialty Care</h2>
           </div>
           <p class="text-[10px] text-gray-700 mt-2 hidden sm:block">Unyellowing Midsole (35K - 45K)</p>
         </div>
@@ -187,7 +258,7 @@
         <div onclick="openAllServicesModal('addon')" class="bg-[#e6d7bc]/95 backdrop-blur-md p-4 rounded-2xl border border-amber-950/25 cursor-pointer text-left group shadow-md luxury-glow card-hover flex flex-col justify-between">
           <div>
             <div class="text-[10px] font-bold text-amber-900 uppercase">Kategori 3</div>
-            <div class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Add-On Service</div>
+            <h2 class="font-black text-xs sm:text-sm text-gray-900 group-hover:text-amber-900 transition mt-1">Add-On Service</h2>
           </div>
           <p class="text-[10px] text-gray-700 mt-2 hidden sm:block">One Day Service (+15K)</p>
         </div>
@@ -261,7 +332,7 @@
 
       <div class="bg-[#e6d7bc]/95 backdrop-blur-md p-5 rounded-2xl border border-amber-950/25 space-y-3 shadow-xl luxury-glow">
         <div class="flex items-center justify-between border-b border-amber-950/20 pb-2.5">
-          <h3 class="font-bold text-xs text-amber-950 uppercase tracking-wider">Informasi Penting</h3>
+          <h2 class="font-bold text-xs text-amber-950 uppercase tracking-wider">Informasi Penting</h2>
           <button onclick="openHowToOrderModal()" class="text-[10px] font-black bg-[#241f1c] text-amber-400 px-2.5 py-1 rounded-lg hover:bg-black transition cursor-pointer border border-amber-500/30">
             📲 Cara Order
           </button>
@@ -288,7 +359,7 @@
       <div class="bg-gradient-to-br from-[#241f1c] to-[#3a322b] text-white p-5 rounded-2xl border border-amber-500/40 space-y-2.5 shadow-xl luxury-glow">
         <div class="flex items-center gap-2 border-b border-white/10 pb-2">
           <span class="text-base">☕</span>
-          <h3 class="font-black text-xs text-amber-400 uppercase tracking-wider">HiveSpot Special Perks</h3>
+          <h2 class="font-black text-xs text-amber-400 uppercase tracking-wider">HiveSpot Special Perks</h2>
         </div>
         <div class="space-y-2 text-xs text-gray-300">
           <div class="flex items-start gap-2">
@@ -388,7 +459,7 @@
       <!-- Area Brosur / Poster Promo -->
       <div class="space-y-3">
         <div class="rounded-xl overflow-hidden border border-amber-950/30 bg-gray-900 shadow-md">
-          <img src="images/brosur.png" alt="Brosur Promo HiveSpot" class="w-full h-auto object-cover" onerror="this.src='images/deep-clean.jpg'">
+          <img src="images/brosur.png" alt="Brosur Promo Cuci Sepatu HiveSpot" class="w-full h-auto object-cover" onerror="this.src='images/deep-clean.jpg'">
         </div>
         <div class="p-3 bg-[#d8c29a] rounded-xl border border-amber-950/25 text-xs text-gray-900 space-y-1">
           <p class="font-black text-amber-950">📢 Info Promo Aktif:</p>
@@ -696,7 +767,7 @@
       </div>
 
       <div class="relative rounded-xl overflow-hidden border border-amber-950/30 h-80 bg-gray-900 flex items-center justify-center">
-        <img id="scImage" src="" alt="Showcase Detail" class="w-full h-full object-cover">
+        <img id="scImage" src="" alt="Showcase Detail Hasil Cuci Sepatu" class="w-full h-full object-cover">
         <div class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-semibold text-white border border-white/10">
           Hasil Treatment HiveSpot
         </div>
@@ -725,7 +796,7 @@
       
       <!-- Embed Google Maps -->
       <div class="rounded-xl overflow-hidden border border-amber-950/30 h-48 bg-gray-900">
-        <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.297775512345!2d110.416!3d-6.99!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTknMjguNCJTIDExMMKwMjQnNTcuNiJF!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"></iframe>
+        <iframe title="Lokasi Workshop HiveSpot Semarang" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.297775512345!2d110.416!3d-6.99!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTknMjguNCJTIDExMMKwMjQnNTcuNiJF!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"></iframe>
       </div>
 
       <div class="space-y-1 text-xs text-gray-800">
